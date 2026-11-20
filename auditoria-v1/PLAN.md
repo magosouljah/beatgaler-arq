@@ -97,3 +97,14 @@ HEAD LOCAL comprobado con GitHub compare: **identical** a `4e66638051effe888e66a
 - **Microlote:** `src/features/library/catalog/useCatalogGalleryScope.ts`, `catalogQueryStore.ts` y el caller directo del sort en `CatalogAppShell.tsx` (máximo 3 módulos principales).
 - **Cierre:** describir timers, dependencias y cleanup, capturas de estado, `setSort`/`setQuery`, un escenario de carrera y contraejemplo, tests escritos existentes y C2/C3 por tramo. Solo lectura a HEAD fijo, sin ejecutar tests; un informe inmutable en runs/.
 - **Backlog:** AUD-006 R-003 gating, AUD-007 cursores, AUD-008 playback; revalidación de R-001/UI y delta del gateway en microlote posterior. No abrir asignaciones paralelas.
+
+## Dirección 2026-11-20 16:00 — AUD-005 revisado, AUD-006 asignado
+HEAD LOCAL fijado: `45ec5b27e778127414537d01d170e0b972777768`; compare contra `9680c73da477cc9bcd201a036490d736bb6a7b12`: 3 commits, 3 rutas modificadas (gateway Cloud, test gateway, documento). Los tres módulos Web de AUD-005 no aparecen en delta, por lo que su evidencia estática @SHA anterior se conserva como revisión selectiva, NO como prueba runtime @HEAD. [AUD-005 15:34](runs/20261120T1534-investigador-AUD-005.md) contrastado directamente con `useCatalogGalleryScope.ts:155-175`, `catalogQueryStore.ts:355-368` y `CatalogAppShell.tsx:67-79` @9680c73da477cc9bcd201a036490d736bb6a7b12. **AUD-005 CERRADO PARCIAL**: cronología de debounce/sort sustentada; R-002 sigue RIESGO con mecanismo estático confirmado, sin navegador ni tests. C2 de tramos, C3 pendiente.
+
+### ÚNICA asignación vigente: AUD-006 — ASIGNADO
+- **SHA obligatorio:** `45ec5b27e778127414537d01d170e0b972777768` (confirmar rama antes de leer y fijar nuevo SHA si cambia).
+- **Pregunta:** ¿Qué acciones de mutación siguen habilitadas cuando Gallery tiene estado error/integrity/quarantined, y cuáles guardas reales impiden llegar al servidor? Falsar R-003.
+- **Microlote:** `src/features/library/catalog/useCatalogGalleryScope.ts` (connectionState, rejectOfflineMutation y llamadas), `CatalogAppShell.tsx` (botones/drop/gating), `catalogMutations.ts` solo entrypoints/guards necesarios. No ampliar a toda la API.
+- **Cierre:** tabla pequeña estado→acción→guarda→llamada, camino feliz y error con líneas @SHA, contraejemplo, tests escritos si existen, C2/C3 de tramos y límite runtime. Informe único inmutable runs/. No ejecutar tests.
+- **Backlog:** AUD-007 cursores/paginación; AUD-008 playback/lease; AUD-009 delta gateway y revalidación R-001; AUD-010 pruebas de debounce R-002. No reasignar antes del informe.
+- **Carril A:** clasificados por lectura nuevos límites de estado React/store y ownership de sort; regenerar árbol y clasificar archivos activos/legado sigue pendiente.
