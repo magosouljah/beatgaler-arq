@@ -65,3 +65,13 @@ No se calculan porcentajes: inventario aún no clasificado.
 Árbol Git recursivo no truncado: **1.459 blobs** clasificados por carpeta (INVENTARIO). Es denominador de repositorio, **NO** denominador de código Web+Cloud operativo. C0 panorámico por árbol para grupos `src` (269), `cloud-server` (455), `tests` (288), `scripts` (165), `cloud-server/migrations` (42, subconjunto de Cloud). No conceder C1/C2 a esos conjuntos por nombre o conteo. Pendiente: enumeración individual de activos/legado y exclusiones para porcentaje legítimo.
 
 **AUD-001: PARCIAL**, conserva C2 **solo en tramos** ya contrastados en secciones anteriores; F01/F02 C2 parcial, ningún C3 certificado. Informe de cierre [11:30](runs/20261120T1130-investigador-AUD-001-cierre-tramos.md), contraexamen independiente de `filtersKey`, `setQuery` y composición a SHA. **AUD-002 ASIGNADO**: callers UI y comportamiento de selección/audio; no hay cobertura anticipada. No tests ejecutados.
+
+## Revisión 13:00 — AUD-002 @ `4e66638051effe888e66a885010065d98fc7df17`
+- `CatalogGalleryWorkspace.tsx:5-17`: **C2 estático** wrapper completo.
+- `CatalogAppShell.tsx:70-99,125-145,180-193`: **C2 de tramos** controles/tarjetas/virtualización/Player, no módulo completo.
+- `useCatalogGalleryScope.ts:115-176,504-507`: **C2 de tramos** filtros/debounce/sort y estado conexión; otros métodos pendientes.
+- `catalogInteractionStore.ts:173-205`: **C2 de tramo** selección y conflicto, no store completo.
+- `catalogPlaybackSession.ts:77-103`: **C2 de tramo** lease y retry CURSOR_STALE; `setQuery` no contrastado.
+- `CatalogVirtualGallery.tsx:74-104`: **C2 de tramo** virtualización y errores.
+- `catalogLibraryProvider.tsx:1-110`: **C1 parcial + C2 de tramo** factory de servicios y DirectPort condicional.
+- F01 filtros→render y F05 control audio: **C2 parcial estático**; C3 ninguno. AUD-002 **PARCIAL**. Sin pruebas ejecutadas ni porcentajes de comprensión.
