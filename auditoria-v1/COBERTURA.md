@@ -28,3 +28,9 @@ Resto de propuestas C2 del Investigador **no certificadas** todavía: se requier
 | `src/features/library/catalog/catalogApi.ts` (resolveContext/filtersKey) | C2 parcial estático | Director contrastó líneas 194-225; consumidores de filtersKey pendientes |
 | F02 provisión→membresía | C2 parcial estático | Contraste primario y [checkpoint 05:25](runs/20261120T0525-investigador-AUD-001.md); sin pruebas ejecutadas, C3 pendiente |
 No se calculan porcentajes: inventario aún no clasificado.
+
+## Revisión 07:00 — AUD-001 @ 4e66638051effe888e66a885010065d98fc7df17
+- `cloud-server/catalog/routes.js`: C2 parcial estático ampliado a wrapper de autenticación y respuestas 503; montaje no verificado.
+- `cloud-server/catalog/native-transport-provisioning.js`: C2 parcial estático ampliado a lock/ready/pending/gateway; store y gateway pendientes.
+- `cloud-server/server.js:1-123`: C1 parcial (composición inicial inspeccionada); sin C2 hasta seguir montaje y dependencias.
+- F02: C2 parcial, no C3. Pruebas mencionadas en [informe 06:30](runs/20261120T0630-investigador-AUD-001.md) sin contraste primario por Director. Sin porcentaje de cobertura por falta de inventario clasificado.
