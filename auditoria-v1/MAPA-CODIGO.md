@@ -61,3 +61,13 @@ Fuente: árbol Git completo @ `4e66638051effe888e66a885010065d98fc7df17`; las re
 | `src-tauri` | Desktop FUERA | solo frontera con Web si se encuentra | no auditar internals |
 
 **Regla:** C0 de árbol ≠ C1 leído ≠ C2 comprendido. Inventario de código activo y entradas dinámicas aún pendiente.
+
+## Panorama nuevo 13:00 — frontera de servicios y UI @ `4e66638051effe888e66a885010065d98fc7df17` (estático)
+| Sistema | Entrada / interfaz | Estado y dueño | Dependencias y efectos | Dónde modificar / límite |
+|---|---|---|---|---|
+| Composición catálogo | `catalogLibraryProvider.tsx:createCatalogServices` | Servicios por cuenta/época, `teardown()` conjunto; ACTIVO condicional | `createCatalogApi`, commands, query, interaction, playback, mutations, transfer, media, caches; `DirectPort` condicional | Incorporar servicio/ciclo de vida aquí; C2 de tramo, no lifecycle completo |
+| Shell Gallery | `CatalogGalleryWorkspace` → `CatalogAppShell` | Shell presenta; `useCatalogGalleryScope` coordina borradores; ACTIVO | `GalleryChrome`→filtros, `BeatCard`→selección/play, `CatalogVirtualGallery`→store, `Player`→audio | Cambiar composición visual en Shell; reglas de filtros en scope, no en wrapper |
+| Query/selección/audio | `catalogQueryStore`, `catalogInteractionStore`, `catalogPlaybackSession` | Store dueño de bloques; Interaction dueño de token/flags de selección; Playback dueño de current/lease/queue | API HTTP catálogo y cliente de medios; UI usa snapshots y callbacks | Cambios de consistencia de consulta en store, selección en interaction, audio en session; C2 por tramos |
+| Frontera HTTP/Direct | `catalogApi.ts` / `catalogLibraryProvider.tsx:79-110` | HTTP solo metadatos; DirectPort condicional y cachés locales | Lazy import de puerto real o lab DEV, medios y transferencias | No inferir que Cloud transporte bytes; implementación de puerto y errores pendiente |
+
+Evidencia: [AUD-002 12:31](runs/20261120T1231-investigador-AUD-002.md) y contraste directo de archivos @SHA. No se infiere activación en producción ni ejecución real.
