@@ -81,3 +81,14 @@ Evidencia: [AUD-002 12:31](runs/20261120T1231-investigador-AUD-002.md) y contras
 | `cloud-server/catalog/queries.js` | canonicaliza filtros para `filterHash` (sin sort), valida GET y produce predicados SQL | `routes.js` → `queries.listBeats`; `byteSort` usa Buffer.compare UTF-8 | `CatalogQueryError`, timeout SQL 57014 → 503; cambiar filtros/SQL aquí | C2 tramos 85-146,164-213,228-244 |
 | `cloud-server/catalog/cursor.js` | firma/verifica tokens opacos HMAC; sin DB/red ni owner de caché | `queries.js` usa contrato de cursor; payload JSON canónico | 400 inválido, 409 clave retirada; rotación y formato aquí; uso en paginación aún pendiente | C2 de interfaz 1-95; integración pendiente |
 **Separación fundamental:** `filtersKey` identifica bloques cliente, `filterHash` identifica conjunto de filtros servidor y `cursor.js` autentica continuidad de paginación. No son el mismo hash ni deben igualarse byte a byte. Fuente [AUD-003](runs/20261120T1330-investigador-AUD-003.md), contrastada por Director.
+
+## Panorama 15:00 — membresía y contención HTTP (lectura estática, dos SHAs separados)
+| Módulo | Contrato / ownership y frontera | Estado y límite |
+|---|---|---|
+| `catalogLibraryProvider.tsx:159-207` @ `4e66638051effe888e66a885010065d98fc7df17` | hook posee resolución de contexto, servicios por cuenta y cleanup; al recibir ready monta Gallery sin comprobar membershipState | C2 de tramo; no retry periódico; acceso UI posterior pendiente |
+| `LibraryCompositionGate.tsx:9-38` @ `4e66638051effe888e66a885010065d98fc7df17` | presenta resolving/legacy/catalog/blocked; blocked sin acción explícita; no posee estado Telegram | C2 de tramo, no prueba de imposibilidad global de recuperación |
+| `routes.js:48-79,130-135,179-184` @ `4e66638051effe888e66a885010065d98fc7df17` | GET contexto solo authority; POST provision y POST IMPORT/REPLACE/direct-session invocan ensure condicional | C2 de tramo; provisioner montado según composición; runtime pendiente |
+| `direct-transport-control.js:~480-515` @ `9680c73da477cc9bcd201a036490d736bb6a7b12` | gateway de membresía: credencial de bot, MASTER invita/promueve, comprueba participante y `getChat` del bot con reintentos | Cambio desde SHA anterior; ruta de membresía sigue visible, semántica completa del delta pendiente |
+| `http-containment.js` @ `9680c73da477cc9bcd201a036490d736bb6a7b12` | frontera HTTP de autenticación/contención; lee sesiones persistidas y liga identidad de instalación | Nuevo delta, C1 parcial de cabecera; revisar consumidores y guardas |
+| `server-core.js:~115-140` @ `9680c73da477cc9bcd201a036490d736bb6a7b12` | Express: CORS, parsers y montaje `createCatalogRouter` con servicios actuales y autenticador | C2 de tramo; cambios recientes exigen revisar otros middlewares |
+Dónde cambiar: recuperación Web en provider/Gate, semántica GET/POST en routes, prueba externa en gateway, contención de rutas en http-containment/server-core. No inferir runtime de esta lectura.
