@@ -40,3 +40,11 @@ No se calculan porcentajes: inventario aún no clasificado.
 - `cloud-server/server-core.js:115-138,1114-1121`: C2 **de tramo**, montaje Express, CORS/parsers y frontera bearer; no C2 del módulo completo ni de sesiones.
 - `cloud-server/catalog/routes.js:48-79`: C2 parcial, conexión efectiva de router y autenticación por handler comprobadas.
 - F02: C2 parcial ampliado al montaje efectivo; C3 pendiente por stores, gateway, sesión y pruebas escritas. Evidencia [07:32](runs/20261120T0732-investigador-AUD-001.md), contrastada con código a SHA. Inventario de alcance sin clasificar; porcentajes no disponibles.
+
+
+## Revisión Director 09:00 — AUD-001 @ 4e66638051effe888e66a885010065d98fc7df17
+- `cloud-server/server-core.js:1031-1082`: C2 **de tramo** para carga, escritura, creación y consulta de sesiones; no C2 del archivo completo.
+- `cloud-server/direct-vault-assignment.js:115-229`: C2 parcial estático para asignación, locks y transición durable.
+- `cloud-server/direct-transport-control.js:425-461`: C2 **de tramo** para verificación de membresía; no C2 de gateway completo.
+- `cloud-server/catalog/native-transport-provisioning.js:19-59`: C2 parcial contrastado para prueba antes de READY.
+- F02 C2 parcial ampliado a stores y gateway; C3 no concedido. Fuente [08:30](runs/20261120T0830-investigador-AUD-001.md) y lectura primaria Director. Pruebas escritas, consumidores `filtersKey`, UI recuperación y concurrencia pendientes. Sin porcentaje por inventario sin clasificar.
