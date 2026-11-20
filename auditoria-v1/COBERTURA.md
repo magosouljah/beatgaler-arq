@@ -48,3 +48,9 @@ No se calculan porcentajes: inventario aún no clasificado.
 - `cloud-server/direct-transport-control.js:425-461`: C2 **de tramo** para verificación de membresía; no C2 de gateway completo.
 - `cloud-server/catalog/native-transport-provisioning.js:19-59`: C2 parcial contrastado para prueba antes de READY.
 - F02 C2 parcial ampliado a stores y gateway; C3 no concedido. Fuente [08:30](runs/20261120T0830-investigador-AUD-001.md) y lectura primaria Director. Pruebas escritas, consumidores `filtersKey`, UI recuperación y concurrencia pendientes. Sin porcentaje por inventario sin clasificar.
+
+## Revisión Director 10:00 — AUD-001 @ 4e66638051effe888e66a885010065d98fc7df17
+- `src/features/library/catalog/catalogApi.ts:224-227`: C2 de tramo para generación de clave y anomalía del comparador; no C3 de contrato/caché.
+- `src/features/library/catalog/catalogQueryStore.ts:109,355-358`: C1 parcial y relación `queryKey` C2 de tramo; no C2 del módulo entero.
+- `cloud-server/tests/catalog/catalog-native-transport-provisioning.test.cjs:1-64`: C1 parcial; prueba escrita con fakes de pending/READY inspeccionada, no ejecutada.
+- F01 y F02: continúan C2 parcial, C3 pendiente. Evidencia [09:30](runs/20261120T0930-investigador-AUD-001.md) + contraste primario. Sin porcentaje: inventario sin clasificar.
