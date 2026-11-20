@@ -85,3 +85,15 @@ HEAD LOCAL comprobado con GitHub compare: **identical** a `4e66638051effe888e66a
 - **Cierre:** secuencia UI→GET/POST→estado PENDING→retry accesible/inaccesible, rutas/líneas, tests escritos relevantes y contraejemplo; proponer C2/C3 por tramo. No ejecutar tests ni inferir runtime. Un informe nuevo e inmutable en runs/. Máximo dos informes sin cierre.
 - **Backlog separado:** AUD-005 debounce/sort R-002; AUD-006 gating R-003; AUD-007 cursor/query sets y pruebas de Unicode; AUD-008 reproducción/lease.
 - **Carril panorámico:** documentada frontera `cursor.js` (firma HMAC, rotación de claves y errores), `queries.js` (filtros SQL) y API HTTP (identidad de caché distinta). Inventario por archivo activo/legado y pruebas sigue pendiente.
+
+## Dirección 2026-11-20 15:00 — AUD-004 revisado; delta detectado
+**HEAD LOCAL NUEVO:** `9680c73da477cc9bcd201a036490d736bb6a7b12` (11 commits por delante de `4e66638051effe888e66a885010065d98fc7df17`, sin divergencia según compare GitHub). Cambios reportados: `direct-transport-control.js`, `http-containment.js`, `server-core.js`, dos tests Cloud y documento post-LIVE. Las conclusiones anteriores @SHA antiguo no se transfieren automáticamente; revisar específicamente gateway de membresía y fronteras HTTP. Fuente actual inspeccionada por SHA en esos tres módulos; no se ejecutó nada.
+
+**AUD-004 CERRADO PARCIAL:** [informe 14:31](runs/20261120T1431-investigador-AUD-004.md) contrastado independientemente contra `catalogApi.ts:194-216`, `catalogLibraryProvider.tsx:159-207`, `LibraryCompositionGate.tsx:9-38`, `routes.js:48-79,130-135,179-184`, `authority.js:168-245`, `native-transport-provisioning.js:19-59` @ `4e66638051effe888e66a885010065d98fc7df17`. Confirmado estáticamente: POST confirma SQL antes de asegurar membresía; GET contexto no invoca ensure; hook resuelve por montaje y Gate blocked no ofrece botón; rutas posteriores pueden reintentar. **R-001 sigue RIESGO**, no atrapamiento demostrado. Contraste parcial de gateway en HEAD nuevo: la función `ensureCatalogBotMembership` sigue presente y verifica membresía, pero cambios del archivo requieren revalidación focalizada. C2 solo de tramos; C3 ninguno.
+
+### ÚNICA asignación vigente: AUD-005 — ASIGNADO
+- **SHA:** `9680c73da477cc9bcd201a036490d736bb6a7b12`.
+- **Pregunta:** ¿Puede un debounce pendiente de filtros sobrescribir el orden elegido después, o la recreación del efecto lo evita? Falsar R-002 con una cronología precisa de React y llamadas.
+- **Microlote:** `src/features/library/catalog/useCatalogGalleryScope.ts`, `catalogQueryStore.ts` y el caller directo del sort en `CatalogAppShell.tsx` (máximo 3 módulos principales).
+- **Cierre:** describir timers, dependencias y cleanup, capturas de estado, `setSort`/`setQuery`, un escenario de carrera y contraejemplo, tests escritos existentes y C2/C3 por tramo. Solo lectura a HEAD fijo, sin ejecutar tests; un informe inmutable en runs/.
+- **Backlog:** AUD-006 R-003 gating, AUD-007 cursores, AUD-008 playback; revalidación de R-001/UI y delta del gateway en microlote posterior. No abrir asignaciones paralelas.
