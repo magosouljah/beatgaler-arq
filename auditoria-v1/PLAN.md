@@ -62,3 +62,14 @@ Recibido [checkpoint 10:30](runs/20261120T1030-investigador-AUD-001.md). HEAD LO
 - **Cierre:** diagrama caller→store→render, owner de selección y audio, escenario error/contraejemplo, pruebas escritas relevantes, líneas y nivel C0–C3 propuesto por tramo; distinguir no comprobado. Un informe inmutable `runs/*-investigador-AUD-002.md`. Máximo dos informes sin cierre: dividir o PARCIAL.
 - **Backlog separado:** AUD-003 equivalencia canonicalización cliente/SQL y H-002; AUD-004 alcanzabilidad UI de recuperación de membresía R-001. No son asignaciones simultáneas.
 - **Carril panorámico:** árbol Git recursivo completo sin truncar, 1.459 blobs, grupos principales clasificados en INVENTARIO; cartografía por sistemas en MAPA y registro C0 inicial en COBERTURA. Ningún porcentaje de comprensión ni C3.
+
+## Dirección 2026-11-20 13:00 — revisión AUD-002 y siguiente microlote
+HEAD LOCAL comprobado por compare GitHub: `4e66638051effe888e66a885010065d98fc7df17`, identical, 0 commits de delta. Informe [AUD-002 12:31](runs/20261120T1231-investigador-AUD-002.md) leído y contrastado en fuentes primarias a SHA. **AUD-002 CERRADO PARCIAL**: aceptada cartografía estática UI→scope→query/interaction/playback→virtualización y retry; no se certifica runtime, SQL, ni error funcional. Riesgos de debounce/sort y habilitación en estados no saludables quedan como hipótesis separadas, no bugs confirmados. F01 amplía C2 de tramos; C3 pendiente.
+
+### ÚNICA asignación vigente: AUD-003 — ASIGNADO
+- **SHA:** `4e66638051effe888e66a885010065d98fc7df17`.
+- **Pregunta:** ¿Coinciden canonicalización y orden de filtros/etiquetas en cliente y Cloud/SQL, y qué efecto verificable tiene H-002 sobre identidad de consultas?
+- **Microlote:** `src/features/library/catalog/catalogApi.ts` (filtersKey), `cloud-server/catalog/queries.js` o archivo real que implemente canonicalización (identificar con evidencia), y `catalogQueryStore.ts` solo consumidores directos de clave. Máximo 1–3 módulos principales.
+- **Cierre:** comparar filtros equivalentes y distintos, orden UTF-8 y perfil de servidor, mostrar al menos dos contraejemplos o invariantes con líneas @SHA; documentar quién normaliza y cuándo, errores y tests escritos; distinguir anomalía estática de efecto real. Entregar un solo informe inmutable en runs/; C2/C3 propuesto por tramo. No ejecutar pruebas.
+- **Backlog:** AUD-004 recuperación de membresía R-001; AUD-005 falsación debounce/sort; AUD-006 permisos de mutación en estados error; AUD-007 contratos de playback. No asignaciones simultáneas.
+- **Carril A:** se amplió mapa panorámico de composición de servicios de catálogo y separación HTTP metadata / Direct media, con estado provisional de archivos activos; quedan denominadores y clasificación exhaustiva por archivo.
