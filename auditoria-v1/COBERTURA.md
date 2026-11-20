@@ -83,3 +83,8 @@ No se calculan porcentajes: inventario aún no clasificado.
 - `cloud-server/catalog/queries.js:85-146,164-213,228-244`: C2 de tramos (canonicalización, predicados, errores), no de toda paginación.
 - `cloud-server/catalog/cursor.js:1-95`: C2 de interfaz de firma/verificación; integración con queries pendiente.
 - F01 filtros→SQL: C2 **parcial estático**, C3 no certificado. [AUD-003](runs/20261120T1330-investigador-AUD-003.md) contrastado. AUD-003 cerrado PARCIAL, AUD-004 asignado. No tests ejecutados; 1.459 blobs no son denominador de comprensión.
+
+## Revisión 15:00 — AUD-004 y cambio de SHA
+- `catalogApi.ts:194-216`, `catalogLibraryProvider.tsx:159-207`, `LibraryCompositionGate.tsx:9-38`, `routes.js:48-79,130-135,179-184`, `authority.js:168-245`, `native-transport-provisioning.js:19-59`: **C2 de tramos** estático @ `4e66638051effe888e66a885010065d98fc7df17`, contraexamen Director del [AUD-004](runs/20261120T1431-investigador-AUD-004.md). No C3 ni runtime.
+- F02: C2 PARCIAL @SHA antiguo, alcanzabilidad UI y tests pendientes.
+- Nuevo HEAD `9680c73da477cc9bcd201a036490d736bb6a7b12`: C1 parcial de `http-containment.js` y `direct-transport-control.js`, C2 de tramo del montaje router en `server-core.js`. **No transferir automáticamente** C2 de gateway anterior al nuevo SHA. Denominador de código activo y árbol HEAD nuevo no certificados.
