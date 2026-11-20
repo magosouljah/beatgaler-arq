@@ -51,3 +51,14 @@ Recibido [checkpoint 10:30](runs/20261120T1030-investigador-AUD-001.md). HEAD LO
 
 ## Directiva operativa nueva — v2.1 (2026-11-20)
 **Sustituye el estado anterior de AUD-001 como asignación indefinida, en la PRÓXIMA ejecución del Director.** Conforme a la enmienda v2.1 de PROTOCOLO.md: AUD-001 debe cerrarse `PARCIAL` con evidencias C2 de tramos ya verificadas, C3 pendiente y R-001/H-002 conservados. El Director debe extraer los huecos como microlotes nuevos, fijar AUD-002 (1–3 módulos o tramo concreto) y avanzar en paralelo un inventario panorámico de Web+Cloud+SQL. No convertir AUD-001 en PASS completo ni borrar su historial. El Investigador debe leer esta directiva y no abrir otro checkpoint de AUD-001 si ya se asignó AUD-002. Si el Director aún no cambió el estado, el Investigador puede entregar un cierre de tramos y recomendaciones de subdivisión, pero no reasignarse solo.
+
+## Dirección v2.1 — 2026-11-20 12:00 CST
+**AUD-001 CERRADO PARCIAL administrativamente** (prevalece sobre el encabezado histórico «ASIGNADO»). Se aceptan únicamente tramos C2 estáticos ya contrastados: composición Gallery, contexto/provisión, sesiones/asignación y query/caché. C3 no certificado. Se conserva íntegra la serie de nueve informes, incluido [cierre 11:30](runs/20261120T1130-investigador-AUD-001-cierre-tramos.md). R-001 RIESGO; H-002 anomalía estática confirmada, impacto HIPÓTESIS. No se ejecutaron tests.
+
+### ÚNICA asignación vigente: AUD-002 — ASIGNADO
+- **SHA:** `4e66638051effe888e66a885010065d98fc7df17` (HEAD LOCAL confirmado 12:00; sin delta).
+- **Pregunta:** ¿Qué componentes UI invocan `setQuery`/`setSort`, cómo afectan selección, reproducción y render y qué ocurre ante un fallo de carga?
+- **Microlote:** `src/features/library/catalog/CatalogGalleryWorkspace.tsx` y 1–2 módulos directos de controles/filtros o store que realmente encuentre el investigador; seguir imports y llamadas indispensables, sin abrir todo Gallery.
+- **Cierre:** diagrama caller→store→render, owner de selección y audio, escenario error/contraejemplo, pruebas escritas relevantes, líneas y nivel C0–C3 propuesto por tramo; distinguir no comprobado. Un informe inmutable `runs/*-investigador-AUD-002.md`. Máximo dos informes sin cierre: dividir o PARCIAL.
+- **Backlog separado:** AUD-003 equivalencia canonicalización cliente/SQL y H-002; AUD-004 alcanzabilidad UI de recuperación de membresía R-001. No son asignaciones simultáneas.
+- **Carril panorámico:** árbol Git recursivo completo sin truncar, 1.459 blobs, grupos principales clasificados en INVENTARIO; cartografía por sistemas en MAPA y registro C0 inicial en COBERTURA. Ningún porcentaje de comprensión ni C3.
