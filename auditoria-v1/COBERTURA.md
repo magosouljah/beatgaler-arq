@@ -18,3 +18,13 @@ C0: inventariado. C1: contenido leído. C2: responsabilidades, entrypoints, inte
 | F01 arranque→Gallery | C2 parcial | [Informe AUD-001](runs/20261120T0330-investigador-AUD-001.md) + contraste de tres módulos; Cloud/SQL pendiente |
 
 Resto de propuestas C2 del Investigador **no certificadas** todavía: se requiere contraste primario de archivos. No se calculan porcentajes sin inventario de alcance completo. Ningún C3 concedido.
+
+## AUD-001 — Ampliación 06:00 @ 4e66638051effe888e66a885010065d98fc7df17
+| Elemento | Nivel certificado | Evidencia y límites |
+|---|---|---|
+| `cloud-server/catalog/authority.js` (resolveContext/provisionLibrary) | C2 parcial estático | Director contrastó líneas 168-245; resto de módulo pendiente |
+| `cloud-server/catalog/routes.js` (context/provision y llamadas de recuperación) | C2 parcial estático | Director contrastó líneas 48-79,130-135,179-184; montaje/middlewares pendientes |
+| `cloud-server/catalog/native-transport-provisioning.js` | C2 parcial estático | Director contrastó líneas 19-59; store y gateway pendientes |
+| `src/features/library/catalog/catalogApi.ts` (resolveContext/filtersKey) | C2 parcial estático | Director contrastó líneas 194-225; consumidores de filtersKey pendientes |
+| F02 provisión→membresía | C2 parcial estático | Contraste primario y [checkpoint 05:25](runs/20261120T0525-investigador-AUD-001.md); sin pruebas ejecutadas, C3 pendiente |
+No se calculan porcentajes: inventario aún no clasificado.
