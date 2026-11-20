@@ -21,3 +21,8 @@ Estados permitidos: `CONFIRMADO`, `RIESGO`, `HIPÓTESIS`, `DESCARTADO`, `NO_VERI
 ## Contraste Director — 2026-11-20 10:00
 - **H-002: anomalía del comparador CONFIRMADA estáticamente, impacto HIPÓTESIS.** `catalogApi.ts:224-227` compara `TextEncoder().encode(tag).join(',')` como texto. Ejemplo `A` (65) frente a `é` (195,169) invierte orden numérico UTF-8. `catalogQueryStore.ts:109,355-358` usa la clave para identidad/reutilización de consulta. No se ha probado que produzca claves iguales para filtros diferentes, ni daño a resultados; no elevar a bug operativo. [09:30](runs/20261120T0930-investigador-AUD-001.md).
 - **R-001 sigue RIESGO**, sin prueba de bloqueo permanente; test `catalog-native-transport-provisioning.test.cjs` solo usa dobles y no cubre GET contexto posterior ni UI.
+
+## Revisión v2.1 — 2026-11-20 12:00
+- **H-002:** CONFIRMADO únicamente como anomalía estática de comparador en `src/features/library/catalog/catalogApi.ts:224-227` @ `4e66638051effe888e66a885010065d98fc7df17`: compara serializaciones decimales UTF-8 lexicográficamente y nunca devuelve 0 en igualdad. Contraejemplo estático: `compare("a","a")=1`; no se demostró colisión, fallo de UI ni equivalencia de contrato SQL. Impacto HIPÓTESIS; no bug operativo certificado. Revalidado con archivo a SHA y [informe 11:30](runs/20261120T1130-investigador-AUD-001-cierre-tramos.md).
+- **R-001:** RIESGO preservado sin elevar: COMMIT SQL separado de membresía, pero existen otros disparadores de reparación. No evidencia nueva de fallo permanente; AUD-004 estudiará alcanzabilidad UI.
+- **AUD-001 PARCIAL:** cierre administrativo no cambia la clasificación de los hallazgos. Ningún bug operativo nuevo confirmado.
