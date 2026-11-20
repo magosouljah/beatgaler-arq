@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>BeatGaler — Diagnóstico de arquitectura, pasada 1</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script type="module">
+  import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+  mermaid.initialize({ startOnLoad: true, theme: "neutral", securityLevel: "loose" });
+</script>
+<style>
+  body { font-feature-settings: "tnum"; }
+  h2 { font-family: Georgia, "Times New Roman", serif; }
+  code, .mono { font-family: ui-monospace, "Cascadia Mono", Consolas, monospace; font-size: .82em; }
+  code { background: #f1f5f9; padding: 1px 4px; border-radius: 3px; overflow-wrap: anywhere; }
+  .chip { display: inline-block; font-size: 11px; line-height: 1; padding: 4px 7px; border-radius: 999px; font-weight: 600; white-space: nowrap; }
+  .c-act { background: #d1fae5; color: #065f46; }
+  .c-leg { background: #fef3c7; color: #92400e; }
+  .c-off { background: #e0e7ff; color: #3730a3; }
+  .c-desk { background: #e2e8f0; color: #334155; }
+  .c-firm { background: #0f172a; color: #fff; }
+  .c-prov { background: #fff; color: #0f172a; border: 1px dashed #64748b; }
+  .c-strong { background: #059669; color: #fff; }
+  .c-worth { background: #d97706; color: #fff; }
+  .c-spec { background: #64748b; color: #fff; }
+  .where { display: inline-block; font-size: 10.5px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 2px 6px; border-radius: 4px; margin-right: 6px; white-space: nowrap; }
+  .w-pag { background: #dbeafe; color: #1e40af; }
+  .w-wrk { background: #ede9fe; color: #5b21b6; }
+  .w-srv { background: #fee2e2; color: #991b1b; }
+  .w-pg { background: #dcfce7; color: #166534; }
+  .w-tg { background: #cffafe; color: #155e75; }
+  .w-ext { background: #f1f5f9; color: #334155; }
+  table { border-collapse: collapse; width: 100%; }
+  th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: #64748b; padding: 8px 10px; border-bottom: 2px solid #cbd5e1; vertical-align: bottom; }
+  td { padding: 9px 10px; border-bottom: 1px solid #e2e8f0; vertical-align: top; font-size: 14px; line-height: 1.5; }
+  .tbl { overflow-x: auto; background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; }
+  .card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 22px; }
+  .box { border: 1.5px solid #94a3b8; border-radius: 6px; padding: 6px 9px; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; background: #fff; }
+  .box-leak { border-color: #dc2626; color: #991b1b; }
+  .deep { background: linear-gradient(135deg, #0f172a, #1e293b); color: #fff; border-radius: 8px; padding: 14px; }
+  .deep .inner { opacity: .55; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; border: 1px dashed #94a3b8; border-radius: 4px; padding: 4px 7px; display: inline-block; margin: 3px 3px 0 0; }
+  .band { border-left: 4px solid #94a3b8; background: #f8fafc; padding: 5px 10px; font-size: 11px; text-transform: uppercase; letter-spacing: .05em; margin-bottom: 4px; }
+  .band-leak { border-left-color: #dc2626; }
+  .lbl { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #64748b; }
+  .steps li { margin-bottom: 7px; }
+  .note { border-left: 4px solid #d97706; background: #fffbeb; padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 14px; }
+  .alert { border-left: 4px solid #dc2626; background: #fef2f2; padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 14px; }
+  nav a { color: #334155; text-decoration: underline; text-decoration-color: #cbd5e1; text-underline-offset: 3px; }
+  @media print { .card, .tbl { break-inside: avoid; } }
+</style>
+</head>
+<body class="bg-stone-50 text-slate-900 font-sans">
+<main class="max-w-6xl mx-auto px-5 sm:px-8 py-12 space-y-14">
+
+<!-- CABECERA -->
+<header class="space-y-5">
+  <p class="lbl">BeatGaler · Diagnóstico de arquitectura · Pasada 1 (a lo ancho)</p>
+  <h1 class="text-4xl font-serif leading-tight" style="font-family:Georgia,serif">Qué es BeatGaler por dentro, y por dónde conviene ordenarlo</h1>
+  <p class="text-slate-600 text-sm">11 de noviembre de 2026 · rama <code>local/landing-gallery-unificada</code> · commit leído <code>5cb6ccc</code> · solo lectura: no se ejecutó nada, no se tocó el repositorio, no se accedió a AWS, Telegram ni producción.</p>
+
+  <div class="card space-y-3">
+    <p class="lbl">Cómo leer este informe</p>
+    <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+      <span><span class="chip c-firm">Firme</span> leído directamente en el código.</span>
+      <span><span class="chip c-prov">Provisional</span> deducido; falta algo por comprobar (se dice qué).</span>
+      <span><span class="chip c-act">Activo</span> <span class="chip c-leg">Se retira con la migración</span> <span class="chip c-off">Construido, apagado</span> <span class="chip c-desk">Desktop archivado</span></span>
+    </div>
+    <p class="text-sm text-slate-700">Se distingue siempre entre lo que <b>el código hace</b>, lo que <b>un documento afirma</b>, lo que <b>tú quieres</b> y lo que <b>yo propongo</b>. Las propuestas solo aparecen en la sección H y en la recomendación final.</p>
+    <details class="text-sm">
+      <summary class="cursor-pointer font-semibold">Las ocho palabras técnicas que uso (en inglés, siempre con el mismo significado)</summary>
+      <dl class="grid sm:grid-cols-2 gap-x-8 gap-y-2 mt-3 text-slate-700">
+        <div><dt class="font-semibold inline">Module:</dt> <dd class="inline">cualquier pieza con una "cara" y un "interior": una función, un archivo, un sistema entero.</dd></div>
+        <div><dt class="font-semibold inline">Interface:</dt> <dd class="inline">la cara: todo lo que hay que saber para usar la pieza bien (qué pedirle, en qué orden, cómo falla).</dd></div>
+        <div><dt class="font-semibold inline">Implementation:</dt> <dd class="inline">el interior: el trabajo que la pieza hace sin que quien la usa tenga que saberlo.</dd></div>
+        <div><dt class="font-semibold inline">Depth (deep / shallow):</dt> <dd class="inline">deep = cara pequeña y mucho trabajo detrás (bueno). Shallow = la cara es casi tan complicada como el interior (no ahorra nada).</dd></div>
+        <div><dt class="font-semibold inline">Seam:</dt> <dd class="inline">la costura: el punto donde una pieza se une a otra y donde se puede cambiar una sin tocar la otra.</dd></div>
+        <div><dt class="font-semibold inline">Adapter:</dt> <dd class="inline">lo que se enchufa en una costura (por ejemplo: "Telegram real" o "Telegram de mentira para pruebas").</dd></div>
+        <div><dt class="font-semibold inline">Leverage:</dt> <dd class="inline">lo que gana quien usa una pieza deep: mucho resultado aprendiendo poco.</dd></div>
+        <div><dt class="font-semibold inline">Locality:</dt> <dd class="inline">lo que gana quien la mantiene: un cambio o un fallo se resuelve en un solo sitio.</dd></div>
+      </dl>
+      <p class="mt-3 text-slate-600">Prueba de borrado: imagina que borras una pieza. Si la complejidad desaparece, la pieza no aportaba nada. Si reaparece repartida en muchos sitios, se ganaba el sitio.</p>
+    </details>
+  </div>
+
+  <nav class="text-sm flex flex-wrap gap-x-5 gap-y-1">
+    <a href="#esencial">Lo esencial</a><a href="#avisos">Avisos aparte</a><a href="#A">A · Sistemas</a><a href="#B">B · Flujos</a><a href="#C">C · Correcciones</a><a href="#D">D · Fricción</a><a href="#E">E · Lo que se retira</a><a href="#F">F · Pruebas y CI</a><a href="#G">G · Infraestructura</a><a href="#H">H · Candidatos</a><a href="#top">Recomendación</a>
+  </nav>
+</header>
+
+<!-- LO ESENCIAL -->
+<section id="esencial" class="space-y-5">
+  <h2 class="text-3xl">Lo esencial en una pantalla</h2>
+  <div class="grid md:grid-cols-2 gap-4">
+    <div class="card"><p class="lbl mb-2">1 · Hoy BeatGaler son tres aplicaciones entrelazadas</p>
+      <p class="text-sm leading-relaxed">Desktop (archivada), la Web que funciona hoy sobre el INDEX de Telegram, y la Web nueva sobre el catálogo PostgreSQL (construida, apagada). Comparten las mismas piezas visuales, y cada pieza lleva dentro bifurcaciones para las tres. Esa es la razón principal por la que cuesta poner BeatGaler en un mapa mental.</p></div>
+    <div class="card"><p class="lbl mb-2">2 · Quien habla con Telegram hoy es tu navegador</p>
+      <p class="text-sm leading-relaxed">Hoy el navegador sube y baja el audio directamente a Telegram; el servidor da permisos y vigila la cuota. En el catálogo nuevo es al revés: todo pasa por el servidor. Ese cambio afecta a velocidad y a coste, y la pieza del servidor que lo haría aún no está conectada a Telegram real.</p></div>
+    <div class="card"><p class="lbl mb-2">3 · El servidor se monta con parches apilados</p>
+      <p class="text-sm leading-relaxed">Lo que ocurre de verdad cuando alguien hace login no se puede leer en ningún archivo: es un núcleo de 3.272 líneas más unas 19 capas que lo modifican al arrancar, en un orden que solo existe en <code>server.js</code>. Una de ellas reescribe el texto del núcleo antes de ejecutarlo.</p></div>
+    <div class="card"><p class="lbl mb-2">4 · El catálogo nuevo es la zona mejor construida</p>
+      <p class="text-sm leading-relaxed">Sus piezas son deep y están probadas. Aun así, añadir un dato nuevo a un beat obliga a tocar entre 12 y 18 sitios, y su maquinaria común está copiada entre 5 y 9 veces. Importa para V2, que añadirá datos nuevos constantemente.</p></div>
+    <div class="card"><p class="lbl mb-2">5 · Las pruebas esperan mucho donde menos protegen</p>
+      <p class="text-sm leading-relaxed">En cada push solo corre el catálogo: 8,6 minutos hoy, y creciendo. Las pruebas completas de la Web no tienen ninguna ejecución verde en el historial. Muchas pruebas comprueban el texto del código, no su comportamiento. Nada impide desplegar con pruebas en rojo.</p></div>
+    <div class="card"><p class="lbl mb-2">6 · Lo que más aclara es retirar, no reordenar</p>
+      <p class="text-sm leading-relaxed">Cuando la migración esté validada, quitar el camino INDEX y el código Desktop elimina dos de las tres aplicaciones. Lo que quede (catálogo, cuentas, pagos, piezas visuales) es lo que merece ordenarse, y es mucho menos.</p></div>
+  </div>
+</section>
+
+<!-- AVISOS -->
+<section id="avisos" class="space-y-4">
+  <h2 class="text-3xl">Avisos aparte</h2>
+  <p class="text-sm text-slate-600">No son el diagnóstico. Son cosas que vi al leer y que conviene que conozcas ya. Ninguna está reproducida: son lectura de código.</p>
+  <div class="alert space-y-2">
+    <p><b>1. El borrado de cuentas está montado, aunque el <code>CLAUDE.md</code> del repo lo da por deshabilitado.</b> <span class="chip c-firm">Firme</span> El servidor atiende <code>POST /auth/account/delete</code> con borrado inmediato, sin periodo de gracia (<code>cloud-server/d8-ro-resolutions.js:9-11, 39-77</code>; se instala sin condición en <code>server.js:245</code>). Exige reautenticación reciente y la página Web no lo invoca. <span class="chip c-prov">Provisional</span> No sé qué le ocurre a la biblioteca del catálogo de esa cuenta: cuelga del usuario con borrado en cascada (<code>migrations/0026_catalog_core.sql:12</code>) y la migración 0027 trae protecciones que no he leído a fondo.</p>
+  </div>
+  <div class="alert space-y-2">
+    <p><b>2. En la Web actual, renombrar un tag y editar varios beats a la vez no se guardan.</b> <span class="chip c-firm">Firme en código</span> Cambian lo que ves, pero no sale ninguna llamada: las funciones que deberían guardar son de Desktop y en Web no hacen nada, en silencio (<code>src/lib/tauri.ts:563-566</code>; <code>Drawer.tsx:321-348</code>). Al recargar, el cambio se perdería. <b>Lo puedes comprobar tú en un minuto:</b> renombra un tag en la Web, recarga, y mira si sigue.</p>
+  </div>
+  <div class="note space-y-2">
+    <p><b>3. Para la sesión de la migración: tres huecos del camino catálogo que la interfaz no avisa.</b> <span class="chip c-firm">Firme en código</span> (a) En el editor (Drawer), los archivos MASTER/WAV/PROJECT que elijas se descartan al guardar, sin aviso (<code>Drawer.tsx:313, 834</code>). (b) Restaurar y vaciar la papelera existen en el servidor y en el cliente, pero ningún botón los llama. (c) Descargar no está conectado (<code>CatalogAppShell.tsx:63</code>).</p>
+    <p><b>4. Con dos o más procesos del servidor, uno puede pisar datos del otro.</b> <span class="chip c-firm">Firme en código</span> <span class="chip c-prov">Impacto provisional</span> Parte del estado (qué dispositivo va con qué almacén, hilos de Telegram) se guarda como un único bloque que cada proceso reemplaza entero (<code>postgres-control-plane-runtime.js:246-254</code>). No sé cuántos procesos corren en producción. Además, tras un fallo de escritura el proceso responde error a todo hasta reiniciarlo (<code>:286-294</code>).</p>
+    <p><b>5. Arrancar <code>node server-core.js</code> en vez de <code>node server.js</code></b> levanta el servidor sin ninguna capa de protección: todas se instalan desde <code>server.js</code>. <span class="chip c-firm">Firme</span></p>
+  </div>
+</section>
+
+<!-- A -->
+<section id="A" class="space-y-6">
+  <h2 class="text-3xl">A · Los sistemas de BeatGaler</h2>
+  <p class="text-slate-700 max-w-3xl">Tus cuatro cajas (AWS, Frontend, Backend, Telegram) se quedan cortas en dos puntos: falta PostgreSQL como lugar propio, y el Frontend hace mucho más que pantallas. Este es el mapa corregido: cinco lugares donde se ejecuta o se guarda algo, y dieciocho sistemas repartidos entre ellos. AWS no aparece porque no es un sistema: es dónde se aloja (anexo G).</p>
+
+  <div class="card">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-3 text-sm">
+      <div class="rounded-lg bg-blue-50 p-3 space-y-2 lg:col-span-2">
+        <p class="lbl text-blue-900">Tu navegador</p>
+        <div class="grid grid-cols-2 gap-2">
+          <div class="space-y-1.5">
+            <p class="text-[11px] font-bold text-blue-800">PÁGINA</p>
+            <div class="box">Landing <span class="chip c-act">activo</span></div>
+            <div class="box">Entrada y sesión <span class="chip c-act">activo</span></div>
+            <div class="box">Gallery sobre INDEX <span class="chip c-leg">se retira</span></div>
+            <div class="box">Gallery sobre catálogo <span class="chip c-off">apagado</span></div>
+            <div class="box">Piezas visuales compartidas <span class="chip c-act">activo</span></div>
+            <div class="box">Importación <span class="chip c-act">activo</span></div>
+            <div class="box">Reproducción <span class="chip c-act">2 versiones</span></div>
+            <div class="box">Capa Desktop <span class="chip c-desk">archivado</span></div>
+          </div>
+          <div class="space-y-1.5">
+            <p class="text-[11px] font-bold text-violet-800">WORKER (segundo plano)</p>
+            <div class="box">Transporte directo a Telegram <span class="chip c-leg">se retira</span></div>
+            <p class="text-xs text-slate-600 pt-2">Un cliente de Telegram completo dentro del navegador: sube, descarga, lee el INDEX.</p>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-lg bg-red-50 p-3 space-y-1.5">
+        <p class="lbl text-red-900">Servidor Cloud</p>
+        <div class="box">Esqueleto y rutas <span class="chip c-act">activo</span></div>
+        <div class="box">Cuentas <span class="chip c-act">activo</span></div>
+        <div class="box">Pagos y planes <span class="chip c-act">activo</span></div>
+        <div class="box">Coordinación del transporte directo <span class="chip c-act">activo</span></div>
+        <div class="box">Pasarela MASTER <span class="chip c-act">activo</span></div>
+        <div class="box">Biblioteca INDEX <span class="chip c-leg">se retira</span></div>
+        <div class="box">Catálogo <span class="chip c-off">apagado</span></div>
+        <div class="box">Persistencia de control <span class="chip c-act">activo</span></div>
+        <div class="box">Operación y salud <span class="chip c-act">activo</span></div>
+      </div>
+      <div class="rounded-lg bg-green-50 p-3 space-y-1.5">
+        <p class="lbl text-green-900">PostgreSQL</p>
+        <div class="box">Tablas de control: cuentas, sesiones, pagos, cuota <span class="chip c-act">activo</span></div>
+        <div class="box">Tablas del catálogo: beats, tags, archivos, papelera <span class="chip c-off">apagado</span></div>
+        <p class="lbl text-slate-600 pt-3">Disco del servidor</p>
+        <div class="box">Archivos de estado JSON: bots, sesiones revocadas… <span class="chip c-act">activo</span></div>
+      </div>
+      <div class="rounded-lg bg-cyan-50 p-3 space-y-1.5">
+        <p class="lbl text-cyan-900">Telegram</p>
+        <div class="box">Un grupo privado por usuario ("vault"), con un hilo por beat</div>
+        <div class="box">Los archivos: audio, portadas, proyectos</div>
+        <div class="box">El INDEX: documento con toda la biblioteca, fijado en el grupo <span class="chip c-leg">se retira</span></div>
+        <p class="lbl text-slate-600 pt-3">Otros externos</p>
+        <div class="box">Polar (pagos) · SES (correo) · Google y X (login)</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:15%">Sistema</th><th style="width:30%">Qué hace</th><th style="width:27%">Archivos que lo componen</th><th style="width:16%">Depende de</th><th>Estado</th></tr></thead>
+      <tbody>
+        <tr><td colspan="5" class="bg-blue-50 lbl">En el navegador</td></tr>
+        <tr><td><b>Landing</b></td><td>Página pública de presentación.</td><td><code>src/features/design/LANDING/</code></td><td>—</td><td><span class="chip c-act">Activo</span> <span class="chip c-firm">Firme</span></td></tr>
+        <tr><td><b>Entrada y sesión</b></td><td>Registro, verificación por código, login y mantener la sesión abierta.</td><td><code>src/features/auth/</code>, <code>src/components/AccountGate.tsx</code> (que además es el cliente HTTP de todo lo demás)</td><td>Cuentas (servidor)</td><td><span class="chip c-act">Activo</span> <span class="chip c-firm">Firme</span></td></tr>
+        <tr><td><b>Gallery sobre INDEX</b></td><td>La Gallery que funciona hoy. Carga una página de hasta 240 beats con paginador; buscar, filtrar y ordenar actúan solo sobre esa página.</td><td><code>src/App.tsx</code>, <code>src/app/</code> (<code>useBeatGalerComposition</code>, <code>AppShell</code>), <code>src/features/library/</code> (sin <code>catalog/</code>), <code>tags</code>, <code>selection</code>, <code>edit</code>, <code>trash</code>, <code>state</code></td><td>Transporte directo, piezas visuales</td><td><span class="chip c-leg">Se retira</span> <span class="chip c-firm">Firme</span><br><span class="text-xs">También es el armazón de Desktop.</span></td></tr>
+        <tr><td><b>Gallery sobre catálogo</b></td><td>La Gallery infinita virtualizada, con búsqueda, filtros y selección sobre toda la biblioteca. Se enciende con un interruptor al compilar: un paquete es INDEX o es catálogo, no se decide por cuenta.</td><td><code>src/features/library/catalog/</code></td><td>Catálogo (servidor), piezas visuales</td><td><span class="chip c-off">Construido, apagado</span> <span class="chip c-firm">Firme</span></td></tr>
+        <tr><td><b>Piezas visuales compartidas</b></td><td>BeatCard, editor (Drawer), Playbar, Tag Bar, barra de búsqueda, Ajustes, "Añadir beat". Las usan las dos Gallery y Desktop.</td><td><code>src/components/</code>, <code>src/features/design/</code> (26 archivos; es producción aunque conserve nombres de laboratorio)</td><td>Según quién las monte</td><td><span class="chip c-act">Activo</span> <span class="chip c-firm">Firme</span></td></tr>
+        <tr><td><b>Importación</b></td><td>Leer el archivo que sueltas: título, BPM, tono y portada; convertir WAV a MP3 dentro del navegador.</td><td><code>src/platform/webImport.ts</code>, <code>src/features/import/web*</code>, <code>src/lib/id3BrowserParser.ts</code></td><td>—</td><td><span class="chip c-act">Activo</span> <span class="chip c-firm">Firme</span></td></tr>
+        <tr><td><b>Reproducción</b></td><td>Hacer sonar el beat. El elemento de audio es común. Por encima hay dos versiones: la de hoy (trozos en directo + prefetch) y la del catálogo (descarga entera).</td><td>Común: <code>src/hooks/useAudio.ts</code>, <code>Player.tsx</code>. Hoy: <code>src/features/playback/web*</code>. Catálogo: <code>catalogPlaybackSession</code>, <code>catalogMediaClient</code></td><td>Transporte directo o Catálogo</td><td><span class="chip c-leg">Versión de hoy se retira</span><br><span class="chip c-off">Versión catálogo apagada</span></td></tr>
+        <tr><td><b>Transporte directo a Telegram</b></td><td>Un cliente de Telegram dentro del navegador. Sube audio y portadas, descarga, hace el streaming y lee el INDEX.</td><td><code>src/features/cloud/webTransport.worker.ts</code> (3.344 líneas) y diez archivos a su alrededor</td><td>Telegram; Coordinación (servidor)</td><td><span class="chip c-leg">Se retira</span> <span class="chip c-firm">Firme</span></td></tr>
+        <tr><td><b>Capa de plataforma y Desktop</b></td><td>La costura Web/Desktop y todo el código de la app de escritorio.</td><td><code>src/platform/</code>, <code>src/lib/tauri.ts</code> (136 funciones), <code>src-tauri/</code> (16.000 líneas de Rust)</td><td>—</td><td><span class="chip c-desk">Desktop archivado</span> <span class="chip c-firm">Firme</span><br><span class="text-xs">33 de 196 archivos de <code>src</code> siguen importando <code>tauri.ts</code>.</span></td></tr>
+
+        <tr><td colspan="5" class="bg-red-50 lbl">En el servidor Cloud (un proceso Node; el worker del catálogo sería un segundo proceso, apagado por defecto)</td></tr>
+        <tr><td><b>Esqueleto y rutas</b></td><td>Arranca el servidor, registra todas las rutas y aplica las protecciones HTTP.</td><td><code>cloud-server/server.js</code>, <code>server-core.js</code>, <code>http-containment.js</code>, <code>security-headers.js</code></td><td>Todos</td><td><span class="chip c-act">Activo</span> <span class="chip c-firm">Firme</span></td></tr>
+        <tr><td><b>Cuentas</b></td><td>Alta con verificación, login, sesiones, MFA, login con Google/X, cambio de email y contraseña, borrado.</td><td>Unos 23 archivos (<code>account-*</code>, <code>auth-*</code>, <code>pending-signup-*</code>, <code>session-security.js</code>…) más un bloque dentro de <code>server-core.js</code></td><td>PostgreSQL, SES, Google/X, Pasarela MASTER (crea tu grupo al activar la cuenta)</td><td><span class="chip c-act">Activo</span> <span class="chip c-firm">Firme</span></td></tr>
+        <tr><td><b>Pagos y planes</b></td><td>Planes, checkout, aviso de pago, suscripción, reconciliación, portal de facturación; decide los límites de cada usuario.</td><td>23 archivos <code>billing-*</code>, <code>access-*</code>, <code>plans.js</code></td><td>Polar, PostgreSQL</td><td><span class="chip c-act">Activo</span> <span class="chip c-firm">Firme</span></td></tr>
+        <tr><td><b>Coordinación del transporte directo</b></td><td>Decide qué bot atiende a cada usuario, abre sesiones, da permisos de un solo uso y firma la llave temporal del navegador.</td><td>17 archivos <code>direct-*</code>, <code>productive-temp-auth-boundary.js</code></td><td>Telegram, PostgreSQL, disco</td><td><span class="chip c-act">Activo hoy</span><br><span class="chip c-prov">Futuro abierto</span></td></tr>
+        <tr><td><b>Pasarela MASTER</b></td><td>La cuenta de Telegram del servicio: crea el grupo de cada usuario, sube los proyectos (ZIP), borra con verificación.</td><td><code>master-storage.js</code>, <code>user-storage-lifecycle.js</code>, <code>project-upload-*</code>, parte de <code>direct-transport-control.js</code></td><td>Telegram</td><td><span class="chip c-act">Activo; sobrevive</span> <span class="chip c-firm">Firme</span></td></tr>
+        <tr><td><b>Biblioteca INDEX</b></td><td>Valida y publica el INDEX, lleva la cuota, vacía la papelera, repara al arrancar.</td><td><code>library-index-publication.js</code>, <code>library-beat-quota.js</code>, <code>library-trash-assets.js</code>, <code>vault-index-pointer-store.js</code>, <code>startup-*</code>, bloques de <code>server-core.js</code></td><td>Pasarela MASTER, PostgreSQL</td><td><span class="chip c-leg">Se retira</span> <span class="chip c-firm">Firme</span></td></tr>
+        <tr><td><b>Catálogo</b></td><td>La biblioteca en PostgreSQL: listar, buscar, editar, seleccionar, subir, dar acceso a archivos, papelera y purga, copias.</td><td><code>cloud-server/catalog/</code> (25 archivos), <code>catalog-worker.js</code>, migraciones 0026–0040</td><td>PostgreSQL; Telegram a través de una pasarela ("gateway") aún sin conectar</td><td><span class="chip c-off">Construido, apagado</span><br><span class="chip c-prov">Provisional hasta que acabe la migración</span></td></tr>
+        <tr><td><b>Persistencia de control</b></td><td>Guarda cuentas, sesiones y ajustes en PostgreSQL; cifra secretos; aplica migraciones.</td><td><code>postgres-*</code>, <code>control-plane-*</code>, <code>secret-*</code>, <code>legacy-import-executor.js</code> (16 + 3 archivos)</td><td>PostgreSQL</td><td><span class="chip c-act">Activo</span> <span class="chip c-firm">Firme</span></td></tr>
+        <tr><td><b>Operación y salud</b></td><td>Señales de "estoy vivo", métricas y alertas.</td><td><code>operations-*</code>, <code>runtime-operability.js</code></td><td>—</td><td><span class="chip c-act">Activo</span> <span class="chip c-firm">Firme</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- B -->
+<section id="B" class="space-y-6">
+  <h2 class="text-3xl">B · Los caminos principales, de punta a punta</h2>
+  <p class="text-slate-700 max-w-3xl">Casi todos los caminos existen dos veces: como funcionan <b>hoy</b> (sobre el INDEX) y como funcionarán <b>con el catálogo</b>. Las etiquetas de color dicen dónde ocurre cada paso.</p>
+  <p class="text-sm"><span class="where w-pag">Página</span><span class="where w-wrk">Worker</span><span class="where w-srv">Servidor</span><span class="where w-pg">PostgreSQL</span><span class="where w-tg">Telegram</span><span class="where w-ext">Externo</span></p>
+
+  <div class="card space-y-3">
+    <p class="lbl">El cambio de fondo entre los dos caminos</p>
+    <div class="grid md:grid-cols-2 gap-4">
+      <div><p class="text-sm font-semibold mb-2">Hoy: el navegador va directo</p>
+        <pre class="mermaid">
+flowchart LR
+  N["Navegador"] -- "audio, portadas, descargas, leer INDEX" --> T["Telegram"]
+  N -- "permisos y cuota" --> S["Servidor"]
+  S -- "proyectos ZIP, publicar INDEX, borrar" --> T
+  S --> P["PostgreSQL: solo puntero y cuota"]
+        </pre></div>
+      <div><p class="text-sm font-semibold mb-2">Catálogo: todo pasa por el servidor</p>
+        <pre class="mermaid">
+flowchart LR
+  N2["Navegador"] -- "todo: datos y archivos" --> S2["Servidor"]
+  S2 -- "gateway, sin conectar hoy" --> T2["Telegram"]
+  S2 --> P2["PostgreSQL: biblioteca completa"]
+        </pre></div>
+    </div>
+  </div>
+
+  <!-- Subir -->
+  <div class="card space-y-4">
+    <h3 class="text-xl font-semibold">Subir un beat</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div><p class="lbl mb-2">Hoy (INDEX)</p>
+        <ol class="steps list-decimal pl-5 text-sm">
+          <li><span class="where w-pag">Página</span>Sueltas el archivo o pulsas "Add beat". Se leen título, BPM, tono y portada; si es WAV se convierte a MP3 ahí mismo. Revisas y guardas.</li>
+          <li><span class="where w-srv">Servidor</span>Comprueba tu plan, reserva un hueco de cuota y crea el hilo del beat en tu grupo.</li>
+          <li><span class="where w-wrk">Worker</span><span class="where w-tg">Telegram</span>El navegador sube audio, WAV y portada directamente a Telegram. El ZIP de proyecto es la excepción: va por el servidor.</li>
+          <li><span class="where w-pag">Página</span>Construye el INDEX nuevo con el beat añadido.</li>
+          <li><span class="where w-srv">Servidor</span><span class="where w-tg">Telegram</span>Valida el INDEX (cuota, versión), lo publica y lo fija en tu grupo; borra el anterior.</li>
+          <li><span class="where w-pg">PostgreSQL</span>Se anotan puntero y cuota. El servidor avisa a tus otros dispositivos.</li>
+        </ol></div>
+      <div><p class="lbl mb-2">Con el catálogo</p>
+        <ol class="steps list-decimal pl-5 text-sm">
+          <li><span class="where w-pag">Página</span>"Add beat": calcula la huella del archivo.</li>
+          <li><span class="where w-srv">Servidor</span><span class="where w-pg">PostgreSQL</span>Abre una operación de importación: comprueba plan y reserva cuota.</li>
+          <li><span class="where w-pag">Página</span><span class="where w-srv">Servidor</span>Pide un permiso de un solo uso y envía los bytes al servidor.</li>
+          <li><span class="where w-srv">Servidor</span><span class="where w-tg">Telegram</span>El gateway los envía a Telegram; un proceso aparte verifica que llegaron.</li>
+          <li><span class="where w-pg">PostgreSQL</span>Se confirma: el beat existe.</li>
+        </ol>
+        <p class="note mt-3"><b>Estado:</b> el gateway no está conectado, así que el paso 4 responde error fuera del laboratorio. Hoy solo envía el audio principal y se salta la pantalla de revisión.</p></div>
+    </div>
+  </div>
+
+  <!-- Editar -->
+  <div class="card space-y-4">
+    <h3 class="text-xl font-semibold">Editar nombre, tags o portada</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div><p class="lbl mb-2">Hoy (INDEX)</p>
+        <ol class="steps list-decimal pl-5 text-sm">
+          <li><span class="where w-pag">Página</span>Abres el editor (Drawer) y guardas.</li>
+          <li><span class="where w-wrk">Worker</span><span class="where w-tg">Telegram</span>Se descarga el INDEX actual; si hay portada nueva, se sube.</li>
+          <li><span class="where w-srv">Servidor</span><span class="where w-tg">Telegram</span>Se publica un INDEX nuevo completo. Cada edición reescribe el documento entero de la biblioteca.</li>
+        </ol>
+        <p class="alert mt-3">Renombrar un tag y editar varios beats a la vez no llegan a este camino: solo cambian la pantalla (aviso 2).</p></div>
+      <div><p class="lbl mb-2">Con el catálogo</p>
+        <ol class="steps list-decimal pl-5 text-sm">
+          <li><span class="where w-pag">Página</span>Mismo editor.</li>
+          <li><span class="where w-srv">Servidor</span><span class="where w-pg">PostgreSQL</span>Se envía solo el cambio, con el número de versión que tenías; si otro dispositivo lo cambió antes, se rechaza en vez de pisarlo.</li>
+          <li>Una portada nueva viaja como una subida. Renombrar tags y editar en lote se hacen en el servidor, por tandas.</li>
+        </ol>
+        <p class="note mt-3">Los archivos elegidos en el editor se descartan sin aviso (aviso 3).</p></div>
+    </div>
+  </div>
+
+  <!-- Buscar -->
+  <div class="card space-y-4">
+    <h3 class="text-xl font-semibold">Buscar, filtrar y ordenar</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div><p class="lbl mb-2">Hoy (INDEX)</p>
+        <p class="text-sm"><span class="where w-pag">Página</span>Todo ocurre en el navegador, sobre los beats ya cargados (hasta 240). No sale ninguna llamada. Una biblioteca mayor se recorre con un paginador que recarga la página; la búsqueda no ve lo que no está cargado.</p></div>
+      <div><p class="lbl mb-2">Con el catálogo</p>
+        <p class="text-sm"><span class="where w-pag">Página</span><span class="where w-srv">Servidor</span><span class="where w-pg">PostgreSQL</span>Cada búsqueda, filtro u orden es una consulta al servidor sobre toda la biblioteca. La Tag Bar recibe los tags con sus contadores. La página solo guarda en memoria una ventana de la lista.</p></div>
+    </div>
+  </div>
+
+  <!-- Reproducir -->
+  <div class="card space-y-4">
+    <h3 class="text-xl font-semibold">Reproducir, y el prefetch</h3>
+    <div class="grid md:grid-cols-2 gap-6">
+      <div><p class="lbl mb-2">Hoy (INDEX)</p>
+        <ol class="steps list-decimal pl-5 text-sm">
+          <li><span class="where w-pag">Página</span>Al pulsar play, busca en una nota guardada en el navegador en qué mensaje de Telegram está ese audio. No pregunta al servidor.</li>
+          <li><span class="where w-wrk">Worker</span><span class="where w-tg">Telegram</span>Pide el audio a Telegram en trozos de 64 KiB.</li>
+          <li><span class="where w-pag">Página</span>Cada trozo entra en el reproductor según llega: suena mientras sigue descargando.</li>
+        </ol>
+        <p class="text-sm mt-3"><b>Prefetch:</b> vive en el navegador (<code>src/features/playback/webPlaybackSource.ts</code> y el worker). Precarga exactamente los primeros 64 KiB de cada beat. Lo disparan tres cosas: el arranque (hasta 14 beats recordados), las tarjetas que entran en pantalla, y el propio play. Ese primer trozo ya descargado es lo primero que recibe el reproductor, por eso arranca rápido. Al pulsar play, todo lo demás cede el paso.</p>
+        <p class="text-sm mt-2"><b>Siguiente y Shuffle:</b> los decide la página.</p></div>
+      <div><p class="lbl mb-2">Con el catálogo</p>
+        <ol class="steps list-decimal pl-5 text-sm">
+          <li><span class="where w-pag">Página</span><span class="where w-srv">Servidor</span>Pide permiso para leer el archivo.</li>
+          <li><span class="where w-srv">Servidor</span><span class="where w-tg">Telegram</span>El servidor trae el archivo de Telegram y lo reenvía.</li>
+          <li><span class="where w-pag">Página</span>Descarga el archivo <b>entero</b>, lo verifica, y entonces suena.</li>
+        </ol>
+        <p class="note mt-3"><b>No hay streaming ni prefetch en este camino.</b> El Shuffle lo sortea el servidor. Si el camino de hoy se retira tal cual, la reproducción inmediata desaparece con él.</p></div>
+    </div>
+  </div>
+
+  <!-- Descargar / papelera -->
+  <div class="grid md:grid-cols-2 gap-4">
+    <div class="card space-y-3">
+      <h3 class="text-xl font-semibold">Descargar</h3>
+      <p class="text-sm"><b>Hoy:</b> <span class="where w-wrk">Worker</span><span class="where w-tg">Telegram</span>el navegador baja el archivo de Telegram y lo guarda donde elijas; al MP3 le vuelve a poner título y portada. Un beat cada vez (todos sus archivos a una carpeta, como mucho); no encontré descarga de varios beats.</p>
+      <p class="text-sm"><b>Catálogo:</b> la función existe en el cliente pero el botón no está conectado.</p>
+    </div>
+    <div class="card space-y-3">
+      <h3 class="text-xl font-semibold">Papelera y restaurar</h3>
+      <p class="text-sm"><b>Hoy:</b> mover a la papelera y restaurar son reescrituras del INDEX. Vaciar: <span class="where w-srv">Servidor</span><span class="where w-tg">Telegram</span>la cuenta MASTER borra los archivos, comprueba que ya no están y deja una marca permanente para que ese beat no reaparezca.</p>
+      <p class="text-sm"><b>Catálogo:</b> mover a la papelera es una anotación en PostgreSQL, con 14 días de retención. Restaurar y vaciar están hechos en servidor y cliente, sin botón conectado. El panel de Ajustes sigue preguntando a la papelera del camino INDEX.</p>
+    </div>
+  </div>
+
+  <!-- Cuenta y pago -->
+  <div class="grid md:grid-cols-2 gap-4">
+    <div class="card space-y-3">
+      <h3 class="text-xl font-semibold">Entrar a la cuenta</h3>
+      <ol class="steps list-decimal pl-5 text-sm">
+        <li><span class="where w-pag">Página</span><span class="where w-srv">Servidor</span><b>Registro:</b> el servidor guarda un alta pendiente y envía un código por correo <span class="where w-ext">SES</span>.</li>
+        <li><span class="where w-srv">Servidor</span><span class="where w-tg">Telegram</span>Al verificar el código se crean el usuario, tu grupo privado en Telegram y tu instalación. Si se corta a medias, se puede reintentar.</li>
+        <li><span class="where w-pag">Página</span><span class="where w-srv">Servidor</span><b>Login:</b> pasa una cadena de comprobaciones (abuso, alta pendiente, contraseña, MFA) y devuelve una cookie de sesión.</li>
+        <li><span class="where w-pag">Página</span>Se elige Gallery INDEX o Gallery catálogo según cómo se compiló.</li>
+      </ol>
+      <p class="text-xs text-slate-600">Es igual en los dos caminos.</p>
+    </div>
+    <div class="card space-y-3">
+      <h3 class="text-xl font-semibold">Pagar</h3>
+      <ol class="steps list-decimal pl-5 text-sm">
+        <li><span class="where w-pag">Página</span><span class="where w-srv">Servidor</span>En Ajustes eliges plan; el servidor crea el pago en <span class="where w-ext">Polar</span>.</li>
+        <li><span class="where w-ext">Polar</span>Pagas allí y vuelves.</li>
+        <li><span class="where w-ext">Polar</span><span class="where w-srv">Servidor</span>Polar avisa al servidor; este guarda el aviso, lo confirma preguntando otra vez a Polar y anota la suscripción <span class="where w-pg">PostgreSQL</span>.</li>
+        <li>Tu siguiente acción ya ve los límites nuevos: no hay un "plan aplicado" guardado, se calcula cada vez.</li>
+      </ol>
+      <p class="text-xs text-slate-600">Red de seguridad: un repaso cada minuto de lo pendiente y cada 15 min del resto. Gratis = 20 beats; primer plan de pago = 100 beats y proyectos hasta 1 GB; plan alto = sin límite de beats y proyectos hasta 1,9 GB (<code>billing-access-resolver.js</code>). Gestionar la suscripción se hace en el portal de Polar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- C -->
+<section id="C" class="space-y-5">
+  <h2 class="text-3xl">C · Correcciones al modelo mental</h2>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Creías</th><th style="width:48%">El código hace</th><th>Evidencia</th></tr></thead>
+      <tbody>
+        <tr><td>El backend habla con Telegram.</td><td>Hoy quien sube y baja el audio es <b>tu navegador</b>, directo a Telegram, usando una llave temporal de unos 10 minutos que el servidor le firma. El servidor solo mueve bytes en dos casos: los ZIP de proyecto y la publicación del INDEX.</td><td><code>src/features/cloud/webTransport.worker.ts:1909-1937, 3268-3292</code>; <code>webTempAuth.ts:190-251</code></td></tr>
+        <tr><td>El backend gestiona los metadatos.</td><td>Hoy los metadatos de toda tu biblioteca son <b>un documento guardado en Telegram</b> (el INDEX). El navegador lo construye, el servidor lo valida y lo publica. PostgreSQL solo guarda dónde está y cuánta cuota llevas. Con el catálogo, pasan a ser tablas de PostgreSQL.</td><td><code>cloud-server/library-index-publication.js:208-434</code>; <code>src/features/import/webImportCommit.ts:199-251</code></td></tr>
+        <tr><td>No sé dónde viven playback y prefetch.</td><td>Los dos viven <b>en el navegador</b>. El servidor no interviene en la reproducción de hoy salvo para dar el permiso.</td><td><code>src/features/playback/webPlaybackSource.ts:123-200</code>; <code>webVisiblePlaybackPrefetch.ts</code></td></tr>
+        <tr><td>Telegram guarda los archivos mediante cuentas y bots.</td><td>Concretamente: una <b>cuenta MASTER</b> del servicio es dueña de un grupo privado por usuario, con un hilo por beat. Un <b>bot de transporte</b> asignado a tu grupo es la identidad que usa tu navegador. Un <b>bot gestor</b> aparte emite las llaves de esos bots y nunca entra en los grupos.</td><td><code>cloud-server/master-storage.js:110-164</code>; <code>direct-transport-control.js:548-731</code></td></tr>
+        <tr><td>Frontend = pantallas y botones.</td><td>El frontend hace trabajo pesado: lleva un cliente de Telegram, convierte WAV a MP3, hace el streaming, gestiona una caché de audio y construye el INDEX.</td><td><code>src/features/cloud/</code> (22 archivos); <code>src/features/import/webWavMaster.ts</code></td></tr>
+        <tr><td>"La Gallery" es una.</td><td>Hay dos. La que funciona hoy es paginada (240 beats). La infinita virtualizada aprobada solo existe en el camino catálogo, que está apagado.</td><td><code>src/app/AppShell.tsx:322-388</code>; <code>src/features/library/catalog/CatalogVirtualGallery.tsx</code></td></tr>
+        <tr><td>PostgreSQL es "la base de datos".</td><td>Hay <b>dos migraciones distintas</b>. Una, ya en uso, para cuentas, sesiones y pagos; otra para el catálogo. Y la primera no funciona como una base de datos normal: el servidor trabaja con todo en memoria y cree estar escribiendo archivos; una pieza desvía esas escrituras a PostgreSQL.</td><td><code>cloud-server/control-plane-json-compat.js:41-118</code>; migraciones 0001–0025 y 0026–0040</td></tr>
+        <tr><td>Desktop está archivado.</td><td>El proyecto está archivado, pero su código sigue siendo el esqueleto de la Web de hoy: 33 archivos importan funciones de escritorio y el comando de pruebas general todavía compila la app de escritorio.</td><td><code>src/lib/tauri.ts</code>; <code>package.json</code> (<code>test</code>, <code>check</code>)</td></tr>
+        <tr><td>(Dato de partida) <code>UploadModal.tsx</code> es la subida de beats.</td><td>Es el asistente para publicar en YouTube de Desktop: 2.012 líneas inalcanzables en Web. La subida de beats en Web es "Add beat" más la importación.</td><td><code>src/components/UploadModal.tsx</code>; <code>src/platform/capabilities.ts:69</code></td></tr>
+        <tr><td>AWS, donde corre todo.</td><td>Una parte grande de "todo" corre en el navegador de cada usuario. En AWS hay, según el repo, un servidor web que sirve la página y un proceso Node; PostgreSQL aparte según un documento (anexo G).</td><td><code>deploy/web/beatgaler.com.conf</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- D -->
+<section id="D" class="space-y-5">
+  <h2 class="text-3xl">D · Señales de fricción, por sistema</h2>
+  <p class="text-slate-700 max-w-3xl">Solo lo que cuesta de verdad al comprender, modificar o ampliar. Un archivo largo no aparece aquí por ser largo.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:17%">Sistema</th><th style="width:45%">Qué ocurre</th><th>Qué cuesta</th></tr></thead>
+      <tbody>
+        <tr><td><b>Piezas visuales compartidas</b></td><td>El editor (Drawer) elige cómo guardar según la plataforma y según si le pasan cierto parámetro: tres caminos en una función de 240 líneas. El camino catálogo viaja por la rama que era de Desktop. Todas las piezas reciben un "beat" con forma de Desktop (rutas de carpetas locales); el catálogo rellena esos campos con valores inventados y pasa una docena de acciones vacías.</td><td>Quien toque el guardado tiene que conocer Desktop, INDEX y catálogo a la vez. Los huecos del aviso 3 nacen aquí: la pieza cree que guardó.</td></tr>
+        <tr><td><b>Gallery sobre INDEX</b></td><td>Un único objeto con unas 150 entradas sin tipos conecta toda la lógica con toda la pantalla (<code>scope: Record&lt;string, any&gt;</code>). La biblioteca vive en una cadena de siete copias que hay que mantener sincronizadas a mano.</td><td>Interface tan ancha como la implementation (shallow). Seguir "editar" obliga a saltar por cuatro o cinco archivos. Se retira; no merece ordenarse.</td></tr>
+        <tr><td><b>Gallery sobre catálogo</b></td><td>Sus servicios son deep y están bien probados. Su armazón copia a mano el de la Gallery INDEX, y monta piezas que por debajo siguen consultando al camino INDEX (papelera, capacidades).</td><td>El hueco está en el pegamento entre servicios y pantalla, que no tiene pruebas. Ahí aparecen los fallos.</td></tr>
+        <tr><td><b>Entrada y sesión</b></td><td><code>AccountGate.tsx</code> (894 líneas) es seis cosas: formulario de Desktop, almacén de sesión, descubrimiento de la dirección del servidor, y el cliente HTTP que usan 18 archivos, entre ellos el catálogo. La lógica de añadir la cabecera de seguridad está escrita cinco veces.</td><td>Cualquier módulo que hable con el servidor depende de un componente visual. Cambiar cómo se autentica una llamada son cinco ediciones.</td></tr>
+        <tr><td><b>Capa Desktop</b></td><td><code>src/lib/tauri.ts</code> no falla en Web: devuelve vacío en silencio. Existe una costura Web/Desktop bien definida (<code>src/platform/</code>), pero 33 archivos se la saltan llamando a <code>tauri.ts</code> directamente.</td><td>Funciones que parecen funcionar y no guardan (aviso 2). Nada avisa cuando un camino Web acaba en una función de escritorio.</td></tr>
+        <tr><td><b>Reproducción y transporte directo</b></td><td>La regla "play tiene prioridad" está repartida en seis capas, cada una con su propia copia del estado. El worker depende de piezas internas no públicas de la librería de Telegram. Un 37 % del worker es instrumentación de investigaciones pasadas.</td><td>Cambiar la política de prioridad obliga a tocar las seis. Se retira con el INDEX, pero es lo único que hoy sabe hacer streaming y prefetch.</td></tr>
+        <tr><td><b>Esqueleto del servidor</b></td><td>19 archivos sustituyen funciones globales del servidor al arrancar para envolver rutas ajenas. <code>POST /auth/login</code> aparece en 9 archivos. Una pieza reescribe el texto de <code>server-core.js</code> antes de ejecutarlo. Los módulos se pasan información releyendo archivos en cada petición. Unas 1.200–1.400 de las 3.272 líneas del núcleo están muertas <span class="chip c-prov">estimado</span>.</td><td>No hay ningún sitio donde leer qué pasa en una ruta. Añadir una ruta exige acordarse de inscribirla a mano en seis listas distintas; si se olvida una, queda sin esa protección y nada avisa.</td></tr>
+        <tr><td><b>Cuentas</b></td><td>Una cuenta vive en tres almacenes: el espejo en PostgreSQL, tablas propias en PostgreSQL y dos archivos locales del proceso (códigos de recuperación, sesiones revocadas). Unos módulos sobrescriben funciones internas de otros.</td><td>Entender el login son unos 10 archivos más el orden de instalación. Añadir un dato al usuario son 5 sitios.</td></tr>
+        <tr><td><b>Pagos</b></td><td>El núcleo es deep y sólido (resolver de acceso, checkout, bandeja de avisos, suscripción, reconciliación). Alrededor hay cinco envoltorios de 14 a 49 líneas que repiten el mismo patrón, tres módulos antiguos que ya solo usan sus propias pruebas, y dos listas de planes con valores distintos.</td><td>Entender "qué pasa cuando alguien paga" son unos 12 archivos; con la cáscara fuera serían seis o siete.</td></tr>
+        <tr><td><b>Coordinación del transporte y Pasarela MASTER</b></td><td><code>direct-transport-control.js</code> son tres módulos en un archivo. Su estado vive en un archivo con un candado que puede congelar el servidor hasta 15 s. Producción usa funciones marcadas como "solo para pruebas". La cuenta MASTER abre conexión y recorre hasta 1.000 chats en cada operación.</td><td>Solo vale para un proceso. El flujo de abrir sesión tampoco se lee en un sitio.</td></tr>
+        <tr><td><b>Catálogo</b></td><td>La apertura de transacciones está copiada 5 veces, la de lectura 6, la traducción de errores 7 (y ya difieren), la comprobación de cuarentena 9. "Operación" significa tres cosas distintas detrás de una sola ruta. Arrastra andamiaje de la ruta histórica INDEX→PostgreSQL (la "generación", columnas sin uso, nombres <code>legacy_*</code> para datos vivos).</td><td>Añadir un campo a un beat: 12–18 sitios. Cambiar una política común: 5–9 ediciones. Parte de la papelera funciona por reglas dentro de la base de datos que no se ven desde el código.</td></tr>
+        <tr><td><b>Todo el servidor</b></td><td>115 archivos sueltos en una carpeta. Nombres de fase del proyecto en vez de responsabilidad (<code>d8-ro-resolutions.js</code> es el borrado de cuenta). "capability" nombra tres cosas, "legacy" cuatro, "MASTER" dos. 132 variables de configuración leídas por todas partes.</td><td>El nombre de un archivo no dice qué hace, así que no se puede construir el mapa mental leyendo la carpeta.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- E -->
+<section id="E" class="space-y-5">
+  <h2 class="text-3xl">E · Lo que se retira</h2>
+  <p class="text-slate-700 max-w-3xl">Lista separada de los candidatos a mejorar: esto no se ordena, se quita. <b>Nada se elimina sin tu aprobación</b>, y nada antes de la etapa 2.</p>
+  <div class="grid lg:grid-cols-3 gap-4">
+    <div class="card space-y-3">
+      <h3 class="text-lg font-semibold">El camino INDEX <span class="chip c-leg">con la migración</span></h3>
+      <p class="text-sm"><b>Quién lo usa hoy:</b> toda la Web en producción.</p>
+      <p class="text-sm"><b>Qué incluye:</b> en el navegador, el worker de Telegram y sus diez archivos, la reproducción por trozos, las descargas, la Gallery paginada y su estado. En el servidor, publicación del INDEX, cuota, purga y recuperación al arrancar, las rutas <code>/transport/index|quota|trash|routing|topic</code>, y entre 1.200 y 1.400 líneas de <code>server-core.js</code> <span class="chip c-prov">estimado</span>.</p>
+      <p class="text-sm"><b>Comportamientos que el catálogo debe conservar</b> (hoy existen):</p>
+      <ul class="list-disc pl-5 text-sm space-y-1">
+        <li>Guardar es todo-o-nada y se recupera tras un corte.</li>
+        <li>La cuota se reserva antes de subir y se recomprueba al confirmar.</li>
+        <li>Un beat purgado no reaparece ni se puede reutilizar su identificador.</li>
+        <li>Borrar comprueba que el archivo ya no está.</li>
+        <li>Dos pestañas no se pisan; una pestaña muerta suelta el bloqueo en 15 s.</li>
+        <li>Tus otros dispositivos se enteran de los cambios.</li>
+        <li>Los primeros beats suenan casi al instante.</li>
+        <li>El servidor arranca aunque un grupo de Telegram esté inaccesible.</li>
+      </ul>
+      <p class="text-sm"><b>Antes de quitarlo hay que verificar:</b> que exista un gateway real (sin él no se sube ni se reproduce); que el catálogo tenga streaming y prefetch o que aceptes perderlos; que no queden bibliotecas sin pasar al catálogo (requiere consultar la base; no lo hice); quién limita los permisos de los bots en los grupos nuevos.</p>
+    </div>
+    <div class="card space-y-3">
+      <h3 class="text-lg font-semibold">Desktop mezclado con Web <span class="chip c-desk">archivado</span></h3>
+      <p class="text-sm"><b>Quién lo usa hoy:</b> nadie en Web. Pero la Gallery de hoy está construida sobre él.</p>
+      <p class="text-sm"><b>Cuánto hay:</b></p>
+      <ul class="list-disc pl-5 text-sm space-y-1">
+        <li><code>src/lib/tauri.ts</code>: 136 funciones, importado por 33 archivos.</li>
+        <li><code>src-tauri/</code>: 16.000 líneas de Rust, sin cambios desde el 21 de octubre.</li>
+        <li>El asistente de YouTube (<code>UploadModal</code>, 2.012 líneas), plantillas, offline, carpetas locales.</li>
+        <li>La mitad "escritorio" de <code>AppShell</code>, y <code>LibraryUxBridge</code>.</li>
+        <li>41 scripts, 7 workflows, 16 pruebas de extremo a extremo y 63 pruebas Rust.</li>
+        <li>7 dependencias; <code>npm test</code> compila la app de escritorio.</li>
+      </ul>
+      <p class="text-sm"><b>¿Perjudica?</b> Sí, de tres formas: produce funciones que en Web no guardan y no avisan; obliga a cada pieza visual a llevar ramas que nadie ejecuta; y ata el comando de pruebas general a un producto archivado.</p>
+      <p class="text-sm"><b>Qué conservar:</b> la costura <code>src/platform/</code> ya está bien planteada; si Desktop volviera sobre la Web, entraría por ahí. Ideas del asistente de YouTube pueden servir a V2, pero como referencia en el historial, no como código vivo.</p>
+      <p class="text-sm"><b>Antes de quitarlo:</b> decidir si se guarda una copia etiquetada; la app de escritorio aún llama a rutas del servidor (<code>src-tauri/src/commands.rs</code>), así que hay que cerrarle el paso antes.</p>
+    </div>
+    <div class="card space-y-3">
+      <h3 class="text-lg font-semibold">Código muerto y restos <span class="chip c-firm">verificado por importadores</span></h3>
+      <p class="text-sm"><b>Nadie lo usa (salvo sus propias pruebas):</b></p>
+      <ul class="list-disc pl-5 text-sm space-y-1">
+        <li>Pagos antiguos: <code>billing-checkout.js</code>, <code>billing-webhook.js</code>, <code>billing-entitlements.js</code>, con sus tres workflows.</li>
+        <li>Basura y reconciliación: <code>garbage-*</code>, <code>index-reconciliation.js</code>, <code>direct-operation-repository.js</code>.</li>
+        <li>Catálogo: <code>repository.js</code>; <code>staging.js</code> y <code>migration.js</code> (ruta histórica).</li>
+        <li>Navegador: <code>SetupModal.tsx</code>, <code>directTelegramDataPlane.ts</code>.</li>
+        <li>12 rutas del servidor que solo responden "ya no existe".</li>
+      </ul>
+      <p class="text-sm"><b>Restos en el repositorio:</b></p>
+      <ul class="list-disc pl-5 text-sm space-y-1">
+        <li>Salidas de pruebas de septiembre (<code>*.log</code>, 1,4 MB), <code>PHASE-8A.txt</code>, <code>PHASE-9.txt</code>.</li>
+        <li><code>cloud-server/restart-*.json</code> (dos volcados de diagnóstico, cuatro archivos vacíos) y <code>diagnostics/telegram-direct-control.txt</code> (un registro con identificadores de chats de prueba).</li>
+        <li><code>tests/playback-*</code>: 42 archivos de investigaciones cerradas; solo uno sigue en uso.</li>
+        <li>Documentos que contradicen al código: <code>TELEGRAM-DIRECT.md</code>, <code>TESTING.md</code>, <code>VERSION</code>.</li>
+      </ul>
+      <p class="text-sm"><b>Tras la migración quedarán como herramientas de un solo uso:</b> preparación de cutover y de rollback, exportador a JSON.</p>
+      <p class="text-sm"><b>Ojo, no están muertos:</b> varios métodos del cliente del catálogo sin botón (restaurar, purga, editor con conflictos) son trabajo pendiente de conectar. <code>legacy-import-executor.js</code> se llama "legacy" pero se ejecuta en cada guardado.</p>
+    </div>
+  </div>
+</section>
+
+<!-- F -->
+<section id="F" class="space-y-5">
+  <h2 class="text-3xl">F · Pruebas y CI</h2>
+  <p class="text-slate-700 max-w-3xl">Mediciones del historial de GitHub Actions y lectura de las pruebas. No ejecuté ninguna. Traigo opciones, no una política.</p>
+
+  <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+    <div class="card"><p class="text-3xl font-semibold">8,6 min</p><p class="text-sm text-slate-600 mt-1">tarda hoy lo único que corre en cada push (catálogo). Era 1 min el 8 de noviembre.</p></div>
+    <div class="card"><p class="text-3xl font-semibold">127 → 61</p><p class="text-sm text-slate-600 mt-1">ejecuciones en ese push frente a pruebas distintas: una misma prueba corre hasta 13 veces.</p></div>
+    <div class="card"><p class="text-3xl font-semibold">0 verdes</p><p class="text-sm text-slate-600 mt-1">de las suites completas de la Web en el historial visible. Su coste real es bajo: alrededor de 1 minuto.</p></div>
+    <div class="card"><p class="text-3xl font-semibold">0 puertas</p><p class="text-sm text-slate-600 mt-1">antes de desplegar: el script de despliegue solo compila. Nada exige pruebas en verde.</p></div>
+  </div>
+
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:22%">Grupo de pruebas</th><th style="width:10%">Archivos</th><th style="width:24%">Protege</th><th>Situación</th></tr></thead>
+      <tbody>
+        <tr><td>Catálogo (servidor)</td><td>39</td><td>Catálogo PostgreSQL</td><td>Corre en cada push. 15 necesitan una base PostgreSQL real y comprueban tablas por dentro, así que un cambio de columnas rompe muchas aunque el comportamiento no cambie. 7 de 29 ejecuciones fallaron; al menos 3 por contar migraciones o comparar texto, no por un fallo real.</td></tr>
+        <tr><td>Web: componentes</td><td>98</td><td>Interfaz, transporte del navegador, reproducción, catálogo cliente</td><td>Solo corren completas en dos workflows que están siempre en rojo. 48 son del transporte directo y se irán con él.</td></tr>
+        <tr><td>Web: "integración"</td><td>52</td><td>En teoría, el frontend</td><td>35 no ejecutan nada de la app: leen archivos de código y comprueban que contienen o no cierto texto. Cualquier reordenación las rompe aunque todo funcione.</td></tr>
+        <tr><td>Servidor: cuentas, pagos, transporte, control</td><td>122</td><td>Cuentas, pagos, control en PostgreSQL, INDEX</td><td>Reparto en 12 workflows de pagos casi idénticos, 3 de cuentas y otros. Solo corren al abrir un PR; no hay ninguno abierto. 14 archivos no los ejecuta nadie.</td></tr>
+        <tr><td>Guardas de regresión (scripts)</td><td>17</td><td>Texto del código</td><td>Unas 250 comprobaciones de texto sobre archivos fuente.</td></tr>
+        <tr><td>Desktop</td><td>16 + 63 Rust</td><td>App de escritorio</td><td>Sin ejecutar desde hace más de dos meses.</td></tr>
+        <tr><td>Investigaciones (<code>playback-*</code>, Stage1, Phase2, Step15)</td><td>~70</td><td>Nada de forma continua</td><td>Necesitan cuentas reales. Un solo archivo sigue en uso.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card space-y-2 text-sm">
+    <p class="lbl">Otros hechos medidos</p>
+    <ul class="list-disc pl-5 space-y-1">
+      <li>31 workflows. 7 son de Desktop. 4 están en rojo crónico (<code>d7-direct-capabilities</code>, <code>direct-persistent-vault-assignment</code>, <code>test-desktop-portability</code>, <code>billing-v1-polar-sandbox-e2e-preflight</code>): ya nadie los mira, y uno protege un módulo vivo.</li>
+      <li>El filtro del workflow del catálogo solo conoce las migraciones 0026–0030; existen hasta la 0040. Un push que solo añada una migración nueva no dispara ninguna prueba. <span class="chip c-firm">Firme</span></li>
+      <li>Ese workflow solo corre en la rama de trabajo. Tras llevar el catálogo a <code>main</code> se quedaría sin CI. <span class="chip c-firm">Firme</span></li>
+      <li>Ninguna prueba automática recorre el camino completo "llamada HTTP → catálogo real → PostgreSQL". Eso solo ocurre en el laboratorio manual.</li>
+      <li>No medí esperas en tu máquina (laboratorio, benchmarks). Si lo que te hace esperar es local, no está en estas cifras.</li>
+    </ul>
+  </div>
+
+  <h3 class="text-xl font-semibold pt-2">Opciones para discutir (combinables)</h3>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:20%">Opción</th><th style="width:22%">En cada push</th><th style="width:22%">Antes de desplegar</th><th>Qué se gana y qué se cede</th></tr></thead>
+      <tbody>
+        <tr><td><b>A · Push mínimo y una puerta única</b></td><td>Secretos, que la Web compile, y pruebas rápidas del catálogo: 1–2 min.</td><td>Todo, en paralelo: 9–10 min.</td><td>Esperas poco al trabajar. Los fallos de base de datos aparecen tarde, el día de desplegar.</td></tr>
+        <tr><td><b>B · Lo de hoy, sin repeticiones y en paralelo</b></td><td>El catálogo sin ejecutar lo mismo 13 veces: 3–4 min <span class="chip c-prov">estimado</span>.</td><td>Lo mismo más la Web completa.</td><td>Misma protección, menos espera. No arregla los workflows en rojo.</td></tr>
+        <tr><td><b>C · Un workflow por sistema</b></td><td>Solo el sistema que tocaste: alrededor de 1 min.</td><td>Todos los sistemas.</td><td>La espera mínima. Se escapan fallos cruzados mientras el servidor comparta un núcleo; pide una pasada completa nocturna o antes de desplegar.</td></tr>
+        <tr><td><b>D · Archivar y limpiar primero</b></td><td>Lo que quede vivo.</td><td>Lo que quede vivo.</td><td>Menos ruido y menos fallos por texto. Se pierde poder reactivar Desktop al instante (se recupera del historial).</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- G -->
+<section id="G" class="space-y-5">
+  <h2 class="text-3xl">G · Anexo de infraestructura</h2>
+  <p class="text-slate-700 max-w-3xl">Dónde se aloja cada cosa. <b>AWS no es un sistema de BeatGaler</b>: es el sitio. No accedí al entorno real; cada dato lleva su marca.</p>
+  <div class="tbl">
+    <table>
+      <thead><tr><th style="width:58%">Dato</th><th>Marca</th></tr></thead>
+      <tbody>
+        <tr><td>La Web es estática: la sirve nginx desde una carpeta de versiones; se conservan las 5 últimas.</td><td><span class="chip c-firm">Verificado en el repo</span> <code>deploy/web/install-web-production.sh</code></td></tr>
+        <tr><td>Dominios: <code>beatgaler.com</code>, <code>www</code>, <code>status.beatgaler.com</code>, <code>api.beatgaler.com</code>. Certificados de Let's Encrypt.</td><td><span class="chip c-firm">Verificado en el repo</span> <code>deploy/web/beatgaler.com.conf</code></td></tr>
+        <tr><td>El servidor Cloud es un proceso Node en la misma máquina (puerto interno 4000), detrás de nginx en <code>/beatgaler-api/</code>. Subida de proyectos: hasta 2 GiB y 30 min.</td><td><span class="chip c-firm">Verificado en el repo</span></td></tr>
+        <tr><td>Cómo se instala, arranca o reinicia el servidor Cloud, y cómo se aplican las migraciones de PostgreSQL en producción.</td><td><span class="chip c-firm">No está en el repo</span> No hay script ni procedimiento con comandos.</td></tr>
+        <tr><td>Una máquina EC2 pequeña (<code>t3.micro</code>, 913 MiB de memoria, 8 GiB de disco) en <code>us-east-2</code>.</td><td><span class="chip c-prov">Según documento, sin verificar</span> <code>BLUEPRINT/OPERATIONS/INCIDENT-2026-10-27-EC2-NETWORK.md</code></td></tr>
+        <tr><td>PostgreSQL en RDS (<code>galer-cloud-prod</code>).</td><td><span class="chip c-prov">Según documento, sin verificar</span> Otro documento dice "RDS o equivalente" y se declara solo preparación.</td></tr>
+        <tr><td>Secretos en AWS Secrets Manager; correo por SES.</td><td><span class="chip c-firm">Código verificado</span> <span class="chip c-prov">Uso real sin verificar</span></td></tr>
+        <tr><td>Versión publicada: <code>0.9.0-beta.2</code>.</td><td><span class="chip c-prov">Según documento</span> <code>BLUEPRINT/CURRENT-STATE.md</code> (27 de octubre)</td></tr>
+        <tr><td>Entorno de pruebas previo a producción (staging).</td><td><span class="chip c-firm">No existe en el repo</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card text-sm space-y-2">
+    <p class="lbl">Cómo llega una versión a producción <span class="chip c-firm">verificado en el repo</span></p>
+    <p>Totalmente a mano; ningún workflow despliega. Una persona ejecuta <code>scripts/deploy-web-production.ps1</code> desde Windows con una clave SSH. El script compila la Web, la copia a la máquina y lanza el instalador, que cambia a la versión nueva, renueva certificados, recarga nginx y hace cuatro comprobaciones; si alguna falla, vuelve a la versión anterior. Eso cubre <b>solo la Web</b>. Para el servidor Cloud y la base de datos el procedimiento no está escrito en el repositorio.</p>
+  </div>
+</section>
+
+<!-- H -->
+<section id="H" class="space-y-8">
+  <h2 class="text-3xl">H · Candidatos a mejorar</h2>
+  <p class="text-slate-700 max-w-3xl">Ordenados por cuánto ayudan a comprender, modificar y ampliar BeatGaler, contando dificultad y dependencias. Son propuestas mías, sin diseño todavía: qué forma tendrían se decide contigo en la pasada 2. <b>Ninguna se ejecuta antes de la etapa 2</b>, y ninguna toca lo que el usuario ve en Gallery o Landing. Solo cubren lo que sobrevive a la sección E.</p>
+
+  <!-- 1 -->
+  <article class="card space-y-4" id="h1">
+    <div class="flex flex-wrap items-center gap-2"><h3 class="text-xl font-semibold mr-2">1 · Una sola Gallery, con una interface escrita</h3><span class="chip c-strong">Recomendación fuerte</span><span class="chip c-prov">depende de la migración y de la sección E</span></div>
+    <p class="mono text-slate-600">src/features/library/catalog/ · src/components/BeatCard.tsx, Drawer.tsx, Player.tsx, SettingsPanel.tsx, AddBeatModal.tsx · src/types/index.ts</p>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div><p class="lbl mb-2">Antes</p>
+        <div class="space-y-1.5">
+          <div class="flex gap-1.5 flex-wrap"><span class="box">Armazón INDEX</span><span class="box">Armazón catálogo (copia)</span><span class="box">Armazón Desktop</span></div>
+          <div class="text-center text-slate-400 text-xs">↓ 150 entradas sin tipo · "beat" con forma de Desktop ↓</div>
+          <div class="flex gap-1.5 flex-wrap"><span class="box">BeatCard</span><span class="box">Drawer: 3 caminos</span><span class="box">Playbar</span><span class="box">Ajustes</span></div>
+          <div class="text-center text-xs text-red-700">↓ cada pieza consulta por su cuenta ↓</div>
+          <div class="flex gap-1.5 flex-wrap"><span class="box box-leak">tauri.ts</span><span class="box box-leak">platform (INDEX)</span><span class="box">servicios catálogo</span></div>
+        </div></div>
+      <div><p class="lbl mb-2">Después</p>
+        <div class="space-y-1.5">
+          <div class="flex gap-1.5 flex-wrap"><span class="box">BeatCard</span><span class="box">Drawer</span><span class="box">Playbar</span><span class="box">Ajustes</span></div>
+          <div class="text-center text-slate-400 text-xs">↓ una interface pequeña y con tipos ↓</div>
+          <div class="deep"><p class="text-sm font-semibold">Module "espacio de trabajo de la biblioteca"</p><p class="text-xs opacity-80 mt-1">Lo que la pantalla puede mostrar y las acciones que puede pedir.</p>
+            <span class="inner">consultas</span><span class="inner">selección</span><span class="inner">edición</span><span class="inner">subidas</span><span class="inner">papelera</span><span class="inner">reproducción</span></div>
+        </div></div>
+    </div>
+    <p class="text-sm"><b>Problema.</b> Las piezas visuales no saben a qué biblioteca hablan: reciben un beat con forma de Desktop y deciden su comportamiento preguntando a la plataforma. Por eso el editor descarta archivos sin avisar y Ajustes consulta la papelera equivocada.</p>
+    <p class="text-sm"><b>Solución.</b> Cuando solo quede el camino catálogo, un único armazón entrega a las piezas visuales los datos y las acciones ya resueltos, con tipos. Las piezas dejan de consultar la plataforma. El aspecto no cambia.</p>
+    <p class="text-sm"><b>Beneficios.</b> Locality: una función nueva de biblioteca se añade en un sitio. Leverage: cada pieza aprende una interface en vez de tres caminos. Pruebas: se prueba el pegamento entre servicios y pantalla, que hoy no tiene ninguna.</p>
+  </article>
+
+  <!-- 2 -->
+  <article class="card space-y-4" id="h2">
+    <div class="flex flex-wrap items-center gap-2"><h3 class="text-xl font-semibold mr-2">2 · Rutas del servidor que se puedan leer en un sitio</h3><span class="chip c-strong">Recomendación fuerte</span></div>
+    <p class="mono text-slate-600">cloud-server/server.js · server-core.js · server-core-auth-bridge-loader.js · http-containment.js · session-security.js · direct-capability-boundary.js · y 14 instaladores más</p>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div><p class="lbl mb-2">Antes: qué atraviesa <code>POST /auth/login</code></p>
+        <div class="band band-leak">http-containment (parche)</div>
+        <div class="band band-leak">auth-abuse-controls + auth-durable-abuse-controls (parches)</div>
+        <div class="band band-leak">pending-signup-boundary (parche)</div>
+        <div class="band band-leak">auth-public-registration-hardening (parche)</div>
+        <div class="band band-leak">account-lifecycle (parche)</div>
+        <div class="band band-leak">session-security (parche)</div>
+        <div class="band band-leak">bridge-loader: reescribe el texto del núcleo</div>
+        <div class="band">handler dentro de server-core.js</div>
+        <p class="text-xs text-slate-600 mt-2">La ruta aparece en 9 archivos. El orden real solo existe en <code>server.js:197-263</code>; el de este dibujo es ilustrativo.</p></div>
+      <div><p class="lbl mb-2">Después</p>
+        <div class="deep"><p class="text-sm font-semibold">Module "composición HTTP"</p><p class="text-xs opacity-80 mt-1">Una tabla legible: cada ruta con sus protecciones y su responsable.</p>
+          <span class="inner">/auth/login → abuso → sesión → Cuentas</span><span class="inner">/billing/* → sesión → Pagos</span><span class="inner">/catalog/v1/* → sesión → Catálogo</span></div>
+        <p class="text-xs text-slate-600 mt-2">Las mismas reglas de hoy, declaradas en vez de inyectadas.</p></div>
+    </div>
+    <p class="text-sm"><b>Problema.</b> El comportamiento real de una ruta es su código más N envoltorios en N archivos, aplicados sustituyendo funciones globales en un orden implícito. Lo que se lee no es lo que se ejecuta.</p>
+    <p class="text-sm"><b>Solución.</b> Las reglas se conservan todas (cada una aporta algo real), pero pasan a declararse en un único punto de composición. El núcleo deja de reescribirse al cargar y se parte por responsabilidad.</p>
+    <p class="text-sm"><b>Beneficios.</b> Locality: "qué pasa en esta ruta" se responde abriendo un archivo. Una ruta nueva no puede quedarse sin protección por olvido. Pruebas: dejan de necesitar reproducir el orden de arranque o leer el código como texto.</p>
+    <p class="note"><b>Dependencia.</b> Mucho más barato después de retirar el INDEX: desaparece cerca de la mitad del núcleo.</p>
+  </article>
+
+  <!-- 3 -->
+  <article class="card space-y-4" id="h3">
+    <div class="flex flex-wrap items-center gap-2"><h3 class="text-xl font-semibold mr-2">3 · Cuentas con un solo almacén</h3><span class="chip c-strong">Recomendación fuerte</span></div>
+    <p class="mono text-slate-600">cloud-server/server-core.js (bloque de cuentas) · control-plane-json-compat.js · postgres-control-plane-runtime.js · postgres-auth-multiprocess-compat.js · account-lifecycle.js · session-security.js</p>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div><p class="lbl mb-2">Antes: dónde vive una cuenta</p>
+        <div class="space-y-1.5">
+          <div class="box">Memoria del proceso (manda mientras corre)</div>
+          <div class="box box-leak">"Archivo" virtual → espejo en PostgreSQL</div>
+          <div class="box">Tablas propias en PostgreSQL (altas, verificación)</div>
+          <div class="box box-leak">2 archivos locales: códigos de recuperación, sesiones revocadas</div>
+        </div></div>
+      <div><p class="lbl mb-2">Después</p>
+        <div class="deep"><p class="text-sm font-semibold">Module "cuentas"</p><p class="text-xs opacity-80 mt-1">Crear, autenticar, cambiar, cerrar. PostgreSQL es el único almacén.</p>
+          <span class="inner">usuarios</span><span class="inner">sesiones</span><span class="inner">MFA</span><span class="inner">recuperación</span><span class="inner">login social</span></div></div>
+    </div>
+    <p class="text-sm"><b>Problema.</b> El servidor sigue escrito como si guardara cuentas en archivos; una pieza intercepta esas escrituras y las copia a PostgreSQL. Parte del estado (recuperación de contraseña, sesiones revocadas) ni siquiera se copia.</p>
+    <p class="text-sm"><b>Solución.</b> Cuentas lee y escribe PostgreSQL directamente, y desaparece la pieza que simula archivos.</p>
+    <p class="text-sm"><b>Beneficios.</b> Locality: un dato nuevo del usuario se añade en un sitio, no en cinco. Se cierran los riesgos del aviso 4. Abre la puerta a V2 (perfiles públicos, espacios compartidos) sin apilar más sobre el espejo.</p>
+    <p class="note"><b>Riesgo.</b> Es el cambio más delicado de la lista: toca login y sesiones de usuarios reales. Pide un plan por pasos y pruebas por comportamiento antes de empezar.</p>
+  </article>
+
+  <!-- 4 -->
+  <article class="card space-y-4" id="h4">
+    <div class="flex flex-wrap items-center gap-2"><h3 class="text-xl font-semibold mr-2">4 · Catálogo: un beat definido en un sitio, y una sola maquinaria de transacciones</h3><span class="chip c-strong">Recomendación fuerte</span><span class="chip c-prov">no aplicar durante la migración</span></div>
+    <p class="mono text-slate-600">cloud-server/catalog/commands.js · operations.js · queries.js · playback.js · purge.js · transport.js · metadata-rules.js · legacy-codec.js · src/features/library/catalog/catalogApi.ts</p>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div><p class="lbl mb-2">Antes: añadir un campo a un beat</p>
+        <div class="flex flex-wrap gap-1.5">
+          <span class="box">reglas servidor</span><span class="box">reglas cliente</span><span class="box box-leak">mapeo ×2</span><span class="box">alta</span><span class="box">proyección</span><span class="box">migración</span><span class="box box-leak">escritura SQL ×5</span><span class="box box-leak">lectura ×2</span><span class="box">búsqueda ×3</span><span class="box">orden ×4</span><span class="box">cliente ×4</span><span class="box">dobles de prueba ×2</span>
+        </div>
+        <p class="text-xs text-slate-600 mt-2">12–18 sitios. La apertura de transacciones, copiada 5 veces.</p></div>
+      <div><p class="lbl mb-2">Después</p>
+        <div class="space-y-2">
+          <div class="deep"><p class="text-sm font-semibold">Module "definición del beat"</p><p class="text-xs opacity-80">Qué campos tiene, cómo se validan, guardan, leen y buscan.</p></div>
+          <div class="deep"><p class="text-sm font-semibold">Module "transacción de biblioteca"</p><p class="text-xs opacity-80">Bloqueo, vigencia, repetición segura, errores: una vez.</p></div>
+        </div></div>
+    </div>
+    <p class="text-sm"><b>Problema.</b> Las piezas del catálogo son deep una a una, pero cada una repite la maquinaria común y su propia lista de campos del beat. Las copias ya no son idénticas.</p>
+    <p class="text-sm"><b>Solución.</b> Concentrar "qué es un beat" y "cómo se abre una operación segura" en dos módulos que usen todos los demás.</p>
+    <p class="text-sm"><b>Beneficios.</b> Leverage: V2 añadirá datos (carpetas, espacios compartidos, enlaces de YouTube); cada uno pasaría de 12–18 ediciones a unas pocas. Locality: una política se cambia una vez.</p>
+    <p class="note"><b>Provisional.</b> La zona sigue cambiando (trabajo de rendimiento en curso). Se revalida entera al terminar la migración.</p>
+  </article>
+
+  <!-- 5 -->
+  <article class="card space-y-4" id="h5">
+    <div class="flex flex-wrap items-center gap-2"><h3 class="text-xl font-semibold mr-2">5 · Un único cliente de Cloud en el navegador</h3><span class="chip c-strong">Recomendación fuerte</span><span class="chip c-act">pequeño, buen primer paso</span></div>
+    <p class="mono text-slate-600">src/components/AccountGate.tsx · src/features/auth/webCsrfFetchCoordinator.ts · src/components/billingPortal.ts · catalogApi.ts · catalogCommandsApi.ts · catalogTransfer.ts · catalogMediaClient.ts</p>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div><p class="lbl mb-2">Antes</p>
+        <div class="flex flex-wrap gap-1.5"><span class="box">catálogo ×4</span><span class="box">pagos</span><span class="box">ajustes</span><span class="box">+12 archivos</span></div>
+        <div class="text-center text-xs text-red-700 my-1">↓ todos importan de un componente visual ↓</div>
+        <div class="box box-leak">AccountGate.tsx: formulario + sesión + dirección del servidor + 35 llamadas</div>
+        <p class="text-xs text-slate-600 mt-2">Cabecera de seguridad reescrita 5 veces; dos parches globales de <code>fetch</code>.</p></div>
+      <div><p class="lbl mb-2">Después</p>
+        <div class="deep"><p class="text-sm font-semibold">Module "sesión con Cloud"</p><p class="text-xs opacity-80 mt-1">"Haz esta llamada como el usuario actual."</p>
+          <span class="inner">dirección</span><span class="inner">cookie y CSRF</span><span class="inner">sesión caducada</span></div></div>
+    </div>
+    <p class="text-sm"><b>Problema.</b> Todo lo que habla con el servidor depende de un componente de pantalla que además lleva dentro el formulario de Desktop.</p>
+    <p class="text-sm"><b>Solución.</b> Separar la sesión y las llamadas en un módulo propio; los formularios quedan como pantallas.</p>
+    <p class="text-sm"><b>Beneficios.</b> Leverage: una interface para cada llamada al servidor. Locality: la autenticación de las llamadas se cambia una vez. Pruebas: un doble del servidor en un solo punto. Riesgo bajo y sin efecto visible; despeja el camino del candidato 1.</p>
+  </article>
+
+  <!-- 6 -->
+  <article class="card space-y-4" id="h6">
+    <div class="flex flex-wrap items-center gap-2"><h3 class="text-xl font-semibold mr-2">6 · Reproducción como un module, con la prioridad decidida en un sitio</h3><span class="chip c-worth">Merece explorarse</span><span class="chip c-prov">depende de una decisión tuya</span></div>
+    <p class="mono text-slate-600">src/hooks/useAudio.ts · src/features/playback/ · src/features/library/catalog/catalogPlaybackSession.ts, catalogMediaClient.ts · cloud-server/catalog/media.js</p>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div><p class="lbl mb-2">Antes</p>
+        <div class="space-y-1.5">
+          <div class="box box-leak">Pila de hoy: streaming + prefetch, prioridad repartida en 6 capas (se retira)</div>
+          <div class="box">Pila catálogo: descarga entera, sin prefetch</div>
+          <div class="box">En común: solo el elemento de audio</div>
+        </div></div>
+      <div><p class="lbl mb-2">Después</p>
+        <div class="deep"><p class="text-sm font-semibold">Module "reproducción"</p><p class="text-xs opacity-80 mt-1">"Prepara este beat", "suena", "esto va a hacer falta pronto".</p>
+          <span class="inner">origen de los bytes</span><span class="inner">streaming</span><span class="inner">prefetch</span><span class="inner">prioridad</span></div></div>
+    </div>
+    <p class="text-sm"><b>Problema.</b> Lo que hace que BeatGaler suene al instante vive solo en el camino que se retira, y ahí está repartido en seis capas. El camino nuevo no lo tiene.</p>
+    <p class="text-sm"><b>Solución.</b> Una sola pieza de reproducción que esconda de dónde vienen los bytes y concentre la política de prioridad.</p>
+    <p class="text-sm"><b>Beneficios.</b> Locality: la política se cambia en un sitio. La costura "origen de los bytes" permite pruebas sin Telegram.</p>
+    <p class="note"><b>Decisión que necesita tus datos.</b> Si los bytes van directos del navegador a Telegram (rápido, sin coste de servidor, pero el navegador lleva una llave del bot) o pasan todos por el servidor (más simple y cerrado, pero cada escucha consume servidor y puede añadir retraso). La migración prevé medirlo (T20). No se diseña hasta tener esa medida.</p>
+  </article>
+
+  <!-- 7 -->
+  <article class="card space-y-4" id="h7">
+    <div class="flex flex-wrap items-center gap-2"><h3 class="text-xl font-semibold mr-2">7 · Un solo module del servidor para hablar con Telegram</h3><span class="chip c-worth">Merece explorarse</span><span class="chip c-prov">depende del candidato 6</span></div>
+    <p class="mono text-slate-600">cloud-server/direct-transport-control.js · master-storage.js · catalog/transport-gateway.js · catalog-project-master-adapter.js · telegram-retry.js</p>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div><p class="lbl mb-2">Antes</p>
+        <div class="space-y-1.5">
+          <div class="box box-leak">direct-transport-control.js: sesiones + cuenta MASTER + llaves de bots, estado en un archivo con candado</div>
+          <div class="box">Gateway del catálogo: sin conectar</div>
+          <div class="box">Identidad del grupo en 3 almacenes</div>
+        </div></div>
+      <div><p class="lbl mb-2">Después</p>
+        <div class="deep"><p class="text-sm font-semibold">Module "almacén en Telegram"</p><p class="text-xs opacity-80 mt-1">Crear el grupo de un usuario, guardar, leer, borrar con verificación.</p>
+          <span class="inner">cuenta MASTER</span><span class="inner">bots</span><span class="inner">reintentos</span></div>
+        <p class="text-xs text-slate-600 mt-2">Dos adapters reales: Telegram, y el doble para pruebas.</p></div>
+    </div>
+    <p class="text-sm"><b>Problema.</b> El conocimiento de "cómo se guarda en Telegram" está repartido entre un archivo que hace tres cosas, una pasarela nueva sin estrenar y tres registros del mismo dato.</p>
+    <p class="text-sm"><b>Solución.</b> Una pieza con una interface de almacén. Qué sobrevive de sesiones y permisos del transporte directo lo decide el candidato 6.</p>
+    <p class="text-sm"><b>Beneficios.</b> Locality: los límites y rarezas de Telegram se tratan en un sitio. Leverage: catálogo, cuentas y purga usan la misma interface. Telegram sigue siendo el almacenamiento; esto no cambia de proveedor.</p>
+  </article>
+
+  <!-- 8 -->
+  <article class="card space-y-4" id="h8">
+    <div class="flex flex-wrap items-center gap-2"><h3 class="text-xl font-semibold mr-2">8 · Pruebas que comprueban comportamiento, no texto</h3><span class="chip c-worth">Merece explorarse</span><span class="chip c-prov">la política la decides tú (sección F)</span></div>
+    <p class="mono text-slate-600">tests/integration/ (35 de 52) · scripts/run-regressions.mjs · cloud-server/tests/catalog/*.integration.cjs · scripts/catalog-suites.json · .github/workflows/</p>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div><p class="lbl mb-2">Antes</p>
+        <div class="space-y-1.5">
+          <div class="box box-leak">"El archivo X contiene este texto"</div>
+          <div class="box box-leak">"Hay exactamente 40 migraciones"</div>
+          <div class="box box-leak">"La tabla tiene esta fila" (mirando por dentro)</div>
+          <div class="box">Ninguna prueba de la llamada completa</div>
+        </div></div>
+      <div><p class="lbl mb-2">Después</p>
+        <div class="deep"><p class="text-sm font-semibold">Pruebas por la interface</p><p class="text-xs opacity-80 mt-1">"Si pido esto, ocurre esto." Sobreviven a cualquier reordenación interna.</p></div></div>
+    </div>
+    <p class="text-sm"><b>Problema.</b> Una parte grande de las pruebas fija la forma del código. Se rompen al reordenar aunque todo funcione, y pasan aunque algo deje de funcionar. Eso es lo que convierte la limpieza en una espera.</p>
+    <p class="text-sm"><b>Solución.</b> A medida que cada candidato dé a un sistema una interface clara, sus pruebas pasan a cruzar esa interface, y las de texto se retiran. No es un proyecto aparte: acompaña a cada mejora.</p>
+    <p class="text-sm"><b>Beneficios.</b> La interface es la superficie de prueba. Menos fallos falsos, menos espera, y la protección que hoy falta en el pegamento.</p>
+  </article>
+
+  <!-- 9 -->
+  <article class="card space-y-4" id="h9">
+    <div class="flex flex-wrap items-center gap-2"><h3 class="text-xl font-semibold mr-2">9 · Pagos: quitar la cáscara y dejar el núcleo</h3><span class="chip c-worth">Merece explorarse</span><span class="chip c-act">pequeño</span></div>
+    <p class="mono text-slate-600">cloud-server/billing-*-runtime.js (5) · billing-plan-catalog-route.js · access-grant-runtime.js · billing-checkout.js · billing-webhook.js · billing-entitlements.js · plans.js</p>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div><p class="lbl mb-2">Antes: 23 archivos</p>
+        <div class="flex flex-wrap gap-1.5"><span class="box">resolver</span><span class="box">checkout</span><span class="box">avisos</span><span class="box">suscripción</span><span class="box">reconciliación</span><span class="box">Polar ×2</span><span class="box box-leak">5 envoltorios</span><span class="box box-leak">3 versiones antiguas</span><span class="box box-leak">2 listas de planes</span></div></div>
+      <div><p class="lbl mb-2">Después</p>
+        <div class="deep"><p class="text-sm font-semibold">Module "pagos"</p><p class="text-xs opacity-80 mt-1">"¿Qué puede hacer este usuario?" y "empieza un pago".</p>
+          <span class="inner">resolver</span><span class="inner">checkout</span><span class="inner">avisos</span><span class="inner">suscripción</span><span class="inner">reconciliación</span><span class="inner">adapter Polar</span></div></div>
+    </div>
+    <p class="text-sm"><b>Problema.</b> El núcleo es bueno, pero para seguir un pago hay que abrir unos 12 archivos; casi la mitad no aportan comportamiento.</p>
+    <p class="text-sm"><b>Solución.</b> Retirar las versiones antiguas, absorber los envoltorios y dejar una única lista de planes.</p>
+    <p class="text-sm"><b>Beneficios.</b> Locality: el camino del pago se lee en seis o siete piezas. De paso caen tres workflows y la duplicación entre los doce de pagos.</p>
+  </article>
+
+  <!-- 10 -->
+  <article class="card space-y-4" id="h10">
+    <div class="flex flex-wrap items-center gap-2"><h3 class="text-xl font-semibold mr-2">10 · Que la carpeta se lea como el mapa</h3><span class="chip c-strong">Recomendación fuerte</span><span class="chip c-act">barato; el glosario puede empezar ya</span></div>
+    <p class="mono text-slate-600">cloud-server/ (115 archivos sueltos) · src/features/design/ · nombres d8-, d10-, stage1-, step15-, f3-, direct-persistent-* · 132 variables de configuración</p>
+    <div class="grid md:grid-cols-2 gap-5">
+      <div><p class="lbl mb-2">Antes</p>
+        <div class="flex flex-wrap gap-1.5"><span class="box box-leak">d8-ro-resolutions.js</span><span class="box box-leak">productive-temp-auth-boundary.js</span><span class="box box-leak">billing-polar-sandbox.js (también producción)</span><span class="box box-leak">legacy-import-executor.js (vivo)</span><span class="box box-leak">StudioToolbarCandidate</span><span class="box">+110 sueltos</span></div></div>
+      <div><p class="lbl mb-2">Después</p>
+        <div class="flex flex-wrap gap-1.5"><span class="box">cuentas/</span><span class="box">pagos/</span><span class="box">catalogo/</span><span class="box">telegram/</span><span class="box">http/</span><span class="box">persistencia/</span><span class="box">operacion/</span></div>
+        <p class="text-xs text-slate-600 mt-2">Más un glosario: una palabra, un significado.</p></div>
+    </div>
+    <p class="text-sm"><b>Problema.</b> Los nombres cuentan la historia del proyecto, no lo que hace cada pieza. "Capability" significa tres cosas, "legacy" cuatro, "MASTER" dos.</p>
+    <p class="text-sm"><b>Solución.</b> Primero un glosario acordado contigo (ya hay un borrador). Después, en la etapa 2, carpetas por sistema y nombres por responsabilidad; la configuración, leída en un sitio.</p>
+    <p class="text-sm"><b>Beneficios.</b> Es lo que más directamente te da el mapa mental: abrir la carpeta y ver los sistemas de la sección A. Mover archivos solo cuenta porque mejora la comprensión; no es un fin.</p>
+  </article>
+
+  <!-- 11 -->
+  <article class="card space-y-3" id="h11">
+    <div class="flex flex-wrap items-center gap-2"><h3 class="text-xl font-semibold mr-2">11 · Que "operación" signifique una sola cosa en el catálogo</h3><span class="chip c-spec">Especulativo</span></div>
+    <p class="mono text-slate-600">cloud-server/catalog/routes.js:120-149 · operations.js · commands.js · purge.js</p>
+    <p class="text-sm"><b>Problema.</b> Tres mecanismos distintos (ediciones en lote, subidas, purgas) comparten ruta y nombre y se distinguen por el prefijo de su identificador. La cola de trabajos vive dentro del archivo de subidas aunque la usan todos.</p>
+    <p class="text-sm"><b>Solución posible.</b> Separar la cola como pieza propia y dar nombre a cada tipo de operación. Lo dejo como especulativo porque puede resolverse solo al terminar la migración, y porque el coste de comprensión es menor que el de los anteriores.</p>
+  </article>
+</section>
+
+<!-- TOP -->
+<section id="top" class="space-y-5">
+  <h2 class="text-3xl">Recomendación: dónde profundizar en la pasada 2</h2>
+  <div class="card space-y-4 border-2 border-emerald-600">
+    <p class="text-sm">Propongo tres zonas, en este orden. La decisión es tuya.</p>
+    <div class="grid md:grid-cols-3 gap-4 text-sm">
+      <div class="space-y-2"><p class="lbl text-emerald-800">Primera</p><p class="font-semibold">La Gallery y sus piezas visuales <a class="underline" href="#h1">(1)</a> <a class="underline" href="#h5">(5)</a></p><p>Es donde aterrizará cada función de V2 y donde hoy aparecen los fallos silenciosos. Es también la zona con más diseño protegido, así que conviene pensarla contigo despacio.</p></div>
+      <div class="space-y-2"><p class="lbl text-emerald-800">Segunda</p><p class="font-semibold">El servidor: rutas y cuentas <a class="underline" href="#h2">(2)</a> <a class="underline" href="#h3">(3)</a></p><p>Es la parte más difícil de entender de todo BeatGaler y la más arriesgada de tocar. Merece el diseño más cuidadoso y la comparación de alternativas.</p></div>
+      <div class="space-y-2"><p class="lbl text-emerald-800">Tercera</p><p class="font-semibold">El camino de los archivos <a class="underline" href="#h6">(6)</a> <a class="underline" href="#h7">(7)</a></p><p>No para diseñarlo ahora, sino para preparar la decisión "directo o por el servidor": qué medir, qué te costaría cada opción y qué sentirías como usuario.</p></div>
+    </div>
+    <p class="text-sm">En paralelo, sin esperar a nada: revisar contigo el <b>borrador de glosario</b> <a class="underline" href="#h10">(10)</a> y convertir la sección E en una lista de retirada ordenada. El candidato 4 (catálogo) lo dejaría para cuando la migración termine, porque sigue cambiando.</p>
+  </div>
+</section>
+
+<footer class="text-xs text-slate-500 border-t border-slate-200 pt-6 space-y-1">
+  <p>Evidencia detallada por zona, con archivo y línea: <code>E:\777\app\BeatGaler-arq\pasada-1\zonas\</code> (siete archivos). Estado del diagnóstico: <code>E:\777\app\BeatGaler-arq\ESTADO-DIAGNOSTICO.md</code>. Borrador de glosario: <code>E:\777\app\BeatGaler-arq\borradores\GLOSARIO-borrador.md</code>.</p>
+  <p>Todo lo relativo al catálogo es provisional hasta que la migración termine y se revalidará entonces. Nada de este informe se ejecuta antes de la etapa 2.</p>
+</footer>
+
+</main>
+</body>
+</html>
