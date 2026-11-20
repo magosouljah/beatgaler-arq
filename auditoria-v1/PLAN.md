@@ -1,15 +1,22 @@
-# Plan de trabajo — director es propietario
+# Plan de auditoría — Director
 
-**Estado inicial:** SIN ASIGNACIÓN hasta que el director ejecute el primer turno.
-**Fuente:** `magosouljah/BeatGaler` rama `local/landing-gallery-unificada`.
-**SHA observado durante configuración (NO sustituye a HEAD del primer turno):** `4e66638051effe888e66a885010065d98fc7df17`.
-**Protocolo:** [PROTOCOLO.md](PROTOCOLO.md).
+Protocolo: [PROTOCOLO.md](PROTOCOLO.md). Fuente de código SOLO `magosouljah/BeatGaler@4e66638051effe888e66a885010065d98fc7df17` (rama `local/landing-gallery-unificada`, HEAD comprobado 2026-11-20). Solo lectura. Director dueño de este archivo.
 
-## Primera misión sugerida (el Director debe fijar el SHA y convertirla en asignación)
-AUD-001 — Inventariar sistemas, módulos y entrypoints Web/Cloud/SQL del commit vigente; contrastar conclusiones históricas en `ESTADO-DIAGNOSTICO.md` y siete informes `pasada-1/zonas/`, sin confundir el catálogo anterior con PostgreSQL LIVE. Escoger un lote pequeño que permita al Investigador producir un mapa profundo y falsable. Registrar dependencias y preguntas pendientes, no solo nombres.
+## Asignación vigente: AUD-001 — ASIGNADO
 
-## Asignación vigente
-Ninguna. El director debe rellenar ID, pregunta, SHA, fronteras, verificación requerida, estado y criterios de aceptación antes del primer turno del Investigador.
+- **Pregunta central:** ¿Cómo selecciona Web la experiencia Gallery activa y cómo entra al catálogo PostgreSQL, incluyendo arranque, sesión, estados de carga y error? Contrastar específicamente la hipótesis histórica «catálogo desactivado por defecto» contra el código ACTUAL, sin asumir que el informe de `5cb6ccc` sigue vigente.
+- **Alcance inicial:** `src/main.tsx`, `src/app/WebExperience.tsx`, `src/app/WebGalleryEntry.tsx`, `src/app/WebGalleryWorkspace.tsx`, `src/features/library/catalog/catalogComposition.ts`, `catalogLibraryProvider.tsx`, `LibraryCompositionGate.tsx` y llamadas/imports directos pertinentes. Incluir endpoints Cloud de contexto/provisión solo hasta identificar contratos y responsables; registrar como siguiente lote si excede capacidad.
+- **SHA obligatorio:** `4e66638051effe888e66a885010065d98fc7df17`. Leer todos los archivos con ese `ref`, no usar GitHub search/main como prueba.
+- **Entregable de comprensión:** diagrama textual entrypoint → routing → autenticación → composición → context/provision → Gallery; responsables de estado, interfaces, flags, errores, recuperación, archivos y líneas, puntos concretos de modificación.
+- **Falsación:** verificar si legacy INDEX aún puede activarse en Web y bajo qué condiciones; distinguir código muerto de ruta activa; buscar un camino de fallo y un contraejemplo a cada sospecha.
+- **Evidencia:** código a SHA, tests escritos pertinentes, líneas precisas; sin ejecutar tests ni acceder a producto real. Clasificar CONFIRMADO/RIESGO/HIPÓTESIS.
+- **Criterio de aceptación:** informe nuevo `auditoria-v1/runs/<fecha>-investigador-AUD-001.md` con llamadas trazadas, mapa técnico, hipótesis históricas reconciliadas, cobertura C1/C2/C3 propuesta por archivo, límites y siguiente paso. No editar registros canónicos.
+- **Estado:** ASIGNADO, pendiente de primer informe del Investigador. El Director no reasignará hasta recepción, bloqueo o cierre documentado.
 
-## Cola e histórico
-Pendiente de primer inventario. Conservar cada lote cerrado con enlace a `runs/`, verificación y deltas de cobertura.
+## Campañas posteriores
+
+P0 inventario íntegro y reconciliación de las siete zonas históricas (basadas en `5cb6ccc`); P1 arquitectura y ownership; P2 journeys UI→Cloud→SQL→Telegram; P3 contratos, concurrencia y recuperación; P4 duplicaciones/legado y comprensibilidad; P5 falsación y deltas. Cada lote pequeño debe producir mapa y evidencia, no solo hallazgos.
+
+## Registro
+
+2026-11-20: HEAD comprobado; árbol Git recursivo no truncado, 1,459 blobs; sin informes nuevos registrados al preparar AUD-001. Los hallazgos históricos quedan como hipótesis hasta revalidación.
