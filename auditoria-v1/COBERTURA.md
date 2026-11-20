@@ -95,3 +95,9 @@ No se calculan porcentajes: inventario aún no clasificado.
 - `CatalogAppShell.tsx:67-79`: C2 **de tramo** callbacks a GalleryChrome; sin internals Chrome.
 - F01: C2 parcial estático ampliado, C3 pendiente. AUD-005 PARCIAL; pruebas escritas no contrastadas en esta revisión, runtime no ejecutado.
 - HEAD cambió 3 archivos Cloud/doc desde SHA del informe, ninguno de los tres Web; no transferir cobertura de gateway sin revalidación. Árbol y denominador activo @HEAD pendientes.
+
+
+## Revisión Director 17:00 — AUD-006 + nuevo panorama
+- `useCatalogGalleryScope.ts:248-303,504-507` @ `45ec5b27e778127414537d01d170e0b972777768`: C2 **solo tramos** (gating y entrypoints). `CatalogAppShell.tsx:55-121`: C2 tramos de botones, inert y rutas; `catalogMutations.ts:136-168`: C2 tramo patch/trash, sin store/backend. [AUD-006](runs/20261120T1630-investigador-AUD-006.md) contrastado. **AUD-006 PARCIAL; F06 C2 parcial, ningún C3**.
+- `cloud-server/state-dir.js:1-31` @ `b6b999526f77054a199c74fadb39d2171ac4eb75`: C2 estático de módulo pequeño (ruta, entorno, errores), sin prueba runtime. `cloud-server/server.js:1-95`: C1 parcial + C2 de tramo bootstrap. `cloud-server/catalog/native-transport-provisioning.js:1-75`: C2 de tramo revalidado, no del flujo UI.
+- **F08 bootstrap Cloud:** C2 parcial estático, C3 no. F01/F02/F05/F06 C2 parciales según tramos previos; no flujo C3 certificado. Total 1.459 blobs sigue @SHA inicial, no denominador de código operativo @HEAD; no porcentajes.
