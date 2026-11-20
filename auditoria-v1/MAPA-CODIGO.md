@@ -92,3 +92,11 @@ Evidencia: [AUD-002 12:31](runs/20261120T1231-investigador-AUD-002.md) y contras
 | `http-containment.js` @ `9680c73da477cc9bcd201a036490d736bb6a7b12` | frontera HTTP de autenticación/contención; lee sesiones persistidas y liga identidad de instalación | Nuevo delta, C1 parcial de cabecera; revisar consumidores y guardas |
 | `server-core.js:~115-140` @ `9680c73da477cc9bcd201a036490d736bb6a7b12` | Express: CORS, parsers y montaje `createCatalogRouter` con servicios actuales y autenticador | C2 de tramo; cambios recientes exigen revisar otros middlewares |
 Dónde cambiar: recuperación Web en provider/Gate, semántica GET/POST en routes, prueba externa en gateway, contención de rutas en http-containment/server-core. No inferir runtime de esta lectura.
+
+## Panorama 16:00 — ownership y frontera de sincronización UI @ `9680c73da477cc9bcd201a036490d736bb6a7b12` (sin delta Web hasta `45ec5b27e778127414537d01d170e0b972777768`)
+| Módulo | Owner/entrada | Salida y punto de modificación | Estado/cobertura |
+|---|---|---|---|
+| `useCatalogGalleryScope.ts:114-175` | React posee `search`, tags incluidos/excluidos; lee `snapshot.sort` del store; `setSortBy` es inmediato | Timer 250 ms emite `interactionStore.onFiltersChanged` y `store.setQuery`; para corregir captura obsoleta revisar dependencias y sort al disparar | ACTIVO en Shell; C2 solo tramo, riesgo R-002 |
+| `catalogQueryStore.ts:355-368` | Owner de filtros efectivos, sort, queryKey, bloques y generación | `setSort` delega `setQuery`, publica y carga; abortar red no cancela timers externos | ACTIVO; C2 solo tramo |
+| `CatalogAppShell.tsx:67-79` | Adaptador UI GalleryChrome; no posee sort | Entrega callbacks de scope a Chrome; cambiar presentación aquí, semántica en scope/store | ACTIVO; C2 tramo |
+La evidencia estática de AUD-005 está contrastada; sin test ejecutado ni C3. Gateway Cloud modificado en HEAD `45ec5b27e778127414537d01d170e0b972777768` requiere revisión separada.
