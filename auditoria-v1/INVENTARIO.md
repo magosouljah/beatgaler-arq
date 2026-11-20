@@ -47,3 +47,7 @@ Contraste por lectura directa de `catalogLibraryProvider.tsx:1-110`, `catalogApi
 | Medios | `catalogLibraryProvider.tsx:79-110` crea DirectPort condicional a capabilities, transfer, media y cachés; import dinámico `catalogDirectPort` (o `catalogLabDirectPort` solo DEV) | ACTIVO condicional; implementación interna PENDIENTE |
 
 No se han enumerado todos los archivos de esos subsistemas ni clasificado sus tests. Los 1.459 blobs siguen siendo denominador total del repositorio, no cobertura funcional.
+
+
+## Corte panorámico 14:00 @ `4e66638051effe888e66a885010065d98fc7df17`
+Sin delta de rama. Nueva subclasificación **por lectura de contenido**, sin cambiar denominador de 1.459 blobs: `cloud-server/catalog/queries.js` = motor ACTIVO de consulta SQL (parseo, canonicalización, filtros, páginas; C2 solo tramos); `cloud-server/catalog/cursor.js` = módulo de firma/verificación HMAC de cursores, sin DB/red (C2 de interfaz y errores); `src/features/library/catalog/catalogApi.ts` = HTTP metadata + clave local; `catalogQueryStore.ts` = estado y reutilización de bloques. La ruta `routes.js` monta GET /catalog/v1/beats sobre `queries.listBeats`. No contar migraciones aplicadas ni declarar C0 por archivo exhaustivo: clasificación activo/legado del resto sigue pendiente.
