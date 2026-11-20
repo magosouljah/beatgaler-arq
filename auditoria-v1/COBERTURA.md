@@ -75,3 +75,11 @@ No se calculan porcentajes: inventario aún no clasificado.
 - `CatalogVirtualGallery.tsx:74-104`: **C2 de tramo** virtualización y errores.
 - `catalogLibraryProvider.tsx:1-110`: **C1 parcial + C2 de tramo** factory de servicios y DirectPort condicional.
 - F01 filtros→render y F05 control audio: **C2 parcial estático**; C3 ninguno. AUD-002 **PARCIAL**. Sin pruebas ejecutadas ni porcentajes de comprensión.
+
+
+## Revisión 14:00 — AUD-003 @ `4e66638051effe888e66a885010065d98fc7df17`
+- `catalogApi.ts:98-115,223-227`: C2 **de tramos** (GET/identidad local), no del archivo completo.
+- `catalogQueryStore.ts:355-360`: C2 de tramo (setQuery/setSort, reuse).
+- `cloud-server/catalog/queries.js:85-146,164-213,228-244`: C2 de tramos (canonicalización, predicados, errores), no de toda paginación.
+- `cloud-server/catalog/cursor.js:1-95`: C2 de interfaz de firma/verificación; integración con queries pendiente.
+- F01 filtros→SQL: C2 **parcial estático**, C3 no certificado. [AUD-003](runs/20261120T1330-investigador-AUD-003.md) contrastado. AUD-003 cerrado PARCIAL, AUD-004 asignado. No tests ejecutados; 1.459 blobs no son denominador de comprensión.
