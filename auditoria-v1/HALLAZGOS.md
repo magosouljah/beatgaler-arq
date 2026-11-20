@@ -17,3 +17,7 @@ Estados permitidos: `CONFIRMADO`, `RIESGO`, `HIPÓTESIS`, `DESCARTADO`, `NO_VERI
 ## Contraste Director — 2026-11-20 06:00
 - **R-001 permanece RIESGO:** confirmada separación entre COMMIT de biblioteca y efecto externo de membresía, con GET posterior que no reintenta. **Contraejemplo:** `routes.js` llama a `ensureForUser` en IMPORT/REPLACE y direct/session; por ello NO afirmar recuperación imposible ni bug operativo confirmado. Evidencia primaria `authority.js:168-245`, `routes.js:71-79,130-135,179-184`, `catalogApi.ts:194-216` @ 4e66638051effe888e66a885010065d98fc7df17.
 - **H-002 permanece HIPÓTESIS de impacto:** `catalogApi.ts:222-225` compara serializaciones decimales de bytes lexicográficamente. Ejemplo lógico `100` < `99` como cadenas, pero falta trazar consumidores y efectos. No elevar a bug.
+
+## Contraste Director — 2026-11-20 10:00
+- **H-002: anomalía del comparador CONFIRMADA estáticamente, impacto HIPÓTESIS.** `catalogApi.ts:224-227` compara `TextEncoder().encode(tag).join(',')` como texto. Ejemplo `A` (65) frente a `é` (195,169) invierte orden numérico UTF-8. `catalogQueryStore.ts:109,355-358` usa la clave para identidad/reutilización de consulta. No se ha probado que produzca claves iguales para filtros diferentes, ni daño a resultados; no elevar a bug operativo. [09:30](runs/20261120T0930-investigador-AUD-001.md).
+- **R-001 sigue RIESGO**, sin prueba de bloqueo permanente; test `catalog-native-transport-provisioning.test.cjs` solo usa dobles y no cubre GET contexto posterior ni UI.
