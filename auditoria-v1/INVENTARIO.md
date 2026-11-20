@@ -35,3 +35,15 @@ Fuente primaria: GitHub Git Trees `GET /repos/magosouljah/BeatGaler/git/trees/<S
 **Subclasificación reproducible:** `src/`: `features` 190, `components` 22, `assets` 19, `app` 9, `platform` 8, `lib` 9, otros 12. `cloud-server/`: archivos directos 133, `catalog` 25, `migrations` 42, `tests` 230, `scripts` 22, otros 3. `tests/`: `component-dom` 118, `integration` 52, `e2e-web` 25 y otros 93. `scripts/`: directos 105, `catalog-lab` 45, `backup` 8, `catalog-bench` 5, `wry-patches` 2.
 
 **SQL:** `cloud-server/migrations/0001_control_plane.sql` hasta `0042_catalog_reused_bots.sql` (42 archivos). Nombre no prueba migración aplicada; catálogo aparece en 0026–0042. **Pendiente:** inventario por archivo con denominador de código operativo, separación activo/legado, relaciones dinámicas y ownership. No atribuir C1 a la lectura del árbol.
+
+## Corte panorámico 13:00 @ `4e66638051effe888e66a885010065d98fc7df17`
+Contraste por lectura directa de `catalogLibraryProvider.tsx:1-110`, `catalogApi.ts:1-110`, `catalogQueryStore.ts:1-110`, `CatalogGalleryWorkspace.tsx:1-19` y `CatalogAppShell.tsx:70-99,125-145,180-193`.
+
+| Subsistema en `src/features/library/catalog/` | Entradas y responsabilidades verificadas estáticamente | Estado |
+|---|---|---|
+| Composición | `catalogLibraryProvider.tsx` fabrica servicios por cuenta/época: API, commands, store, interaction, playback, media, mutations, caches y transfer; `teardown` es parte del contrato | ACTIVO en composición POSTGRES, C2 solo de tramo |
+| UI Gallery | `CatalogGalleryWorkspace.tsx` delega a `CatalogAppShell.tsx`; este conecta GalleryChrome, BeatCard, VirtualGallery y Player | ACTIVO en rama catálogo, C2 parcial |
+| Consulta | `catalogApi.ts` declara DTO, filtros, errores y transporte HTTP de metadatos; `catalogQueryStore.ts` controla bloques, cursores, estados y límites de memoria | ACTIVO en rama catálogo, C2 parcial |
+| Medios | `catalogLibraryProvider.tsx:79-110` crea DirectPort condicional a capabilities, transfer, media y cachés; import dinámico `catalogDirectPort` (o `catalogLabDirectPort` solo DEV) | ACTIVO condicional; implementación interna PENDIENTE |
+
+No se han enumerado todos los archivos de esos subsistemas ni clasificado sus tests. Los 1.459 blobs siguen siendo denominador total del repositorio, no cobertura funcional.
