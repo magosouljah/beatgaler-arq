@@ -71,3 +71,13 @@ Fuente: árbol Git completo @ `4e66638051effe888e66a885010065d98fc7df17`; las re
 | Frontera HTTP/Direct | `catalogApi.ts` / `catalogLibraryProvider.tsx:79-110` | HTTP solo metadatos; DirectPort condicional y cachés locales | Lazy import de puerto real o lab DEV, medios y transferencias | No inferir que Cloud transporte bytes; implementación de puerto y errores pendiente |
 
 Evidencia: [AUD-002 12:31](runs/20261120T1231-investigador-AUD-002.md) y contraste directo de archivos @SHA. No se infiere activación en producción ni ejecución real.
+
+
+## Panorama 14:00 — identidad de consultas y cursores @ `4e66638051effe888e66a885010065d98fc7df17` (lectura estática)
+| Módulo | Responsabilidad / owner | Entrada y dependencia | Errores / modificación | Nivel |
+|---|---|---|---|---|
+| `catalogApi.ts` | construye GET con filtros y `filtersKey` de identidad LOCAL (incluye sort); no posee filas | `listBeats` → `/catalog/v1/beats` | errores HTTP tipados; modificar canonicalización cliente aquí | C2 tramos 98-115,223-227 |
+| `catalogQueryStore.ts` | dueño de `snapshot.queryKey`, filtros y bloques | `setQuery/setSort` → `filtersKey` y `loadFirst` | si misma clave y hay bloques evita carga; cambiar política de reutilización aquí | C2 tramo 355-360 |
+| `cloud-server/catalog/queries.js` | canonicaliza filtros para `filterHash` (sin sort), valida GET y produce predicados SQL | `routes.js` → `queries.listBeats`; `byteSort` usa Buffer.compare UTF-8 | `CatalogQueryError`, timeout SQL 57014 → 503; cambiar filtros/SQL aquí | C2 tramos 85-146,164-213,228-244 |
+| `cloud-server/catalog/cursor.js` | firma/verifica tokens opacos HMAC; sin DB/red ni owner de caché | `queries.js` usa contrato de cursor; payload JSON canónico | 400 inválido, 409 clave retirada; rotación y formato aquí; uso en paginación aún pendiente | C2 de interfaz 1-95; integración pendiente |
+**Separación fundamental:** `filtersKey` identifica bloques cliente, `filterHash` identifica conjunto de filtros servidor y `cursor.js` autentica continuidad de paginación. No son el mismo hash ni deben igualarse byte a byte. Fuente [AUD-003](runs/20261120T1330-investigador-AUD-003.md), contrastada por Director.
