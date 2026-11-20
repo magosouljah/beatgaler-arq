@@ -100,3 +100,13 @@ Dónde cambiar: recuperación Web en provider/Gate, semántica GET/POST en route
 | `catalogQueryStore.ts:355-368` | Owner de filtros efectivos, sort, queryKey, bloques y generación | `setSort` delega `setQuery`, publica y carga; abortar red no cancela timers externos | ACTIVO; C2 solo tramo |
 | `CatalogAppShell.tsx:67-79` | Adaptador UI GalleryChrome; no posee sort | Entrega callbacks de scope a Chrome; cambiar presentación aquí, semántica en scope/store | ACTIVO; C2 tramo |
 La evidencia estática de AUD-005 está contrastada; sin test ejecutado ni C3. Gateway Cloud modificado en HEAD `45ec5b27e778127414537d01d170e0b972777768` requiere revisión separada.
+
+
+## Panorama 17:00 — estado persistente y bootstrap Cloud @ `b6b999526f77054a199c74fadb39d2171ac4eb75` (estático)
+| Módulo | Propósito/estado/owner | Entrada → dependencias/efectos | Punto de modificación y límites |
+|---|---|---|---|
+| `cloud-server/state-dir.js:1-31` | ACTIVO, dueño de resolución de ruta de estado de proceso; no almacena sesiones directamente | `server.js` importa `STATE_DIR` y `assertProductionStateDir`; lee variables de entorno y `fs.statSync`; exige directorio externo a release si entorno productivo | Configuración de ruta aquí; C2 de tramo estático, sin inspección de entorno real ni pruebas ejecutadas |
+| `cloud-server/server.js:1-95` | ACTIVO, entrypoint/compositor Cloud | carga middlewares, auth, catálogo, PostgreSQL; `start()` valida ruta de estado antes de inicializar pool; módulos importados incluyen `catalog/authority,queries,commands,operations,playback,media,purge,direct` | Alterar orden de bootstrap aquí; solo tramo inicial C1/C2, resto de montaje pendiente |
+| `cloud-server/catalog/native-transport-provisioning.js:1-75` | ACTIVO por import desde server; owner del contrato de provisión de membresía, no del gateway ni DB | inyección `pool/assignmentStore/transport`; valida chat y bot activo, lock por chat, `ensureCatalogBotMembership`, marca READY solo tras proof; errores 409/503 | Cambiar política de provisión aquí; revalidación parcial de R-001, no alcanzabilidad UI ni comportamiento externo |
+
+**Nuevo límite de arquitectura:** estado JSON/sesiones local persistente se separa del directorio de release por `state-dir` en producción configurada; esto es **intención y guardia en código**, no evidencia de que el despliegue real lo cumpla. `deploy/aws` y scripts solo inventariados por nombre, no auditados ni ejecutados.
