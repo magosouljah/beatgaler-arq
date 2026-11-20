@@ -42,3 +42,22 @@ Evidencia: [checkpoint 05:25](runs/20261120T0525-investigador-AUD-001.md) y cont
 
 ## AUD-001 — Identidad, caché y revalidación Gallery (Director 11:00; estático @ `4e66638051effe888e66a885010065d98fc7df17`)
 `catalogApi.ts:223-227` define `filtersKey` de filtros+sort (sin estado propio). `catalogQueryStore.ts:355-359` es dueño de `snapshot.queryKey`, bloques y generación: si coincide clave y existen bloques, no recarga; si cambia, publica consulta y carga primera página. `:261-284` siembra bloque local **provisional** y revalida con SQL; si la revalidación falla y sigue provisional, retira bloques. `:371-405` refresca bloques residentes tras mutación, conservando tarjetas confirmadas mientras obtiene páginas y reintentando ante cambios de revisión. `catalogLibraryProvider.tsx:170-205` es dueño de composición/ciclo de servicios: espera `/context` ready, verifica identidad de autoridad antes de usar caché local, crea store nuevo y dispara revalidación. **Dónde modificar:** normalización/identidad en `catalogApi.ts`; políticas de bloques, retry y refresh en `catalogQueryStore.ts`; identidad de cuenta y siembra de caché en `catalogLibraryProvider.tsx`. Pendiente: callers UI, implementación completa de caché y contrato de normalización SQL. [Informe 10:30](runs/20261120T1030-investigador-AUD-001.md); C2 solo de tramos.
+
+## Panorama v2.1 — sistemas y puntos de modificación (C0 por árbol, NO C2 por esta tabla)
+Fuente: árbol Git completo @ `4e66638051effe888e66a885010065d98fc7df17`; las relaciones marcadas como verificadas proceden de contrastes primarios AUD-001, las demás son candidatas por estructura.
+
+| Sistema/carpeta | Función y estado | Entrada / ownership / dependencia | Dónde modificar / límite |
+|---|---|---|---|
+| `src/app` + `src/main.tsx` | composición Web; ruta Gallery catálogo/legacy VERIFICADA estáticamente | `WebGalleryWorkspace` → `LibraryCompositionGate`; selección de modo | cambiar composición en `WebGalleryWorkspace.tsx`; resto de app PENDIENTE |
+| `src/features/library/catalog` | consultas, estado y caché Gallery; tramo ACTIVO condicionado por flag | `catalogLibraryProvider` posee servicios; `catalogQueryStore` posee bloques/clave/generación; Cloud es autoridad | filtros en `catalogApi.ts`, store en `catalogQueryStore.ts`; UI callers PENDIENTES AUD-002 |
+| `src/features/auth` | identidad Web; INCIERTO por archivo | `activeWebAccount` consumido por Gallery; endpoints pendientes | trazar auth UI y Cloud en lote posterior |
+| `src/components`, `src/features` restantes | componentes/funcionalidades Web; INCIERTO | inventariados por árbol; no se presume ruta activa | descomponer subcarpetas en próximas pasadas |
+| `cloud-server/server.js` + `server-core.js` | arranque Express, middlewares, sesiones; tramos VERIFICADOS | sesión JSON/memoria → bearer → router catálogo | auth en `server-core.js`; runtime global no cubierto |
+| `cloud-server/catalog` | autoridad PostgreSQL, rutas y provisión; tramos VERIFICADOS | `routes.js` → `authority.js` → SQL; `native-transport-provisioning.js` → asignación/gateway | contratos y SQL restantes PENDIENTES |
+| `cloud-server/migrations` | 42 migraciones SQL, estado de aplicación NO_VERIFICABLE | 0001–0042, catálogo desde 0026; triggers/índices pendientes | modificar schema solo en futuro, auditoría lectura |
+| `cloud-server/direct-vault-assignment.js`, `direct-transport-control.js` | asignación durable y gateway Telegram; tramos VERIFICADOS | PostgreSQL locks/estado → comprobación externa | R-001: recuperación UI pendiente |
+| `tests`, `cloud-server/tests` | suites escritas, no ejecutadas | evidencia estática potencial | cotejar contra contratos por microlote |
+| `scripts`, `.github`, `deploy` | operación, CI y laboratorios; INCIERTO | no equivalen a runtime | examinar solo dependencias de Web/Cloud |
+| `src-tauri` | Desktop FUERA | solo frontera con Web si se encuentra | no auditar internals |
+
+**Regla:** C0 de árbol ≠ C1 leído ≠ C2 comprendido. Inventario de código activo y entradas dinámicas aún pendiente.
