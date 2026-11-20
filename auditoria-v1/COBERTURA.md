@@ -34,3 +34,9 @@ No se calculan porcentajes: inventario aún no clasificado.
 - `cloud-server/catalog/native-transport-provisioning.js`: C2 parcial estático ampliado a lock/ready/pending/gateway; store y gateway pendientes.
 - `cloud-server/server.js:1-123`: C1 parcial (composición inicial inspeccionada); sin C2 hasta seguir montaje y dependencias.
 - F02: C2 parcial, no C3. Pruebas mencionadas en [informe 06:30](runs/20261120T0630-investigador-AUD-001.md) sin contraste primario por Director. Sin porcentaje de cobertura por falta de inventario clasificado.
+
+## Revisión Director 08:00 — AUD-001 @ 4e66638051effe888e66a885010065d98fc7df17
+- `cloud-server/server.js:304-313`: C1 parcial; orden de carga de `server-core` comprobado.
+- `cloud-server/server-core.js:115-138,1114-1121`: C2 **de tramo**, montaje Express, CORS/parsers y frontera bearer; no C2 del módulo completo ni de sesiones.
+- `cloud-server/catalog/routes.js:48-79`: C2 parcial, conexión efectiva de router y autenticación por handler comprobadas.
+- F02: C2 parcial ampliado al montaje efectivo; C3 pendiente por stores, gateway, sesión y pruebas escritas. Evidencia [07:32](runs/20261120T0732-investigador-AUD-001.md), contrastada con código a SHA. Inventario de alcance sin clasificar; porcentajes no disponibles.
