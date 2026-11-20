@@ -54,3 +54,9 @@ No se calculan porcentajes: inventario aún no clasificado.
 - `src/features/library/catalog/catalogQueryStore.ts:109,355-358`: C1 parcial y relación `queryKey` C2 de tramo; no C2 del módulo entero.
 - `cloud-server/tests/catalog/catalog-native-transport-provisioning.test.cjs:1-64`: C1 parcial; prueba escrita con fakes de pending/READY inspeccionada, no ejecutada.
 - F01 y F02: continúan C2 parcial, C3 pendiente. Evidencia [09:30](runs/20261120T0930-investigador-AUD-001.md) + contraste primario. Sin porcentaje: inventario sin clasificar.
+
+## Revisión Director 11:00 — AUD-001 @ `4e66638051effe888e66a885010065d98fc7df17`
+- `catalogApi.ts:223-227`: C2 de tramo (identidad determinista; comparador defectuoso); contrato servidor pendiente.
+- `catalogQueryStore.ts:261-284,355-405`: C2 de tramos (bloque provisional, revalidación, identidad, refresh, errores); módulo completo NO C2.
+- `catalogLibraryProvider.tsx:170-205`: C2 de tramo (contexto ready, identidad de caché, ciclo de servicios); caché interna pendiente.
+- F01 caché/consulta Gallery: C2 parcial, no C3. [Checkpoint 10:30](runs/20261120T1030-investigador-AUD-001.md) y lectura primaria. Sin tests ejecutados; no porcentaje por inventario sin clasificar.
