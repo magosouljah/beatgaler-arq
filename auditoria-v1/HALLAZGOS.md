@@ -7,3 +7,9 @@ Estados permitidos: `CONFIRMADO`, `RIESGO`, `HIPÓTESIS`, `DESCARTADO`, `NO_VERI
 | ID | Resumen | Estado | Severidad | SHA | Evidencia | Próxima prueba |
 |---|---|---|---|---|---|---|
 | — | Sin hallazgos verificados aún | — | — | — | — | — |
+
+## Revisión Director 2026-11-20 05:00 — AUD-001 (checkpoint 04:30)
+
+- **R-001 — RIESGO, no bug confirmado**, `BeatGaler@4e66638051effe888e66a885010065d98fc7df17`: `cloud-server/catalog/routes.js:75-79` llama primero `authority.provisionLibrary`, después `transportProvisioner.ensureForUser`; `authority.js:168-185` devuelve contexto si ya existe biblioteca POSTGRES; `src/features/library/catalog/catalogApi.ts:194-215` solo reaprovisiona con `LIBRARY_NOT_PROVISIONED`. Secuencia estática verificada: fallo de membresía tras crear biblioteca puede impedir reintento desde la resolución de contexto. **No demostrado:** ausencia de reparación por otras rutas, ni incidencia real. Comprobar invocadores adicionales y estado PENDING.
+- **H-002 — HIPÓTESIS de impacto / anomalía estática del comparador**, `src/features/library/catalog/catalogApi.ts:222-225`: orden lexicográfico de cadenas decimales UTF-8; `'d'` codifica `100` y `'c'` `99`, por lo que puede invertir orden numérico. **No probado:** impacto en consultas/caché ni equivalencia con servidor. Seguir usos y pruebas antes de elevar a bug de producto.
+- Fuente: [checkpoint 04:30](runs/20261120T0430-investigador-AUD-001.md). No se ejecutaron tests.
