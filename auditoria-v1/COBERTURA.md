@@ -60,3 +60,8 @@ No se calculan porcentajes: inventario aún no clasificado.
 - `catalogQueryStore.ts:261-284,355-405`: C2 de tramos (bloque provisional, revalidación, identidad, refresh, errores); módulo completo NO C2.
 - `catalogLibraryProvider.tsx:170-205`: C2 de tramo (contexto ready, identidad de caché, ciclo de servicios); caché interna pendiente.
 - F01 caché/consulta Gallery: C2 parcial, no C3. [Checkpoint 10:30](runs/20261120T1030-investigador-AUD-001.md) y lectura primaria. Sin tests ejecutados; no porcentaje por inventario sin clasificar.
+
+## Corte v2.1 — 2026-11-20 12:00
+Árbol Git recursivo no truncado: **1.459 blobs** clasificados por carpeta (INVENTARIO). Es denominador de repositorio, **NO** denominador de código Web+Cloud operativo. C0 panorámico por árbol para grupos `src` (269), `cloud-server` (455), `tests` (288), `scripts` (165), `cloud-server/migrations` (42, subconjunto de Cloud). No conceder C1/C2 a esos conjuntos por nombre o conteo. Pendiente: enumeración individual de activos/legado y exclusiones para porcentaje legítimo.
+
+**AUD-001: PARCIAL**, conserva C2 **solo en tramos** ya contrastados en secciones anteriores; F01/F02 C2 parcial, ningún C3 certificado. Informe de cierre [11:30](runs/20261120T1130-investigador-AUD-001-cierre-tramos.md), contraexamen independiente de `filtersKey`, `setQuery` y composición a SHA. **AUD-002 ASIGNADO**: callers UI y comportamiento de selección/audio; no hay cobertura anticipada. No tests ejecutados.
