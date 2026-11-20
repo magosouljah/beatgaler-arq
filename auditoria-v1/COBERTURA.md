@@ -88,3 +88,10 @@ No se calculan porcentajes: inventario aún no clasificado.
 - `catalogApi.ts:194-216`, `catalogLibraryProvider.tsx:159-207`, `LibraryCompositionGate.tsx:9-38`, `routes.js:48-79,130-135,179-184`, `authority.js:168-245`, `native-transport-provisioning.js:19-59`: **C2 de tramos** estático @ `4e66638051effe888e66a885010065d98fc7df17`, contraexamen Director del [AUD-004](runs/20261120T1431-investigador-AUD-004.md). No C3 ni runtime.
 - F02: C2 PARCIAL @SHA antiguo, alcanzabilidad UI y tests pendientes.
 - Nuevo HEAD `9680c73da477cc9bcd201a036490d736bb6a7b12`: C1 parcial de `http-containment.js` y `direct-transport-control.js`, C2 de tramo del montaje router en `server-core.js`. **No transferir automáticamente** C2 de gateway anterior al nuevo SHA. Denominador de código activo y árbol HEAD nuevo no certificados.
+
+## Revisión Director 16:00 — AUD-005 @ `9680c73da477cc9bcd201a036490d736bb6a7b12`, HEAD `45ec5b27e778127414537d01d170e0b972777768`
+- `useCatalogGalleryScope.ts:114-175`: C2 **de tramo** filtros/timer/sort, confirmado por lectura primaria; no módulo completo.
+- `catalogQueryStore.ts:355-368`: C2 **de tramo** setQuery/setSort/generación; sin C3.
+- `CatalogAppShell.tsx:67-79`: C2 **de tramo** callbacks a GalleryChrome; sin internals Chrome.
+- F01: C2 parcial estático ampliado, C3 pendiente. AUD-005 PARCIAL; pruebas escritas no contrastadas en esta revisión, runtime no ejecutado.
+- HEAD cambió 3 archivos Cloud/doc desde SHA del informe, ninguno de los tres Web; no transferir cobertura de gateway sin revalidación. Árbol y denominador activo @HEAD pendientes.
