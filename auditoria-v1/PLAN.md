@@ -20,3 +20,7 @@ P0 inventario íntegro y reconciliación de las siete zonas históricas (basadas
 ## Registro
 
 2026-11-20: HEAD comprobado; árbol Git recursivo no truncado, 1,459 blobs; sin informes nuevos registrados al preparar AUD-001. Los hallazgos históricos quedan como hipótesis hasta revalidación.
+
+
+## Revisión Director — 2026-11-20 04:00 (AUD-001)
+Recibido [checkpoint del Investigador](runs/20261120T0330-investigador-AUD-001.md). Estado **EN_PROGRESO**, no aceptado ni reasignado. El Director contrastó a `4e66638051effe888e66a885010065d98fc7df17` tres archivos: `catalogComposition.ts`, `WebGalleryWorkspace.tsx`, `LibraryCompositionGate.tsx`. **Aceptado parcialmente:** flag y modos, lazy legacy, bloqueo sin fallback; mapa/flujo C2 parcial. **No verificado:** runtime de auth, handler Cloud, SQL, flag del bundle desplegado, impacto de `filtersKey`; ningún bug confirmado. Próxima asignación: **continúa AUD-001** con Cloud `/catalog/v1/context` y `/library/provision`, auth y pruebas escritas; cerrar hipótesis de `filtersKey` solo con contraejemplo e impacto. No abrir AUD-002 hasta informe final y revisión. HEAD remoto verificado sin delta: `4e66638051effe888e66a885010065d98fc7df17`.
