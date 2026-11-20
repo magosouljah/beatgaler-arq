@@ -108,3 +108,17 @@ HEAD LOCAL fijado: `45ec5b27e778127414537d01d170e0b972777768`; compare contra `9
 - **Cierre:** tabla pequeña estado→acción→guarda→llamada, camino feliz y error con líneas @SHA, contraejemplo, tests escritos si existen, C2/C3 de tramos y límite runtime. Informe único inmutable runs/. No ejecutar tests.
 - **Backlog:** AUD-007 cursores/paginación; AUD-008 playback/lease; AUD-009 delta gateway y revalidación R-001; AUD-010 pruebas de debounce R-002. No reasignar antes del informe.
 - **Carril A:** clasificados por lectura nuevos límites de estado React/store y ownership de sort; regenerar árbol y clasificar archivos activos/legado sigue pendiente.
+
+
+## Dirección 2026-11-20 17:00 — AUD-006 revisado; AUD-007 asignado
+Rama LOCAL HEAD fijada en `b6b999526f77054a199c74fadb39d2171ac4eb75` (4 commits por delante de `45ec5b27e778127414537d01d170e0b972777768`; 20 rutas cambiadas, principalmente Cloud/deploy/scripts; **ninguna de los tres módulos Web de AUD-006**). Evidencia de AUD-006 se verificó a su SHA original, no se infiere runtime ni se transfieren contratos Cloud automáticamente.
+
+**AUD-006 CERRADO PARCIAL:** [informe 16:30](runs/20261120T1630-investigador-AUD-006.md) contrastado con `useCatalogGalleryScope.ts:248-303,504-507`, `CatalogAppShell.tsx:55-121`, `catalogMutations.ts:136-168` @ `45ec5b27e778127414537d01d170e0b972777768`. Confirmado: guarda binaria offline/online, Delete/bulk sin la guarda local, comandos downstream no examinados; protecciones independientes en Add/Edit/Drawer y `inert` provisional. **R-003 RIESGO**, sin operación indebida demostrada. C2 solo tramos; C3 pendiente. Huecos de estados alcanzables/store/backend pasan a backlog **AUD-010**.
+
+### ÚNICA asignación vigente: AUD-007 — ASIGNADO
+- **SHA obligatorio:** `b6b999526f77054a199c74fadb39d2171ac4eb75` (verificar rama al iniciar; si cambia, fijar nuevo SHA explícitamente).
+- **Pregunta:** ¿Cómo se produce, valida y consume el cursor de paginación de beats en Cloud, y cómo mantiene la Gallery continuidad y coherencia cuando cambian filtros/revisión?
+- **Microlote:** `cloud-server/catalog/queries.js`, `cloud-server/catalog/cursor.js`, `src/features/library/catalog/catalogQueryStore.ts` (solo tramo cursor y solicitud de páginas). Seguir callers directos sin ampliar más de tres módulos principales.
+- **Cierre:** trazar GET → validación/filtro/sort → token firmado → next page → estado de bloques; un caso válido y errores (cursor obsoleto/firma/revisión), referencias de líneas @SHA, pruebas escritas y contraejemplos. C2/C3 solo por tramos y distinguir estático de runtime. Un informe inmutable en runs/; máximo dos informes sin cierre.
+- **Backlog:** AUD-008 playback/lease; AUD-009 delta de membresía R-001; AUD-010 estados reales y guardas downstream R-003; AUD-011 revalidación debounce R-002.
+- **Carril A:** nuevo mapa de arranque Cloud y directorio de estado persistente `state-dir.js` @HEAD; clasificación de tests/deploy y denominador operativo siguen pendientes. No ejecutar CI/tests ni acceder a producción.
