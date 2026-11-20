@@ -27,3 +27,9 @@ Bearer → autenticador `server-core.js:1073-1082,1114-1121` (sesión en mapa/JS
 
 ### F01 — Caché de arranque y consulta Gallery (Director 11:00; C2 parcial estático @ `4e66638051effe888e66a885010065d98fc7df17`)
 Provider obtiene `/context` → solo en modo catálogo y con identidad válida de cuenta/era/época/vault busca primera página local por `filtersKey` → `store.seedFirst` muestra bloque provisional → `store.revalidate` solicita página SQL → éxito sustituye bloque; fallo retira copia provisional. Tras cambios de filtros `setQuery` compara `queryKey`, reutiliza bloques si coincide o solicita primera página si cambia. Tras mutación `notifyLibraryChanged` recarga bloques residentes sin vaciar tarjetas confirmadas; revisiones incompatibles provocan otra pasada. La caché **no reemplaza** autoridad SQL. Límites: callers UI, cache.pick/write y contrato backend no contrastados; ninguna ejecución. [Informe 10:30](runs/20261120T1030-investigador-AUD-001.md).
+
+## Registro panorámico v2.1 — 2026-11-20 12:00
+- **F01 arranque/consulta Gallery:** C2 PARCIAL estático @ `4e66638051effe888e66a885010065d98fc7df17`; `WebGalleryWorkspace` → gate/provider → `catalogQueryStore` → `catalogApi` → Cloud/SQL; faltan callers UI, selección y audio (**AUD-002**), tests y C3.
+- **F02 provisión/membresía:** C2 PARCIAL estático, COMMIT SQL precede membresía externa; error puede dejar PENDING, otras rutas reintentan. R-001 RIESGO; alcanzabilidad UI no demostrada (**AUD-004**).
+- **F03 subida/transferencia**, **F04 edición**, **F05 reproducción/descarga**, **F06 papelera**, **F07 auth/planes/pagos**: inventariados como journeys por investigar, sin traza ni nivel C2.
+No se infiere comportamiento en producción del árbol o de documentos.
