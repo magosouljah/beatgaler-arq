@@ -73,3 +73,15 @@ HEAD LOCAL comprobado por compare GitHub: `4e66638051effe888e66a885010065d98fc7d
 - **Cierre:** comparar filtros equivalentes y distintos, orden UTF-8 y perfil de servidor, mostrar al menos dos contraejemplos o invariantes con líneas @SHA; documentar quién normaliza y cuándo, errores y tests escritos; distinguir anomalía estática de efecto real. Entregar un solo informe inmutable en runs/; C2/C3 propuesto por tramo. No ejecutar pruebas.
 - **Backlog:** AUD-004 recuperación de membresía R-001; AUD-005 falsación debounce/sort; AUD-006 permisos de mutación en estados error; AUD-007 contratos de playback. No asignaciones simultáneas.
 - **Carril A:** se amplió mapa panorámico de composición de servicios de catálogo y separación HTTP metadata / Direct media, con estado provisional de archivos activos; quedan denominadores y clasificación exhaustiva por archivo.
+
+
+## Dirección 2026-11-20 14:00 — AUD-003 revisado; AUD-004 asignado
+HEAD LOCAL comprobado con GitHub compare: **identical** a `4e66638051effe888e66a885010065d98fc7df17`, cero delta. Informe [AUD-003 13:30](runs/20261120T1330-investigador-AUD-003.md) contrastado con `catalogApi.ts:98-115,223-227`, `catalogQueryStore.ts:355-360`, `queries.js:85-146,164-213` y `cursor.js:1-95` a SHA fijo. **AUD-003 CERRADO PARCIAL:** C2 estático de tramos de identidad cliente, canonicalización servidor y predicados SQL; C3 NO, sin pruebas ejecutadas. H-002 anomalía estática confirmada; el orden cliente difiere del UTF-8 numérico, pero la deduplicación y ordenación determinista de conjuntos únicos no demuestran colisión de conjuntos distintos ni fallo de Gallery. Diferencia `filtersKey` vs `filterHash` por propósitos distintos, no bug probado. Cursor firmado es otra identidad; no atribuirle el comparador cliente.
+
+### ÚNICA asignación vigente: AUD-004 — ASIGNADO
+- **SHA:** `4e66638051effe888e66a885010065d98fc7df17`.
+- **Pregunta:** ¿Puede la UI recuperar membresía Telegram PENDING después de que PostgreSQL ya haya creado biblioteca, sin depender de una acción inaccesible? Falsar R-001 con camino feliz y error.
+- **Microlote:** `src/features/library/catalog/catalogApi.ts` (resolveContext), `src/features/library/catalog/LibraryCompositionGate.tsx` (gating/retry), `cloud-server/catalog/routes.js` (context/provision/direct-session). Seguir solo callers/guards indispensables, documentar dependencia `native-transport-provisioning.js` ya cartografiada sin repetirla.
+- **Cierre:** secuencia UI→GET/POST→estado PENDING→retry accesible/inaccesible, rutas/líneas, tests escritos relevantes y contraejemplo; proponer C2/C3 por tramo. No ejecutar tests ni inferir runtime. Un informe nuevo e inmutable en runs/. Máximo dos informes sin cierre.
+- **Backlog separado:** AUD-005 debounce/sort R-002; AUD-006 gating R-003; AUD-007 cursor/query sets y pruebas de Unicode; AUD-008 reproducción/lease.
+- **Carril panorámico:** documentada frontera `cursor.js` (firma HMAC, rotación de claves y errores), `queries.js` (filtros SQL) y API HTTP (identidad de caché distinta). Inventario por archivo activo/legado y pruebas sigue pendiente.
