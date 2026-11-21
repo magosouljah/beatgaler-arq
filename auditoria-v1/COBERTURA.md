@@ -101,3 +101,12 @@ No se calculan porcentajes: inventario aún no clasificado.
 - `useCatalogGalleryScope.ts:248-303,504-507` @ `45ec5b27e778127414537d01d170e0b972777768`: C2 **solo tramos** (gating y entrypoints). `CatalogAppShell.tsx:55-121`: C2 tramos de botones, inert y rutas; `catalogMutations.ts:136-168`: C2 tramo patch/trash, sin store/backend. [AUD-006](runs/20261120T1630-investigador-AUD-006.md) contrastado. **AUD-006 PARCIAL; F06 C2 parcial, ningún C3**.
 - `cloud-server/state-dir.js:1-31` @ `b6b999526f77054a199c74fadb39d2171ac4eb75`: C2 estático de módulo pequeño (ruta, entorno, errores), sin prueba runtime. `cloud-server/server.js:1-95`: C1 parcial + C2 de tramo bootstrap. `cloud-server/catalog/native-transport-provisioning.js:1-75`: C2 de tramo revalidado, no del flujo UI.
 - **F08 bootstrap Cloud:** C2 parcial estático, C3 no. F01/F02/F05/F06 C2 parciales según tramos previos; no flujo C3 certificado. Total 1.459 blobs sigue @SHA inicial, no denominador de código operativo @HEAD; no porcentajes.
+
+
+## Revisión 18:00 — AUD-007 @ `b6b999526f77054a199c74fadb39d2171ac4eb75`, panorama @ `c59ec82b9dbf63a5158fa2cdfee27b71a27ba7e8`
+- `cloud-server/catalog/queries.js:284-374`: C2 de tramo (vinculación cursor, keyset, ordinales, firma de página); aislamiento de `readTx` y SQL C3 pendientes.
+- `cloud-server/catalog/cursor.js:25-85`: C2 de tramo (keyring, firma, verificación, rotación); pruebas escritas pendientes.
+- `src/features/library/catalog/catalogQueryStore.ts:140-165,191-226,310-337`: C2 de tramo (validación de bloques, stale, navegación); refresh/evicción integral pendiente.
+- F01 cursor→bloques: C2 parcial estático, **no C3**. [AUD-007](runs/20261120T1730-investigador-AUD-007.md) contrastado con código original.
+- `cloud-server/runtime-operability.js:26-103` @ `c59ec82b9dbf63a5158fa2cdfee27b71a27ba7e8`: C1 parcial + C2 de tramo (config/readiness/rutas), no montaje integral ni C3. Test `runtime-operability.test.cjs` solo inventariado.
+- Sin tests ejecutados; sin porcentaje de comprensión: 1.459 blobs del SHA inicial no es denominador operativo vigente.
