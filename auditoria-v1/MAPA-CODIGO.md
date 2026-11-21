@@ -129,3 +129,14 @@ Evidencia primaria leída a SHA y [AUD-007](runs/20261120T1730-investigador-AUD-
 | `catalogLibraryProvider.tsx:133-154` ACTIVO | Factory por cuenta: conecta `PlaybackApi`, `resolveFile`, `media.acquireStream`; teardown secuencial playback→media | Cambiar wiring/cleanup por cuenta aquí. C2 tramo, no garantía de cancelación de promesas tardías |
 | `useCatalogGalleryScope.ts:216-242` ACTIVO | Adapta UI Playbar/BeatCard y `useAudio` a sesión, notifica errores de next/prev | Cambiar interacción aquí; implementación interna `useAudio` pendiente. C2 tramo |
 Dónde cambiar: lease race en session y/o cancelación en media; política de reproducción en session; salida audible en `useAudio`. [AUD-008](runs/20261120T1828-investigador-AUD-008.md) contrastado; sin C3 ni prueba runtime.
+
+
+## Fuente main @ `ad8f8d0436bba5c3f663a301440ebf977200d953` — panorama inicial
+| Sistema | Evidencia nueva @main | Estado y owner |
+|---|---|---|
+| Web catálogo `src/features/library/catalog/catalogLibraryProvider.tsx` | importa composición, query, media, playback, mutaciones, transferencias y DirectPort; comentario describe flag legacy/Postgres | Owner del wiring por cuenta; **ACTIVO probable**, alcanzabilidad legacy pendiente AUD-010 |
+| Cloud catálogo `cloud-server/catalog/routes.js` | declara GET context, POST provision, listado, facetas, navegación, sets y errores JSON | Owner del routing HTTP; ACTIVO probable; montaje exacto pendiente |
+| Membresía `cloud-server/catalog/native-transport-provisioning.js` | consulta `catalog_libraries`, `vaults`, `catalog_library_chats`; lock por chat y gateway inyectado | Owner de orquestación PENDING→READY; ACTIVO probable; no es prueba runtime |
+| `DESIGN/`, `.agents/skills/`, `BLUEPRINT/` | rutas incorporadas en delta de GitHub | Laboratorio/documentación; no clasificarlas como código productivo sin revisar imports/build |
+| Arneses STEP15 retirados | rutas de scripts/tests removidas en compare | Retiro de pruebas antiguas, **no prueba** de eliminación INDEX de runtime |
+No se transfiere automáticamente C2 histórico de LOCAL a main; revisar imports/contratos según delta.
