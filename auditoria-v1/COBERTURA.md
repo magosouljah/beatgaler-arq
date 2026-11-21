@@ -122,3 +122,7 @@ No se calculan porcentajes: inventario aún no clasificado.
 
 ## Cambio de baseline — main `ad8f8d0436bba5c3f663a301440ebf977200d953` (20:00 CST)
 Toda cobertura C0–C2 anteriormente etiquetada LOCAL queda **HISTÓRICA, revalidación pendiente según delta**; no borrar evidencia ni convertirla en C3. Lectura puntual @main de `catalogLibraryProvider.tsx`, `routes.js` y `native-transport-provisioning.js`: C1 parcial y contraste de interfaces de F02; **no C2 integral ni C3** para main. AUD-009 PARCIAL histórico; AUD-010 asignado. El denominador de 1.459 blobs NO aplica a main; inventario completo main pendiente.
+
+
+## Director 21:00 — main `ad8f8d0436bba5c3f663a301440ebf977200d953`, AUD-010 PARCIAL
+`catalogComposition.ts:16-26`, `WebGalleryWorkspace.tsx:13-34`, `LibraryCompositionGate.tsx:32-42`: C2 de tramos **estáticos** por contraste independiente, sin C3. `server-core.js:25-50,115-138`: C1 parcial/C2 tramo de montaje catalog. `WebGalleryEntry.tsx` y `catalogLibraryProvider.tsx`: evidencia del informe Investigador, aún no contraste integral del Director; no elevar cobertura de módulos completos. F01 C2 parcial, C3 pendiente. Árbol íntegro y denominador main pendientes. Sin tests ejecutados.
