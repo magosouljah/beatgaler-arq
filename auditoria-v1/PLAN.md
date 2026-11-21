@@ -122,3 +122,17 @@ Rama LOCAL HEAD fijada en `b6b999526f77054a199c74fadb39d2171ac4eb75` (4 commits 
 - **Cierre:** trazar GET → validación/filtro/sort → token firmado → next page → estado de bloques; un caso válido y errores (cursor obsoleto/firma/revisión), referencias de líneas @SHA, pruebas escritas y contraejemplos. C2/C3 solo por tramos y distinguir estático de runtime. Un informe inmutable en runs/; máximo dos informes sin cierre.
 - **Backlog:** AUD-008 playback/lease; AUD-009 delta de membresía R-001; AUD-010 estados reales y guardas downstream R-003; AUD-011 revalidación debounce R-002.
 - **Carril A:** nuevo mapa de arranque Cloud y directorio de estado persistente `state-dir.js` @HEAD; clasificación de tests/deploy y denominador operativo siguen pendientes. No ejecutar CI/tests ni acceder a producción.
+
+
+## Dirección 2026-11-20 18:00 — AUD-007 contrastado; AUD-008 asignado
+Rama LOCAL: HEAD observado `c59ec82b9dbf63a5158fa2cdfee27b71a27ba7e8`, dos commits por delante de `b6b999526f77054a199c74fadb39d2171ac4eb75`; delta: `cloud-server/runtime-operability.js`, su test y `docs/plans/catalogo-postgresql/EVIDENCIA.md`. Evidencia AUD-007 permanece fijada en `b6b999526f77054a199c74fadb39d2171ac4eb75`; ninguna de sus tres rutas aparece en el delta. No se transfieren pruebas runtime.
+
+**AUD-007 CERRADO PARCIAL:** [informe 17:30](runs/20261120T1730-investigador-AUD-007.md) contrastado independientemente contra `queries.js:284-374`, `cursor.js:25-85`, `catalogQueryStore.ts:140-165,191-226,310-337` @ `b6b999526f77054a199c74fadb39d2171ac4eb75`. Confirmados estáticamente: vinculación cursor–tenant/filtros/revisión, firma HMAC, keyset, ordinales, validación de bloques y una recuperación automática por generación. Contraejemplos a fallo general: firma inválida rechazada; respuestas tardías descartadas; revisión incompatible reinicia en vez de unir bloques. No hay bug funcional demostrado. C2 solo de tramos, C3 pendiente; tests no ejecutados ni contrastados. Quedan como preguntas separadas aislamiento SQL, `edge=last`, refresh multibloque y navegación inversa.
+
+### ÚNICA asignación vigente: AUD-008 — ASIGNADO
+- **SHA obligatorio:** `c59ec82b9dbf63a5158fa2cdfee27b71a27ba7e8` (confirmar rama y fijar nuevo SHA si avanza antes de investigar).
+- **Pregunta:** ¿Cómo adquiere, renueva y libera Web la fuente/lease de reproducción y cómo se conserva audio cuando cambian filtros o se destruye Gallery?
+- **Microlote:** `src/features/library/catalog/catalogPlaybackSession.ts`, `src/features/library/catalog/catalogMediaService.ts` (si existe; localizar implementación real), y caller directo de reproducción en `useCatalogGalleryScope.ts`. Máximo tres módulos principales; documentar fronteras sin expandirlas.
+- **Cierre:** trazar Play → lease/URL → Player, errores/reintentos, selección/continuidad tras filtro y cleanup, un contraejemplo, tests escritos y C2/C3 por tramo @SHA. Un informe nuevo inmutable en runs/. No ejecutar tests.
+- **Backlog:** AUD-009 revalidar membresía R-001 en gateway nuevo; AUD-010 estados reales/guardas R-003; AUD-011 pruebas y debounce R-002; AUD-012 contratos cursor/SQL y navegación inversa. Máximo dos informes por microlote.
+- **Carril A:** nuevo mapa panorámico de `runtime-operability.js` (config, readiness y rutas health/ready); dependencia SQL y estado global de drenaje. No confundir health con disponibilidad funcional de Gallery. Árbol operativo completo @HEAD pendiente.
