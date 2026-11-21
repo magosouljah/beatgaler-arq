@@ -17,6 +17,7 @@
 | Consultar detalles, pruebas escritas y evidencia por línea | **Investigaciones P01–P07** (abajo) |
 | Saber qué decidió el propietario sobre conocimiento/contexto | [Context Management](context-management/README.md) y [decisiones](context-management/DECISIONES.md) |
 | Saber qué pruebas pasan hoy, cómo ejecutarlas aisladas y cuáles solo leen texto fuente | **[Línea base de pruebas 2026-11-21](linea-base-20261121/LINEA-BASE.md)** |
+| Ver qué se reparó (pruebas, npm test, CI) y el resultado del piloto F1 | **[Etapas 1–3](linea-base-20261121/ETAPAS-1-3.md)** (rama local, sin push) |
 
 ### Modelo mental
 
