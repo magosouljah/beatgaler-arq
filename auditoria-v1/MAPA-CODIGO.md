@@ -110,3 +110,12 @@ La evidencia estática de AUD-005 está contrastada; sin test ejecutado ni C3. G
 | `cloud-server/catalog/native-transport-provisioning.js:1-75` | ACTIVO por import desde server; owner del contrato de provisión de membresía, no del gateway ni DB | inyección `pool/assignmentStore/transport`; valida chat y bot activo, lock por chat, `ensureCatalogBotMembership`, marca READY solo tras proof; errores 409/503 | Cambiar política de provisión aquí; revalidación parcial de R-001, no alcanzabilidad UI ni comportamiento externo |
 
 **Nuevo límite de arquitectura:** estado JSON/sesiones local persistente se separa del directorio de release por `state-dir` en producción configurada; esto es **intención y guardia en código**, no evidencia de que el despliegue real lo cumpla. `deploy/aws` y scripts solo inventariados por nombre, no auditados ni ejecutados.
+
+
+## Panorama 18:00 — operabilidad Cloud @ `c59ec82b9dbf63a5158fa2cdfee27b71a27ba7e8` (estático)
+| Módulo | Estado/owner | Entrada, dependencias, efectos | Dónde cambiar / límites |
+|---|---|---|---|
+| `cloud-server/runtime-operability.js:26-103` | Cloud runtime; configuración y readiness, C2 de tramo | `runtimeConfig(env)` valida entorno/SHA y timeouts; `configureRuntimeDependencies(pool)`; `readinessSnapshot` comprueba pool con `SELECT 1` acotado; `installRoutesAndProxy` registra `/healthz` y `/readyz`; dependencia `operations-runtime`; estado global `draining` | Cambiar límites y comprobaciones aquí; no equivale a contrato de catálogo, sesiones o medios; caller de montaje y shutdown completos pendientes |
+| `cloud-server/catalog/queries.js` + `cursor.js` | ACTIVO; owner de SQL keyset y firma de tokens | `listBeats` usa `readTx`, `verifyCursor`, tuplas, ordinales; `finishPage` firma fuera de transacción; no owner de bloques | Modificar filtros/orden/cursores Cloud aquí, no en Web; C2 de tramos @ `b6b999526f77054a199c74fadb39d2171ac4eb75` |
+| `src/features/library/catalog/catalogQueryStore.ts` | ACTIVO; owner de bloques y generación UI | `loadNext/loadPrevious` valida revisión, ordinal y duplicados; una recuperación automática de stale | Modificar continuidad/evicción aquí; C2 de tramos @ `b6b999526f77054a199c74fadb39d2171ac4eb75` |
+Evidencia primaria leída a SHA y [AUD-007](runs/20261120T1730-investigador-AUD-007.md); sin pruebas ejecutadas.
