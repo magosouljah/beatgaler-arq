@@ -54,3 +54,10 @@ GalleryChrome → CatalogAppShell.chromeScope → `useCatalogGalleryScope`: camb
 
 ## F01/F06 — revisión adversarial de mutaciones (Director 17:00, @ `45ec5b27e778127414537d01d170e0b972777768`)
 `CatalogAppShell` → `scope.deleteBeat` → `catalogMutations.trashBeats` → `commands.trashBeats`; bulk → `interactionStore.startBulk` (no inspeccionado). `rejectOfflineMutation` solo cubre Add/drop/Edit; Delete/bulk no la invocan en tramos examinados. `snapshot.provisional` vuelve raíz inert; Drawer/Review tienen guardas separadas. Alcanzabilidad de controles en estados de error, servidor y SQL pendientes: **R-003 riesgo, no escritura indebida confirmada**. [AUD-006](runs/20261120T1630-investigador-AUD-006.md). C2 parcial, C3 pendiente.
+
+
+## F01 — paginación keyset y bloques (Director 18:00, C2 parcial estático @ `b6b999526f77054a199c74fadb39d2171ac4eb75`)
+Viewport Gallery → `catalogQueryStore.loadNext/loadPrevious` → `api.listBeats` → Cloud `queries.listBeats` → `readTx`/SQL con filtros y tupla keyset → `finishPage` firma cursores HMAC → respuesta → `validatePage` (contexto/revisión/ordinal/tamaño/duplicados) + `checkOverlap` → publicación y evicción de bloques. `verifyCursor` rechaza token ajeno/alterado (400) o revisión/clave retirada (409); store intenta un reset por generación, después exige intervención. Lectura independiente `queries.js:284-374`, `cursor.js:65-82`, `catalogQueryStore.ts:140-165,191-226,310-337`. Contraejemplos: descarte de respuestas de generación antigua y bloqueo de solapamiento inconsistente. **Pendiente:** HTTP exacto, pruebas escritas, aislamiento real SQL, navegación inversa/refresh; C3 no certificado. [AUD-007](runs/20261120T1730-investigador-AUD-007.md).
+
+## F08 — readiness Cloud (panorama 18:00 @ `c59ec82b9dbf63a5158fa2cdfee27b71a27ba7e8`)
+`runtime-operability.runtimeConfig` valida entorno/timeout/SHA → `installRoutesAndProxy` define `/healthz` (liveness sin consulta DB) y `/readyz` → `readinessSnapshot` hace `SELECT 1` al pool si está configurado y responde 200/503; dependencia `operations-runtime` recibe snapshot. Solo código, no se visitaron endpoints ni infraestructura; montaje completo pendiente.
