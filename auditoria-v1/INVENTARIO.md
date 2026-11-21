@@ -1,3 +1,5 @@
+> **HISTÓRICO — congelado el 2026-11-21. No es estado vigente.** Auditoría autónoma 20-nov. Entrada vigente: [README](../README.md).
+
 # Inventario Web + Cloud (propiedad del Director)
 
 **Pendiente:** generar inventario exhaustivo del árbol Git a SHA fijo antes de emitir porcentajes.

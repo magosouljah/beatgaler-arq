@@ -1,5 +1,12 @@
 # BeatGaler V1 — Primer piloto de limpieza (PROPUESTA, NO ejecutado)
 
+> **Correcciones verificadas en código (2026-11-21, `main@ad8f8d0`) — amplían el alcance descrito abajo; decidir antes de autorizar:**
+> 1. No hay dos sino **cinco** funciones `request` HTTP en el catálogo Web: `catalogApi.ts:145`, `catalogCommandsApi.ts:68`, `catalogMediaClient.ts:81`, `catalogTransfer.ts:192` y `call` en `catalogLibraryProvider.tsx:124`.
+> 2. `call` (comandos de reproducción) **diverge**: sin timeout ni AbortSignal, sin `CatalogNetworkError`, y un 401 no se traduce a `UNAUTHENTICATED`. Efecto en ejecución: HIPÓTESIS (posible bloqueo de Next/Shuffle sin respuesta).
+> 3. `main.tsx:20` instala `installWebCsrfFetchCoordinator()`, que **reemplaza `window.fetch`**: añade CSRF en métodos no seguros y **reintenta una vez** ante 403 `CSRF_REQUIRED`. Los tests con `fetchImpl` falso no pasan por él; la paridad debe cubrir también el comportamiento compuesto.
+> 4. `webCsrfFetchCoordinator.ts:8` contiene un host Tailscale de desarrollo fijo (`REMOTE_API_HOST`) dentro del bundle de producción.
+> 5. Línea base de pruebas antes del piloto: [LINEA-BASE](../linea-base-20261121/LINEA-BASE.md) (suites T08/T13 del catálogo PASS localmente).
+
 **Objetivo:** demostrar que una extracción pequeña **reduce responsabilidades y duplicación** sin cambiar funcionamiento. **Estado:** plan preparado, permiso de implementación pendiente. **Rama objetivo:** una rama LAB/LOCAL creada desde `BeatGaler/main`, nunca `main` ni `beatgaler.com`.
 
 ## Por qué este piloto, no INDEX ni Cloud

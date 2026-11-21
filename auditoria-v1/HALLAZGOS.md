@@ -1,3 +1,5 @@
+> **HISTÓRICO — congelado el 2026-11-21. No es estado vigente.** Auditoría autónoma 20-nov; revalidar cada hallazgo en el SHA actual. Entrada vigente: [README](../README.md).
+
 # Índice de hallazgos (propiedad del Director)
 
 **Ningún hallazgo de la nueva campaña ha sido confirmado todavía.** Los siete informes anteriores de `pasada-1/zonas/` son material histórico a revalidar en el SHA vigente. No migrar automáticamente sus conclusiones como defectos actuales.

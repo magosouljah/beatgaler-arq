@@ -1,0 +1,2527 @@
+{
+ "generated": "2026-11-21",
+ "sha": "ad8f8d0436bba5c3f663a301440ebf977200d953",
+ "cloud": [
+  {
+   "file": "abuse-controls.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 119,
+   "tail": "PASS F1 6.2 abuse controls: 401/403/413/429, scoped limits, delays, malformed body, safe upload boundaries/concurrency"
+  },
+  {
+   "file": "access-runtime-consumers.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": true,
+   "tests": 10,
+   "pass": 10,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 2200,
+   "tail": "# todo 0 | # duration_ms 439.8036"
+  },
+  {
+   "file": "access-welcome-activation.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": true,
+   "tests": 1,
+   "pass": 1,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 338,
+   "tail": "# todo 0 | # duration_ms 67.1251"
+  },
+  {
+   "file": "account-email-ses-staged.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 47,
+   "tail": "account-email-ses staged templates tests: PASS"
+  },
+  {
+   "file": "account-lifecycle-request-guard.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 62,
+   "tail": "d8-ro-resolutions: PASS | account-lifecycle-request-guard: PASS"
+  },
+  {
+   "file": "account-lifecycle.test.cjs",
+   "rc": 0,
+   "secs": 2,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 24,
+   "tail": "account-lifecycle: PASS"
+  },
+  {
+   "file": "auth-identity-preflight.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 36,
+   "tail": "auth-identity-preflight tests: PASS"
+  },
+  {
+   "file": "auth-public-registration-hardening.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 47,
+   "tail": "auth-public-registration-hardening tests: PASS"
+  },
+  {
+   "file": "billing-access-resolver.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": true,
+   "tests": 14,
+   "pass": 14,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 3244,
+   "tail": "# todo 0 | # duration_ms 46.0824"
+  },
+  {
+   "file": "billing-checkout.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": true,
+   "tests": 7,
+   "pass": 7,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 1567,
+   "tail": "# todo 0 | # duration_ms 51.1221"
+  },
+  {
+   "file": "billing-commercial-catalog.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": true,
+   "tests": 5,
+   "pass": 5,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 1149,
+   "tail": "# todo 0 | # duration_ms 60.8268"
+  },
+  {
+   "file": "billing-entitlements.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": true,
+   "tests": 5,
+   "pass": 5,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 1032,
+   "tail": "# todo 0 | # duration_ms 33.316"
+  },
+  {
+   "file": "billing-polar-daily.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": true,
+   "tests": 61,
+   "pass": 61,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 10467,
+   "tail": "# todo 0 | # duration_ms 425.1909"
+  },
+  {
+   "file": "billing-polar-failure-progress.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": true,
+   "tests": 7,
+   "pass": 7,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 1822,
+   "tail": "# todo 0 | # duration_ms 44.9961"
+  },
+  {
+   "file": "billing-polar-lifecycle-adapter.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": true,
+   "tests": 11,
+   "pass": 11,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 2609,
+   "tail": "# todo 0 | # duration_ms 77.072"
+  },
+  {
+   "file": "billing-polar-production.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": true,
+   "tests": 7,
+   "pass": 7,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 1792,
+   "tail": "# todo 0 | # duration_ms 52.6757"
+  },
+  {
+   "file": "billing-polar-renewal-proof.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": true,
+   "tests": 2,
+   "pass": 2,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 614,
+   "tail": "# todo 0 | # duration_ms 105.6201"
+  },
+  {
+   "file": "billing-polar-sandbox.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": true,
+   "tests": 13,
+   "pass": 13,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 2770,
+   "tail": "# todo 0 | # duration_ms 56.5379"
+  },
+  {
+   "file": "billing-polar-sdk-contract.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": true,
+   "tests": 5,
+   "pass": 5,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 1224,
+   "tail": "# todo 0 | # duration_ms 255.9185"
+  },
+  {
+   "file": "billing-provider-environment-runtime.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": true,
+   "tests": 5,
+   "pass": 5,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 1141,
+   "tail": "# todo 0 | # duration_ms 56.3071"
+  },
+  {
+   "file": "billing-reconciliation-runtime.test.cjs",
+   "rc": 0,
+   "secs": 2,
+   "nodeTest": true,
+   "tests": 4,
+   "pass": 4,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 1030,
+   "tail": "# todo 0 | # duration_ms 1578.7988"
+  },
+  {
+   "file": "billing-reconciliation.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": true,
+   "tests": 5,
+   "pass": 5,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 1310,
+   "tail": "# todo 0 | # duration_ms 36.321"
+  },
+  {
+   "file": "billing-web-checkout-runtime.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": true,
+   "tests": 3,
+   "pass": 3,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 685,
+   "tail": "# todo 0 | # duration_ms 26.8768"
+  },
+  {
+   "file": "billing-web-portal-route.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": true,
+   "tests": 6,
+   "pass": 6,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 1421,
+   "tail": "# todo 0 | # duration_ms 49.5937"
+  },
+  {
+   "file": "billing-web-runtime.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": true,
+   "tests": 6,
+   "pass": 6,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 1484,
+   "tail": "# todo 0 | # duration_ms 206.6176"
+  },
+  {
+   "file": "billing-webhook-runtime.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": true,
+   "tests": 3,
+   "pass": 3,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 698,
+   "tail": "# todo 0 | # duration_ms 31.4881"
+  },
+  {
+   "file": "billing-webhook.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": true,
+   "tests": 10,
+   "pass": 10,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 1980,
+   "tail": "# todo 0 | # duration_ms 118.8819"
+  },
+  {
+   "file": "capacity-load-harness.cjs",
+   "rc": 1,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 963,
+   "tail": " | Node.js v22.23.2"
+  },
+  {
+   "file": "capacity-load-harness.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": true,
+   "tests": 3,
+   "pass": 3,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 736,
+   "tail": "# todo 0 | # duration_ms 124.4464"
+  },
+  {
+   "file": "control-plane-authority.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 94,
+   "tail": "PASS control-plane authority: explicit, default-off, rollback-guarded, production fail-closed"
+  },
+  {
+   "file": "control-plane-json-compat.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 176,
+   "tail": "PASS control-plane JSON compatibility: PostgreSQL-backed virtual state, no disk dual-write | PASS control-plane durability barrier: Direct bypass is independent of legacy writes"
+  },
+  {
+   "file": "cutover-snapshot-bundle.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 56,
+   "tail": "PASS cutover snapshot bundle sealed/quarantine contract"
+  },
+  {
+   "file": "d8-ro-resolutions.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 24,
+   "tail": "d8-ro-resolutions: PASS"
+  },
+  {
+   "file": "deployment-promotion-contract.test.mjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": true,
+   "tests": 5,
+   "pass": 5,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 998,
+   "tail": "# todo 0 | # duration_ms 130.9184"
+  },
+  {
+   "file": "direct-allocator-no-cap.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 61,
+   "tail": "PASS Direct allocator has no artificial four-session ceiling"
+  },
+  {
+   "file": "direct-capability-boundary.runner.cjs",
+   "rc": 0,
+   "secs": 4,
+   "nodeTest": true,
+   "tests": 23,
+   "pass": 23,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 5352,
+   "tail": "# todo 0 | # duration_ms 2838.2197"
+  },
+  {
+   "file": "direct-capability-boundary.test.cjs",
+   "rc": 0,
+   "secs": 2,
+   "nodeTest": true,
+   "tests": 20,
+   "pass": 20,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 4718,
+   "tail": "# todo 0 | # duration_ms 2277.9075"
+  },
+  {
+   "file": "direct-index-operation-document-context.test.cjs",
+   "rc": 0,
+   "secs": 3,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 159,
+   "tail": "PASS Direct INDEX document fencing: same-tab Reload reclaims orphan; same-document, other-tab, stale-generation, and other-device operations remain serialized"
+  },
+  {
+   "file": "direct-index-operation-liveness.test.cjs",
+   "rc": 0,
+   "secs": 2,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 177,
+   "tail": "PASS Direct INDEX liveness: no cross-installation renewal; fresh process grace/re-confirmation preserves exclusion; no re-confirm expires within 15s despite backward wall clock"
+  },
+  {
+   "file": "direct-managed-token-retry.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": true,
+   "tests": 6,
+   "pass": 6,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 1412,
+   "tail": "# todo 0 | # duration_ms 288.4362"
+  },
+  {
+   "file": "direct-membership-provisioning-primitive.test.cjs",
+   "rc": 0,
+   "secs": 2,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 108,
+   "tail": "PASS Direct provisioning primitive: USER_ALREADY_PARTICIPANT continues to EditAdmin; other errors fail once"
+  },
+  {
+   "file": "direct-message-download.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": true,
+   "tests": 1,
+   "pass": 1,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 350,
+   "tail": "# todo 0 | # duration_ms 158.7122"
+  },
+  {
+   "file": "direct-persistent-assignment-runtime.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 163,
+   "tail": "PASS Direct persistent assignment runtime adapter: same vault, membership state/lock operations, public pool sync, no secret persistence, no implicit reassignment"
+  },
+  {
+   "file": "direct-persistent-cleanup.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 516,
+   "tail": "[direct] SESSION_RELEASED installation=heartbea… transport=Bot01 reason=heartbeat_timeout remaining_leases=0 rotation_pending=false membership=preserved | PASS Direct persistent cleanup: normal close and heartbeat expiry"
+  },
+  {
+   "file": "direct-persistent-legacy-lazy.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 135,
+   "tail": "PASS Direct legacy lazy rollout: NULL assigns on first access only, provisions once, PG wins over live legacy lease, no mass migration"
+  },
+  {
+   "file": "direct-persistent-membership-runtime.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 170,
+   "tail": "PASS Direct persistent membership: bot-visible READY, Worker fallback on transient Bot API failure, definitive failures closed, same-bot repair and concurrent coalescing"
+  },
+  {
+   "file": "direct-persistent-ready-no-master.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 250,
+   "tail": "[direct] SESSION_RELEASED installation=ready-in… transport=Bot01 reason=normal_close remaining_leases=0 rotation_pending=false membership=preserved | PASS Direct READY startup/reentry: assigned bot proves vault visibilit"
+  },
+  {
+   "file": "direct-persistent-session-runtime.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 138,
+   "tail": "PASS Direct persistent session start: exact assigned bot, same-bot multi-device leases, no FIFO ownership, no mismatch membership cleanup"
+  },
+  {
+   "file": "direct-stale-operation-cleanup.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 91,
+   "tail": "PASS Direct stale operation cleanup: persisted once, diagnosed once, valid lease preserved"
+  },
+  {
+   "file": "direct-startup-trace.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": true,
+   "tests": 3,
+   "pass": 3,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 5639,
+   "tail": "# todo 0 | # duration_ms 46.8221"
+  },
+  {
+   "file": "direct-vault-assignment.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 56,
+   "tail": "PASS persistent Direct vault assignment store semantics"
+  },
+  {
+   "file": "email-verification-authority.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 41,
+   "tail": "email verification authority tests: PASS"
+  },
+  {
+   "file": "email-verification-fake-pool.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 0,
+   "tail": ""
+  },
+  {
+   "file": "garbage-journal-repository.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 102,
+   "tail": "PASS garbage journal + worker policy: idempotent enqueue, SKIP LOCKED lease, bounded retry/block/done"
+  },
+  {
+   "file": "legacy-import-executor.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 93,
+   "tail": "PASS legacy import executor: auth compatibility, encrypted secrets, idempotent SQL, rollback"
+  },
+  {
+   "file": "legacy-import-plan.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 89,
+   "tail": "PASS legacy import planner: deterministic, hashed, installation-owner aware, fail-closed"
+  },
+  {
+   "file": "master-index-flood-wait.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": true,
+   "tests": 5,
+   "pass": 5,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 1203,
+   "tail": "# todo 0 | # duration_ms 91.1905"
+  },
+  {
+   "file": "master-storage-recovery.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 96,
+   "tail": "PASS MASTER verification remains available but is outside the normal login/session storage path"
+  },
+  {
+   "file": "operations-observability.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": true,
+   "tests": 4,
+   "pass": 4,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 857,
+   "tail": "# todo 0 | # duration_ms 43.6144"
+  },
+  {
+   "file": "operations-runtime.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": true,
+   "tests": 5,
+   "pass": 5,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 1113,
+   "tail": "# todo 0 | # duration_ms 43.0836"
+  },
+  {
+   "file": "password-kdf.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 85,
+   "tail": "PASS async password KDF: request wiring, event-loop yield, legacy hash compatibility"
+  },
+  {
+   "file": "pending-signup-activation.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 48,
+   "tail": "legacy pending-signup activation shim: DISABLED"
+  },
+  {
+   "file": "pending-signup-safety.test.mjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 34,
+   "tail": "pending-signup-safety tests: PASS"
+  },
+  {
+   "file": "plan-dev-switch-removed.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": true,
+   "tests": 2,
+   "pass": 2,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 594,
+   "tail": "# todo 0 | # duration_ms 108.6464"
+  },
+  {
+   "file": "post-deploy-smoke.test.mjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": true,
+   "tests": 2,
+   "pass": 2,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 508,
+   "tail": "# todo 0 | # duration_ms 31.1654"
+  },
+  {
+   "file": "postgres-auth-compat.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 80,
+   "tail": "PASS PostgreSQL auth compatibility: username identity and scrypt salt preserved"
+  },
+  {
+   "file": "postgres-auth-multiprocess-compat.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 46,
+   "tail": "postgres-auth-multiprocess-compat tests: PASS"
+  },
+  {
+   "file": "postgres-bootstrap-observability.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": true,
+   "tests": 2,
+   "pass": 2,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 544,
+   "tail": "# todo 0 | # duration_ms 46.0671"
+  },
+  {
+   "file": "postgres-installation-claim-coordinator.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 57,
+   "tail": "PASS PostgreSQL installation claim coordinator semantics"
+  },
+  {
+   "file": "postgres-migration-runner.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 81,
+   "tail": "PASS PostgreSQL migration runner: lock, transaction, idempotency, checksum guard"
+  },
+  {
+   "file": "postgres-rollback-preparation.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 85,
+   "tail": "PASS PostgreSQL rollback guard: no blind JSON rollback, exact export digest required"
+  },
+  {
+   "file": "postgres-runtime-config.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 60,
+   "tail": "PASS PostgreSQL runtime config: opt-in, bounds, fail-closed"
+  },
+  {
+   "file": "postgres-schema.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 49,
+   "tail": "PASS PostgreSQL schema contract: 42 migration(s)"
+  },
+  {
+   "file": "project-master-message.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": true,
+   "tests": 3,
+   "pass": 3,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 803,
+   "tail": "# todo 0 | # duration_ms 29.1472"
+  },
+  {
+   "file": "provider-identity-authority.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 40,
+   "tail": "provider-identity-authority tests: PASS"
+  },
+  {
+   "file": "runtime-operability.test.cjs",
+   "rc": 0,
+   "secs": 7,
+   "nodeTest": true,
+   "tests": 10,
+   "pass": 10,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 2046,
+   "tail": "# todo 0 | # duration_ms 6348.4845"
+  },
+  {
+   "file": "secret-envelope-provider.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 106,
+   "tail": "PASS secret envelope provider: production fail-closed, strict AWS keyring contract, rotation-safe runtime"
+  },
+  {
+   "file": "secret-envelope.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 79,
+   "tail": "PASS secret envelope: authenticated encryption, tamper rejection, key rotation"
+  },
+  {
+   "file": "secret-keyring.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 39,
+   "tail": "PASS versioned secret keyring contract"
+  },
+  {
+   "file": "sensitive-auth-capability-revocation.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": true,
+   "tests": 3,
+   "pass": 3,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 747,
+   "tail": "# todo 0 | # duration_ms 41.1774"
+  },
+  {
+   "file": "sensitive-auth-containment.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 39,
+   "tail": "sensitive-auth-containment tests: PASS"
+  },
+  {
+   "file": "server-core-auth-bridge-loader.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 43,
+   "tail": "server-core auth bridge loader tests: PASS"
+  },
+  {
+   "file": "session-security.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 23,
+   "tail": "session-security: PASS"
+  },
+  {
+   "file": "signup-activation-safety.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 37,
+   "tail": "signup-activation-safety tests: PASS"
+  },
+  {
+   "file": "stage1-multi-account-concurrency.test.cjs",
+   "rc": 0,
+   "secs": 8,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 501,
+   "tail": "[direct] SESSION_RELEASED installation=stage1-i… transport=Bot02 reason=heartbeat_timeout remaining_leases=26 rotation_pending=false membership=preserved | PASS Stage 1 multi-account concurrency: 3/10/80 sessions, bot sh"
+  },
+  {
+   "file": "staged-email-change-routes.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 39,
+   "tail": "staged-email-change-routes tests: PASS"
+  },
+  {
+   "file": "staged-email-change.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 32,
+   "tail": "staged-email-change tests: PASS"
+  },
+  {
+   "file": "state-dir.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": true,
+   "tests": 2,
+   "pass": 2,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 586,
+   "tail": "# todo 0 | # duration_ms 34.2226"
+  },
+  {
+   "file": "unit.test.cjs",
+   "rc": 0,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 965,
+   "tail": "  PASS canonical Cloud entrypoint installs temporary-auth boundary before route registration | PASS cloud/direct unit tests: 13/13"
+  },
+  {
+   "file": "user-storage-lifecycle.test.cjs",
+   "rc": 0,
+   "secs": 0,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 84,
+   "tail": "PASS: user storage assignment, recovery classification and single-flight invariants"
+  }
+ ],
+ "cloudpg": [
+  {
+   "file": "access-grant-ownership.integration.cjs",
+   "rc": 0,
+   "secs": 3,
+   "nodeTest": true,
+   "tests": 5,
+   "pass": 5,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 1293,
+   "tail": "# todo 0 | # duration_ms 2629.4606"
+  },
+  {
+   "file": "access-runtime-postgres.integration.cjs",
+   "rc": 0,
+   "secs": 2,
+   "nodeTest": true,
+   "tests": 1,
+   "pass": 1,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 338,
+   "tail": "# todo 0 | # duration_ms 1523.6366"
+  },
+  {
+   "file": "auth-identity-postgres.integration.cjs",
+   "rc": 0,
+   "secs": 3,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 43,
+   "tail": "auth identity PostgreSQL integration: PASS"
+  },
+  {
+   "file": "billing-checkout-persistent.integration.cjs",
+   "rc": 0,
+   "secs": 2,
+   "nodeTest": true,
+   "tests": 16,
+   "pass": 16,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 3799,
+   "tail": "# todo 0 | # duration_ms 1640.0578"
+  },
+  {
+   "file": "billing-lifecycle.integration.cjs",
+   "rc": 0,
+   "secs": 3,
+   "nodeTest": true,
+   "tests": 16,
+   "pass": 16,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 4260,
+   "tail": "# todo 0 | # duration_ms 2507.5083"
+  },
+  {
+   "file": "billing-polar-daily.integration.cjs",
+   "rc": 0,
+   "secs": 2,
+   "nodeTest": true,
+   "tests": 1,
+   "pass": 1,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 415,
+   "tail": "# todo 0 | # duration_ms 1751.682"
+  },
+  {
+   "file": "billing-reconciliation.integration.cjs",
+   "rc": 0,
+   "secs": 5,
+   "nodeTest": true,
+   "tests": 22,
+   "pass": 22,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 6243,
+   "tail": "# todo 0 | # duration_ms 4415.7452"
+  },
+  {
+   "file": "billing-v1-migrations.integration.cjs",
+   "rc": 0,
+   "secs": 3,
+   "nodeTest": true,
+   "tests": 1,
+   "pass": 1,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 345,
+   "tail": "# todo 0 | # duration_ms 2197.338"
+  },
+  {
+   "file": "billing-webhook-durable.integration.cjs",
+   "rc": 0,
+   "secs": 3,
+   "nodeTest": true,
+   "tests": 15,
+   "pass": 15,
+   "fail": 0,
+   "skipped": 0,
+   "todo": 0,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 3800,
+   "tail": "# todo 0 | # duration_ms 2720.5556"
+  },
+  {
+   "file": "direct-capability-postgres.integration.cjs",
+   "rc": 0,
+   "secs": 2,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 49,
+   "tail": "PASS D7 PostgreSQL Direct capability integration"
+  },
+  {
+   "file": "direct-persistent-legacy-lazy.postgres.integration.cjs",
+   "rc": 1,
+   "secs": 1,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 479,
+   "tail": "    at async DirectVaultAssignmentStore.syncTransportBots (BeatGaler-baseline-wt\\cloud-server\\direct-vault-assignment.js:85:7) |     at async main (BeatGaler-baseline-wt\\cloud-server\\tests\\direct-pe"
+  },
+  {
+   "file": "direct-vault-assignment.postgres.integration.cjs",
+   "rc": 0,
+   "secs": 5,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 192,
+   "tail": "PASS persistent Direct vault assignment PostgreSQL integration: migrations, assignment/membership locking, 80/160 balance, restart persistence, lease independence, quarantine, and pool growth"
+  },
+  {
+   "file": "postgres-cutover.integration.cjs",
+   "rc": 0,
+   "secs": 2,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 605,
+   "tail": "{\"postgres_cutover_proven\":true,\"staged_before_ready_proven\":true,\"external_snapshot_bundle_sealed\":true,\"stale_final_delta_rejected\":true,\"exact_final_snapshot_commit_required\":true,\"import_twice_idempotent\":true,\"oauth"
+  },
+  {
+   "file": "postgres-installation-claim-cross-process.integration.cjs",
+   "rc": 0,
+   "secs": 2,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 64,
+   "tail": "PASS real PostgreSQL cross-process installation claim atomicity"
+  },
+  {
+   "file": "signup-activation-postgres.integration.cjs",
+   "rc": 0,
+   "secs": 5,
+   "nodeTest": false,
+   "tests": null,
+   "pass": null,
+   "fail": null,
+   "skipped": null,
+   "todo": null,
+   "blocked": 0,
+   "blockedHosts": [],
+   "bytes": 51,
+   "tail": "signup activation PostgreSQL fault injection: PASS"
+  }
+ ],
+ "vitest-component-dom": {
+  "tests": 617,
+  "pass": 587,
+  "fail": 0,
+  "skipped": 30,
+  "files": [
+   {
+    "file": "component-dom/accountGateWeb.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/accountIsolation.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/activeUploadAuthority.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/addBeatRename.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/appAuxiliaryModals.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/appComposition.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/appLibraryMenus.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/appShellExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/artworkHydration.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/artworkThumbnailCache.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/authUi11_2.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/beatRuntimeRegistry.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/beatSelection.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/billingPortalClient.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/billingPortalSettings.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/billingPresentation.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/billingSettings.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/browserImport.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogApi.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogArtworkCache.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogAudioReplace.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogAuditFixes.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogDirect.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogDropRouting.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogE80.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogE82.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogE83.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogE85.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogE86.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogFirstBlockCache.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogInteractionStore.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogLibraryComposition.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogMainPack.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogMediaClient.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogMutations.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogNavigation.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogPlaybackSession.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogPrefixStreaming.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogQueryStore.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogResumable.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogReviewProject.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogRowGeometry.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogSection61.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogTransfer.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/catalogVirtualGallery.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/componentDom.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/designFoundations.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/directStartupDiagnostics.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/galleryDesign.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/galleryTagPacking.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/importDiscovery.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/importPickDrop.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/importReviewBasics.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/importSaveAll.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/libraryReload.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/libraryState.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/libraryUxBridge.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/libraryViewState.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/mp3PlayablePrefix.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/platformAccount.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/playbackGetFileTrace.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/playbarNextRecovery.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/publicStartupLoader.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/sessionState.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/signupVerificationCode.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/startupBootstrap.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/startupRevealArchitecture.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/startupTrace.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/tagFilters.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/uiPolish.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webBeatEdit.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webBeatEditDrawer.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webCsrfFetchCoordinator.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webDownloads.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webExperience.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webGalleryDirectAuthBoundary.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webImport.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webImportCommit.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webImportDurabilityFlow.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webImportReviewFlow.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webLibrary.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webLibraryNavigation.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webLibraryReconciledCaller.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webLibraryWindow.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webNoTauri.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webPersistentIndexBootstrap.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webPlatformShell.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webPlaybackBackgroundPriority.behavior.test.ts",
+    "status": "failed",
+    "failed": [],
+    "failureHead": "Denied ID BeatGaler/node_modules/@mtcute/wasm/mtcute.wasm?url"
+   },
+   {
+    "file": "component-dom/webPlaybackBackgroundPriority.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webPlaybackDeletePurge.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webPlaybackIntent.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webPlaybackRouteRecovery.behavior.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webPlaybackRouteRecovery.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webPlaybackRoutingCache.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webPlaybackSortCaller.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webPlaybackSource.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webPlaybackSourceAdvanced.behavior.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webProjectOperationGuard.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webRememberedDirectPreconnect.behavior.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webReviewSave.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webSessionBootstrap.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webStartupPlaybackCoordinator.behavior.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webStartupPlaybackCoordinator.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webTransportController.test.ts",
+    "status": "failed",
+    "failed": [],
+    "failureHead": "Denied ID BeatGaler/node_modules/@mtcute/wasm/mtcute.wasm?url"
+   },
+   {
+    "file": "component-dom/webTransportControllerLifecycle.behavior.test.ts",
+    "status": "failed",
+    "failed": [],
+    "failureHead": "Denied ID BeatGaler/node_modules/@mtcute/wasm/mtcute.wasm?url"
+   },
+   {
+    "file": "component-dom/webTransportControllerRefresh.test.ts",
+    "status": "failed",
+    "failed": [],
+    "failureHead": "Denied ID BeatGaler/node_modules/@mtcute/wasm/mtcute.wasm?url"
+   },
+   {
+    "file": "component-dom/webTransportInvalidation.behavior.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webTransportInvalidation.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webTransportSession.test.ts",
+    "status": "failed",
+    "failed": [],
+    "failureHead": "Denied ID BeatGaler/node_modules/@mtcute/wasm/mtcute.wasm?url"
+   },
+   {
+    "file": "component-dom/webTransportWorker.test.ts",
+    "status": "failed",
+    "failed": [],
+    "failureHead": "Denied ID BeatGaler/node_modules/@mtcute/wasm/mtcute.wasm?url"
+   },
+   {
+    "file": "component-dom/webTransportWorkerClient.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webTransportWorkerClientIndex.behavior.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webTransportWorkerClientRefresh.behavior.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webTransportWorkerScheduler.behavior.test.ts",
+    "status": "failed",
+    "failed": [],
+    "failureHead": "Denied ID BeatGaler/node_modules/@mtcute/wasm/mtcute.wasm?url"
+   },
+   {
+    "file": "component-dom/webTransportWorkerStartupVector.behavior.test.ts",
+    "status": "failed",
+    "failed": [],
+    "failureHead": "Denied ID BeatGaler/node_modules/@mtcute/wasm/mtcute.wasm?url"
+   },
+   {
+    "file": "component-dom/webTrash.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webVisiblePlaybackPrefetch.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webWavMaster.test.ts",
+    "status": "passed",
+    "failed": []
+   }
+  ]
+ },
+ "vitest-integration": {
+  "tests": 182,
+  "pass": 177,
+  "fail": 5,
+  "skipped": 0,
+  "files": [
+   {
+    "file": "integration/appAuxiliaryModalExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appBeatAssetUpdatesExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appBeatDownloadsExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appBeatProjectsExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appBrowserImportExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appCloudUploadQueueExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appConnectivityCloudEventsExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appDesktopBeatUploadPipelineExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appHelperExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appHtmlLibraryDropExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appImportDiscoveryExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appImportSaveAllExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appLibraryReloadExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appLibraryRevealExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appMigrationCharacterization.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appMigrationCleanup.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appNativeDropTargetsExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appNativeLibraryDropExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appOfflineAvailabilityExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appPlaybackExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appPlaybackQueueExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appSessionExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appStartupBootstrapExtraction.test.ts",
+    "status": "failed",
+    "failed": [
+     "keeps public startup isolated and mounts Web Direct only inside the confirmed Gallery workspace"
+    ],
+    "failureHead": ""
+   },
+   {
+    "file": "integration/appTagRenameExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/appUploadRecoveryExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/artworkHydrationExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/cleanMp3Cloud.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/coreIntegration.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/directSessionStartupLiveness.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/id3BrowserParser.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/issue97DrawerWebRoutingContract.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/issue97IndexPriority.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/issue97PlaybackOptimization.test.ts",
+    "status": "failed",
+    "failed": [
+     "dispatches remembered Direct on authenticated Gallery mount, route-free and behind the CSRF guard"
+    ],
+    "failureHead": ""
+   },
+   {
+    "file": "integration/issue97Resilience.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/issue97RuntimeTraceContract.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/issue97RuntimeWebFollowup.test.ts",
+    "status": "failed",
+    "failed": [
+     "returns the first MSE URL before stream admission and mounts remembered Direct behind Gallery authentication",
+     "resolves an existing beat topic by vault rather than installation"
+    ],
+    "failureHead": ""
+   },
+   {
+    "file": "integration/issue97WebRoutingContract.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/libraryStateExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/libraryViewExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/libraryViewSelectors.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/mtcuteIndexLivenessGuard.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/mtcutePingSocketRecovery.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/phase2Task2Diagnostics.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/phase2Task2Observer.test.ts",
+    "status": "failed",
+    "failed": [
+     "ties ping and getMessages msg_ids to exact WebSocket bytes, then classifies valid, old and discarded inbound frames"
+    ],
+    "failureHead": ""
+   },
+   {
+    "file": "integration/selectionReorderExtraction.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/useAudioDuplicatePlay.test.tsx",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/webCloudApiOriginPolicy.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/webDirectDownloadCapabilityContract.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/webPersistentDirectDataPlane.test.ts",
+    "status": "failed",
+    "failed": [],
+    "failureHead": "Denied ID BeatGaler/node_modules/@mtcute/wasm/mtcute.wasm?url"
+   },
+   {
+    "file": "integration/webStartupCloudResolutionRace.test.ts",
+    "status": "passed",
+    "failed": []
+   }
+  ]
+ },
+ "vitest-dom-mtcute": {
+  "tests": 69,
+  "pass": 69,
+  "fail": 0,
+  "skipped": 0,
+  "files": [
+   {
+    "file": "component-dom/webPlaybackBackgroundPriority.behavior.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webTransportController.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webTransportControllerLifecycle.behavior.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webTransportControllerRefresh.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webTransportSession.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webTransportWorker.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webTransportWorkerScheduler.behavior.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "component-dom/webTransportWorkerStartupVector.behavior.test.ts",
+    "status": "passed",
+    "failed": []
+   }
+  ]
+ },
+ "vitest-integ-mtcute": {
+  "tests": 3,
+  "pass": 3,
+  "fail": 0,
+  "skipped": 0,
+  "files": [
+   {
+    "file": "integration/phase2Task2Observer.test.ts",
+    "status": "passed",
+    "failed": []
+   },
+   {
+    "file": "integration/webPersistentDirectDataPlane.test.ts",
+    "status": "passed",
+    "failed": []
+   }
+  ]
+ }
+}

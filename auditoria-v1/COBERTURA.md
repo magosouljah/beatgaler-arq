@@ -1,3 +1,5 @@
+> **HISTÓRICO — congelado el 2026-11-21. No es estado vigente.** Auditoría autónoma 20-nov; cobertura nunca certificada. Entrada vigente: [README](../README.md).
+
 # Cobertura verificable (propiedad del Director)
 
 **Cobertura actual certificada por el nuevo protocolo:** NO ESTABLECIDA. Nunca interpretar eso como 0% de código leído históricamente; solo que aún no hay inventario verificado para esta campaña.

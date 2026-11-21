@@ -1,3 +1,5 @@
+> **HISTÓRICO — congelado el 2026-11-21. No es estado vigente.** Auditoría autónoma 20-nov. Entrada vigente: [README](../README.md).
+
 # Trazas de funcionamiento extremo a extremo
 
 **Estado:** pendiente de investigación y consolidación por el Director.

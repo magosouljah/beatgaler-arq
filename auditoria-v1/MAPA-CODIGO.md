@@ -1,3 +1,5 @@
+> **HISTÓRICO — congelado el 2026-11-21. No es estado vigente.** Auditoría autónoma 20-nov. Entrada vigente: [README](../README.md).
+
 # Mapa vivo del código — comprensión completa de BeatGaler V1
 
 **Estado:** por levantar y contrastar con el código vigente. Propietario de escritura: Director.

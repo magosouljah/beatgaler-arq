@@ -1,5 +1,7 @@
 # BeatGaler V1 — Plan maestro propuesto de limpieza (solo diseño)
 
+> **Notas verificadas (2026-11-21, `main@ad8f8d0`):** (a) F0 «¿disparan CI las migraciones 0031–0042?» → **No**: el filtro `paths` de `catalog-checks.yml` solo lista 0026–0030 (sí dispara `postgres-migrations.js`). (b) F3: la proyección ya es compartida — `catalog/beat-projection.js` lo importan `commands.js`, `operations.js` y `queries.js`; la duplicación restante es la enumeración de campos (`commands.js` `DOC_KEYS`, `operations.js` `nativeBeatDocument`), ver P05 §8. (c) F1: alcance real del piloto en [PRIMER-PILOTO](../mapa-v1/PRIMER-PILOTO.md). (d) Línea base de pruebas: [LINEA-BASE](../linea-base-20261121/LINEA-BASE.md).
+
 **Fecha:** 2026-11-20. **Fuente de código:** `magosouljah/BeatGaler` `main@ad8f8d0436bba5c3f663a301440ebf977200d953`. **Fuente de conocimiento:** `magosouljah/beatgaler-arq` `panorama-main-20261120/` y las siete profundizaciones P01–P07, presentes y revisadas. **Estado:** PROPUESTA pendiente de aprobación del propietario; **nada implementado, probado ni desplegado** por este plan.
 
 ## Conclusión de los siete informes

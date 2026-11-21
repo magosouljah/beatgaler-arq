@@ -1,3 +1,5 @@
+> **HISTÓRICO — congelado el 2026-11-21. No es estado vigente.** Borrador sin acordar (11-nov). Entrada vigente: [README](../README.md).
+
 # Glosario de BeatGaler — BORRADOR (fuera del repo)
 
 **Estado:** borrador de la pasada 1 (2026-11-11, commit `5cb6ccc`). No está acordado con el propietario. Entra al repo en la etapa 2, con aprobación.

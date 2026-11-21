@@ -1,3 +1,5 @@
+> **HISTÓRICO — congelado el 2026-11-21. No es estado vigente.** Encargo de la pasada 1 (11-nov). Entrada vigente: [README](README.md).
+
 # Diagnóstico arquitectónico de BeatGaler — encargo para la IA del IDE
 
 **Redactado:** 2026-11-11, tras la entrevista `/grill-me` con el propietario (Purp/magosouljah).

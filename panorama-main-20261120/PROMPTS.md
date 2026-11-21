@@ -1,3 +1,5 @@
+> **HISTÓRICO — congelado el 2026-11-21. No es estado vigente.** Prompts que produjeron P01–P07; los informes son la fuente, no estos prompts. Entrada vigente: [README](../README.md).
+
 # Siete prompts de profundización — BeatGaler V1
 
 **Objetivo:** completar comprensión verificable donde hay dependencias de limpieza, sin releer indiscriminadamente el repositorio ni hacer cambios. Prioridad y orden recomendados P01→P07. Cada prompt es autónomo para copiar a una conversación separada. Nivel ALTA para arquitectura crítica, MEDIA para contratos acotados. No se recomienda hacerlos paralelos si una misma IA gestiona el contexto; los informes pueden convivir porque tienen rutas diferentes.

@@ -1,3 +1,5 @@
+> **HISTÓRICO — congelado el 2026-11-21. No es estado vigente.** Evidencia de la pasada 1 sobre `5cb6ccc`. Entrada vigente: [README](../../README.md).
+
 # Zona 01 — Frontend: armazón de la app, Gallery y biblioteca
 
 **Origen:** informe de sub-agente de solo lectura, pasada 1. **Commit:** `5cb6ccc`. **Fecha:** 2026-11-11.

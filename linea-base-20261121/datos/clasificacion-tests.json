@@ -1,0 +1,1593 @@
+{
+ "summary": {
+  "tests/integration": {
+   "SOLO_FUENTE": 33,
+   "COMPORTAMIENTO": 13,
+   "MIXTO": 4
+  },
+  "tests/component-dom": {
+   "COMPORTAMIENTO": 107,
+   "SOLO_FUENTE": 8,
+   "MIXTO": 3
+  },
+  "cloud-server/tests": {
+   "COMPORTAMIENTO": 79,
+   "MIXTO": 19,
+   "OTRO": 4,
+   "SOLO_FUENTE": 2
+  },
+  "cloud-server/tests/catalog": {
+   "COMPORTAMIENTO": 33,
+   "MIXTO": 6,
+   "SOLO_FUENTE": 1,
+   "OTRO": 1
+  }
+ },
+ "files": [
+  {
+   "dir": "tests/integration",
+   "file": "appAuxiliaryModalExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appBeatAssetUpdatesExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appBeatDownloadsExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appBeatProjectsExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appBrowserImportExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appCloudUploadQueueExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appConnectivityCloudEventsExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appDesktopBeatUploadPipelineExtraction.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appHelperExtraction.test.ts",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appHtmlLibraryDropExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appImportDiscoveryExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appImportSaveAllExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appLibraryReloadExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appLibraryRevealExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appMigrationCharacterization.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appMigrationCleanup.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appNativeDropTargetsExtraction.test.ts",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appNativeLibraryDropExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appOfflineAvailabilityExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appPlaybackExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appPlaybackQueueExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appSessionExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appStartupBootstrapExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appTagRenameExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "appUploadRecoveryExtraction.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "artworkHydrationExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "cleanMp3Cloud.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "coreIntegration.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "directSessionStartupLiveness.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "id3BrowserParser.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "issue97DrawerWebRoutingContract.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "issue97IndexPriority.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "issue97PlaybackOptimization.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "issue97Resilience.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "issue97RuntimeTraceContract.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "issue97RuntimeWebFollowup.test.ts",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "issue97WebRoutingContract.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "libraryStateExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "libraryViewExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "libraryViewSelectors.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "mtcuteIndexLivenessGuard.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "mtcutePingSocketRecovery.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "phase2Task2Diagnostics.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "phase2Task2Observer.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "selectionReorderExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "useAudioDuplicatePlay.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "webCloudApiOriginPolicy.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "webDirectDownloadCapabilityContract.test.ts",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "webPersistentDirectDataPlane.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/integration",
+   "file": "webStartupCloudResolutionRace.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "accountGateWeb.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "accountIsolation.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "activeUploadAuthority.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "addBeatRename.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "appAuxiliaryModals.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "appComposition.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "appLibraryMenus.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "appShellExtraction.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "artworkHydration.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "artworkThumbnailCache.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "authUi11_2.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "beatRuntimeRegistry.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "beatSelection.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "billingPortalClient.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "billingPortalSettings.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "billingPresentation.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "billingSettings.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "browserImport.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogApi.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogArtworkCache.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogAudioReplace.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogAuditFixes.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogDirect.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogDropRouting.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogE80.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogE82.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogE83.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogE85.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogE86.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogFirstBlockCache.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogInteractionStore.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogLibraryComposition.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogMainPack.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogMediaClient.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogMutations.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogNavigation.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogPlaybackSession.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogPrefixStreaming.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogQueryStore.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogResumable.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogReviewProject.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogRowGeometry.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogSection61.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogTransfer.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "catalogVirtualGallery.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "componentDom.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "designFoundations.test.tsx",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "directStartupDiagnostics.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "galleryDesign.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "galleryTagPacking.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "importDiscovery.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "importPickDrop.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "importReviewBasics.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "importSaveAll.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "libraryReload.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "libraryState.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "libraryUxBridge.test.ts",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "libraryViewState.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "mp3PlayablePrefix.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "platformAccount.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "playbackGetFileTrace.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "playbarNextRecovery.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "publicStartupLoader.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "sessionState.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "signupVerificationCode.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "startupBootstrap.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "startupRevealArchitecture.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "startupTrace.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "tagFilters.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "uiPolish.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webBeatEdit.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webBeatEditDrawer.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webCsrfFetchCoordinator.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webDownloads.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webExperience.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webGalleryDirectAuthBoundary.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webImport.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webImportCommit.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webImportDurabilityFlow.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webImportReviewFlow.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webLibrary.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webLibraryNavigation.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webLibraryReconciledCaller.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webLibraryWindow.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webNoTauri.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webPersistentIndexBootstrap.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webPlatformShell.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webPlaybackBackgroundPriority.behavior.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webPlaybackBackgroundPriority.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webPlaybackDeletePurge.test.ts",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webPlaybackIntent.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webPlaybackRouteRecovery.behavior.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webPlaybackRouteRecovery.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webPlaybackRoutingCache.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webPlaybackSortCaller.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webPlaybackSource.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webPlaybackSourceAdvanced.behavior.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webProjectOperationGuard.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webRememberedDirectPreconnect.behavior.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webReviewSave.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webSessionBootstrap.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webStartupPlaybackCoordinator.behavior.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webStartupPlaybackCoordinator.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webTransportController.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webTransportControllerLifecycle.behavior.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webTransportControllerRefresh.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webTransportInvalidation.behavior.test.tsx",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webTransportInvalidation.test.ts",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webTransportSession.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webTransportWorker.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webTransportWorkerClient.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webTransportWorkerClientIndex.behavior.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webTransportWorkerClientRefresh.behavior.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webTransportWorkerScheduler.behavior.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webTransportWorkerStartupVector.behavior.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webTrash.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webVisiblePlaybackPrefetch.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "tests/component-dom",
+   "file": "webWavMaster.test.ts",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "abuse-controls.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "access-grant-ownership.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "access-runtime-consumers.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "access-runtime-postgres.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "access-welcome-activation.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "account-email-ses-staged.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "account-lifecycle-request-guard.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "account-lifecycle.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "auth-identity-postgres.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "auth-identity-preflight.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "auth-public-registration-hardening.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-access-resolver.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-checkout-persistent.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-checkout.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-commercial-catalog.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-entitlements.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-lifecycle.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-polar-daily.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-polar-daily.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-polar-failure-progress.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-polar-lifecycle-adapter.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-polar-production.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-polar-renewal-proof.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-polar-sandbox.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-polar-sdk-contract.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-provider-environment-runtime.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-reconciliation-runtime.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-reconciliation.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-reconciliation.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-v1-migrations.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-web-checkout-runtime.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-web-portal-route.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-web-runtime.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-webhook-durable.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-webhook-runtime.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "billing-webhook.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "capacity-load-harness.test.cjs",
+   "kind": "OTRO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "control-plane-authority.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "control-plane-json-compat.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "cutover-snapshot-bundle.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "d8-ro-resolutions.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "deployment-promotion-contract.test.mjs",
+   "kind": "OTRO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "direct-allocator-no-cap.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "direct-capability-boundary.runner.cjs",
+   "kind": "OTRO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "direct-capability-boundary.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "direct-capability-postgres.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "direct-index-operation-document-context.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "direct-index-operation-liveness.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "direct-managed-token-retry.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "direct-membership-provisioning-primitive.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "direct-message-download.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "direct-persistent-assignment-runtime.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "direct-persistent-cleanup.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "direct-persistent-legacy-lazy.postgres.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "direct-persistent-legacy-lazy.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "direct-persistent-membership-runtime.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "direct-persistent-ready-no-master.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "direct-persistent-session-runtime.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "direct-stale-operation-cleanup.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "direct-startup-trace.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "direct-vault-assignment.postgres.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "direct-vault-assignment.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "email-verification-authority.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "garbage-journal-repository.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "legacy-import-executor.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "legacy-import-plan.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "master-index-flood-wait.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "master-storage-recovery.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "operations-observability.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "operations-runtime.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "password-kdf.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "pending-signup-activation.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "pending-signup-safety.test.mjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "plan-dev-switch-removed.test.cjs",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "post-deploy-smoke.test.mjs",
+   "kind": "OTRO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "postgres-auth-compat.test.cjs",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "postgres-auth-multiprocess-compat.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "postgres-bootstrap-observability.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "postgres-cutover.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "postgres-installation-claim-coordinator.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "postgres-installation-claim-cross-process.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "postgres-live.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "postgres-migration-runner.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "postgres-rollback-preparation.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "postgres-runtime-config.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "postgres-schema.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "project-master-message.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "provider-identity-authority.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "runtime-operability.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "secret-envelope-provider.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "secret-envelope.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "secret-keyring.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "sensitive-auth-capability-revocation.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "sensitive-auth-containment.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "server-core-auth-bridge-loader.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "session-security.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "signup-activation-postgres.integration.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "signup-activation-safety.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "stage1-multi-account-concurrency.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "staged-email-change-routes.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "staged-email-change.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "state-dir.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "unit.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests",
+   "file": "user-storage-lifecycle.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-artwork-unlink.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-authority.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-authority.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-backup-infra.test.cjs",
+   "kind": "SOLO_FUENTE"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-backup-scale.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-backup.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-backup.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-commands.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-commands.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-contract.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-cursor.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-direct.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-direct.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-facets-delta.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-fence.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-fence.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-gateway-runtime.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-metadata-rules.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-name-uniqueness.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-native-cli.integration.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-native-cli.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-native-transport-provisioning.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-operations.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-operations.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-playback.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-playback.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-prefix-packs.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-purge.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-purge.test.cjs",
+   "kind": "MIXTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-queries.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-queries.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-routes.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-schema.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-search-text.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-transport-contract.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-transport-gateway.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-transport-sandbox.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-transport.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-worker.integration.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "catalog-worker.test.cjs",
+   "kind": "COMPORTAMIENTO"
+  },
+  {
+   "dir": "cloud-server/tests/catalog",
+   "file": "g3-preflight.test.cjs",
+   "kind": "OTRO"
+  }
+ ]
+}

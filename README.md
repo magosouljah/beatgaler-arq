@@ -2,7 +2,7 @@
 
 **Repositorio de conocimiento y auditoría**, no el código de la aplicación. Código oficial: [magosouljah/BeatGaler](https://github.com/magosouljah/BeatGaler) (`main`). Último corte verificado de este mapa: **`ad8f8d0436bba5c3f663a301440ebf977200d953` — 20 de noviembre de 2026**.
 
-> **Estado:** panorama estructural + **7 profundizaciones terminadas**; mapa legible creado; plan de limpieza **propuesto**; **ningún refactor autorizado ni ejecutado** desde este repositorio. Lo verificado en código **no** equivale a funcionamiento probado en AWS.
+> **Estado (2026-11-21): INVESTIGACIÓN CONGELADA — este README es la única entrada vigente al conocimiento.** Panorama + **7 profundizaciones terminadas e íntegras**; mapa legible; plan de limpieza **propuesto**; **[línea base de pruebas](linea-base-20261121/LINEA-BASE.md) ejecutada localmente**; **ningún refactor autorizado ni ejecutado**. No se crean más auditorías ni informes panorámicos: el siguiente conocimiento nace de cambios concretos (piloto, pruebas) y se registra junto a ellos. Lo verificado en código **no** equivale a funcionamiento probado en AWS.
 
 ## Empieza aquí (2 minutos)
 
@@ -16,6 +16,7 @@
 | Ver visión general y arquitectura original del corte | [Panorama de main](panorama-main-20261120/PANORAMA.md) |
 | Consultar detalles, pruebas escritas y evidencia por línea | **Investigaciones P01–P07** (abajo) |
 | Saber qué decidió el propietario sobre conocimiento/contexto | [Context Management](context-management/README.md) y [decisiones](context-management/DECISIONES.md) |
+| Saber qué pruebas pasan hoy, cómo ejecutarlas aisladas y cuáles solo leen texto fuente | **[Línea base de pruebas 2026-11-21](linea-base-20261121/LINEA-BASE.md)** |
 
 ### Modelo mental
 
@@ -54,7 +55,18 @@ Settings → checkout Polar → webhooks PG → acceso/planes → cuotas del cat
 | P06 — Billing, checkout, entitlements y quotas | [P06](panorama-main-20261120/profundizacion/P06-PAGOS-ACCESO.md) |
 | P07 — CI, despliegue, backup y recuperación | [P07](panorama-main-20261120/profundizacion/P07-CI-DEPLOY-RECOVERY.md) |
 
-Se conservan originales completos, fuentes y grado de certeza. Los materiales [`auditoria-v1/`](auditoria-v1/PROTOCOLO.md) y [`pasada-1/`](pasada-1/informe-pasada-1.html) son **históricos**: algunos se escribieron contra ramas distintas de `main`, así que no deben sobrescribir el mapa del corte actual.
+Se conservan originales completos, fuentes y grado de certeza. **P01–P07 están congelados sin cambios** en `ad8f8d0`; si el código cambia, se anota el delta en el documento vigente que corresponda, no se reescriben.
+
+### Material histórico (no es estado vigente; consultar solo ante dudas o regresiones)
+
+Cada archivo lleva un aviso `HISTÓRICO — congelado el 2026-11-21` en su primera línea.
+
+| Material | Por qué es histórico |
+|---|---|
+| [`ESTADO-DIAGNOSTICO.md`](ESTADO-DIAGNOSTICO.md), [`PROMPT-DIAGNOSTICO-ARQUITECTURA.md`](PROMPT-DIAGNOSTICO-ARQUITECTURA.md), [`pasada-1/`](pasada-1/informe-pasada-1.html), [`borradores/`](borradores/GLOSARIO-borrador.md) | Pasada 1 sobre `5cb6ccc` (11-nov), antes de LIVE y de T25; parte de sus conclusiones (gateway sin cablear, flag apagado, INDEX vigente) ya no es cierta |
+| [`auditoria-v1/`](auditoria-v1/PROTOCOLO.md) (protocolo, plan, cobertura, hallazgos, 12 ejecuciones) | Auditoría autónoma del 20-nov; protocolo escrito para una rama ya archivada; cobertura nunca certificada. **No se crean más ejecuciones** |
+| [`panorama-main-20261120/PROMPTS.md`](panorama-main-20261120/PROMPTS.md) | Prompts que generaron P01–P07; la fuente son los informes |
+| [`context-management/historico/`](context-management/historico/ARQUITECTURA-SIMPLE-v2.md) | Propuestas de sistema de conocimiento no aprobadas |
 
 ## Qué ya sabemos y qué NO sabemos
 
@@ -67,6 +79,8 @@ Se conservan originales completos, fuentes y grado de certeza. Los materiales [`
 ## SymDex: alcance del piloto local
 
 Prueba local facilitada por el propietario sobre `src/features/library/catalog`: **42 archivos, 672 símbolos, 0 errores**. Búsqueda por símbolo/callers correcta para `createCatalogServices`; los `callees` incluyeron falsos positivos (`accountId ?? "anon"}`) y el context pack priorizó piezas no centrales. **Conclusión:** usar SymDex como navegación auxiliar, no como grafo autoritativo. El SQLite local vive en `E:\777\tools\symdex-state` y **no se sube a este repo**. La indexación completa de BeatGaler no quedó validada.
+
+**Comprobado el 2026-11-21 (lectura `ro` de los SQLite):** existe un `beatgaler.db` **no registrado y abortado**: 561/1.582 archivos (todo `cloud-server`, 19/125 de `DESIGN`, **nada de `src/`, `tests/`, `scripts/` ni `src-tauri/`**), 0 embeddings, aristas solo por nombre; indexó 4 archivos no versionados (incl. `.claude/settings.local.json`, que git ignora globalmente). Su tabla de rutas no ve las rutas montadas por parches de `express.application` (`/auth/login`: 1 archivo frente a 9 referencias reales). Para alcanzabilidad y código muerto usar el grafo del build (`vite build` / `tsc`) y `rg`, no SymDex.
 
 ## Límites de este repositorio
 

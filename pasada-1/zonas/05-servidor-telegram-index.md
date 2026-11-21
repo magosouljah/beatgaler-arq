@@ -1,3 +1,5 @@
+> **HISTÓRICO — congelado el 2026-11-21. No es estado vigente.** Evidencia de la pasada 1 sobre `5cb6ccc`; el INDEX fue retirado del runtime en T25. Entrada vigente: [README](../../README.md).
+
 # Zona 05 — Servidor Cloud: transporte con Telegram, almacenamiento e INDEX legacy
 
 **Origen:** informe de sub-agente de solo lectura, pasada 1. **Commit:** `5cb6ccc`. **Fecha:** 2026-11-11.

@@ -1,3 +1,5 @@
+> **HISTÓRICO — congelado el 2026-11-21. No es estado vigente.** Pasada 1 sobre `5cb6ccc` (11-nov, antes de LIVE y T25); varias conclusiones ya no son ciertas. Entrada vigente: [README](README.md).
+
 # Estado del diagnóstico de arquitectura de BeatGaler
 
 **Última actualización:** 2026-11-11 (sesión 1).

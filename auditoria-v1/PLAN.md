@@ -1,3 +1,5 @@
+> **HISTÓRICO — congelado el 2026-11-21. No es estado vigente.** Auditoría autónoma 20-nov (Director). Entrada vigente: [README](../README.md).
+
 # Plan de auditoría — Director
 
 Protocolo: [PROTOCOLO.md](PROTOCOLO.md). Fuente de código SOLO `magosouljah/BeatGaler@4e66638051effe888e66a885010065d98fc7df17` (rama `local/landing-gallery-unificada`, HEAD comprobado 2026-11-20). Solo lectura. Director dueño de este archivo.

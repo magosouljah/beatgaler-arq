@@ -1,3 +1,5 @@
+> **HISTÓRICO — congelado el 2026-11-21. No es estado vigente.** Auditoría autónoma 20-nov; protocolo escrito para la rama LOCAL ya archivada. No crear más ejecuciones. Entrada vigente: [README](../README.md).
+
 # Auditoría autónoma BeatGaler V1 — protocolo operativo v2
 **Aprobado por el propietario:** 2026-11-20. **Ámbito:** comprensión arquitectónica exhaustiva + búsqueda y comprobación de problemas reales.
 
