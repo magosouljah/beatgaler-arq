@@ -2,7 +2,7 @@
 
 **Repositorio de conocimiento y auditoría**, no el código de la aplicación. Código oficial: [magosouljah/BeatGaler](https://github.com/magosouljah/BeatGaler) (`main`). Último corte verificado de este mapa: **`ad8f8d0436bba5c3f663a301440ebf977200d953` — 20 de noviembre de 2026**.
 
-> **Estado (2026-11-21): INVESTIGACIÓN CONGELADA — este README es la única entrada vigente al conocimiento.** Panorama + **7 profundizaciones terminadas e íntegras**; mapa legible; plan de limpieza **propuesto**; **[línea base de pruebas](linea-base-20261121/LINEA-BASE.md) ejecutada localmente**; **ningún refactor autorizado ni ejecutado**. No se crean más auditorías ni informes panorámicos: el siguiente conocimiento nace de cambios concretos (piloto, pruebas) y se registra junto a ellos. Lo verificado en código **no** equivale a funcionamiento probado en AWS.
+> **Estado (2026-11-21): INVESTIGACIÓN CONGELADA — este README es la única entrada vigente al conocimiento.** Panorama + **7 profundizaciones terminadas e íntegras**; mapa legible; plan de limpieza **propuesto**; **[línea base de pruebas](linea-base-20261121/LINEA-BASE.md) ejecutada localmente**. **Preparación de limpieza CERRADA:** pruebas reparadas, `npm test`/CI seguros y piloto F1 ejecutados en la rama de revisión `local/limpieza-preparacion-20261121` de BeatGaler, con CI de GitHub en verde. **No fusionado a `main`**; F1 verificado solo con fakes ([Etapas 1–4](linea-base-20261121/ETAPAS-1-3.md)). No se crean más auditorías ni informes panorámicos: el siguiente conocimiento nace de cambios concretos y se registra junto a ellos. Lo verificado en código **no** equivale a funcionamiento probado en AWS.
 
 ## Empieza aquí (2 minutos)
 
@@ -17,7 +17,7 @@
 | Consultar detalles, pruebas escritas y evidencia por línea | **Investigaciones P01–P07** (abajo) |
 | Saber qué decidió el propietario sobre conocimiento/contexto | [Context Management](context-management/README.md) y [decisiones](context-management/DECISIONES.md) |
 | Saber qué pruebas pasan hoy, cómo ejecutarlas aisladas y cuáles solo leen texto fuente | **[Línea base de pruebas 2026-11-21](linea-base-20261121/LINEA-BASE.md)** |
-| Ver qué se reparó (pruebas, npm test, CI) y el resultado del piloto F1 | **[Etapas 1–3](linea-base-20261121/ETAPAS-1-3.md)** (rama local, sin push) |
+| Ver qué se reparó (pruebas, npm test, CI), el resultado del piloto F1, los runs de CI y el **siguiente orden de limpieza** | **[Etapas 1–4](linea-base-20261121/ETAPAS-1-3.md)** (rama de revisión, sin merge) |
 
 ### Modelo mental
 
@@ -88,4 +88,4 @@ Prueba local facilitada por el propietario sobre `src/features/library/catalog`:
 - No modificar `magosouljah/BeatGaler`, su rama `main`, AWS, Telegram, DB, bots, datos o producción sin un encargo explícito separado.
 - Los mapas Markdown son **guías legibles a los informes y al código**, no una implementación del **«index» multidimensional** futuro de Context Management. Su tecnología, relaciones y sincronización siguen pendientes de decisión; no improvisar sistema/SQLite/MCP remoto nuevo.
 - Si `main` cambia, **indicar SHA nuevo y delta** antes de asumir que el mapa es vigente. Conservar fuentes históricas; corregir la guía por evidencia, no por antigüedad.
-- **Próxima decisión técnica propuesta, todavía no implementada:** [piloto HTTP Web aislado y reversible](mapa-v1/PRIMER-PILOTO.md), con pruebas de equivalencia. [Orden completo](panorama-main-20261120/PLAN-LIMPIEZA-V1-PROPUESTA.md).
+- **Piloto HTTP Web ([F1](mapa-v1/PRIMER-PILOTO.md)) ejecutado** en la rama de revisión. **Próximo módulo propuesto:** retirar la cadena legacy INDEX del bundle Web ([orden](linea-base-20261121/ETAPAS-1-3.md#siguiente-orden-de-limpieza-propuesto-cada-módulo-necesita-autorización)). Requiere autorización. [Plan maestro](panorama-main-20261120/PLAN-LIMPIEZA-V1-PROPUESTA.md).

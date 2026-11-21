@@ -1,6 +1,8 @@
-# Etapas 1–3 — pruebas reparadas, npm test/CI y piloto F1 (2026-11-21)
+# Etapas 1–4 — pruebas reparadas, npm test/CI, piloto F1 y cierre (2026-11-21)
 
-**Rama:** `local/limpieza-preparacion-20261121` (BeatGaler). Commits locales, sin push ni merge. **Base:** [LINEA-BASE](LINEA-BASE.md) en `ad8f8d0`. Pruebas ejecutadas en local y aisladas (worktree limpio o el checkout con entorno por allowlist y guard de red); PostgreSQL efímero propio en 54329. Sin AWS, Telegram, bases reales ni credenciales.
+> **Estado: PREPARACIÓN DE LIMPIEZA CERRADA (PASS técnico con fakes; CI GitHub verde, ver [Etapa 4](#etapa-4--cierre-de-ci-seguridad-y-f1-commit-cfcfb1d)).** Sin merge a `main` ni despliegue.
+
+**Rama:** `local/limpieza-preparacion-20261121` (BeatGaler), publicada como rama de revisión (sin merge ni PR). **Base:** [LINEA-BASE](LINEA-BASE.md) en `ad8f8d0`. Pruebas ejecutadas en local y aisladas (worktree limpio o el checkout con entorno por allowlist y guard de red); PostgreSQL efímero propio en 54329. Sin AWS, Telegram, bases reales ni credenciales.
 
 ## Etapa 1 — pruebas obsoletas (commit `dcdc094`)
 
@@ -46,5 +48,53 @@ Resultado: integration **184/184**, component-dom **661/661**, regresiones Web/C
 1. `npm run test:regressions` completo falla en `version.mjs check`: `VERSION`=0.9.0-beta.1 frente a `package.json`=0.9.0-beta.2 (el bump `407cdf4` no actualizó `VERSION`), y el título HTML no lleva versión. Es una decisión de release/Desktop.
 2. `webCsrfFetchCoordinator.ts:8`: un host Tailscale de desarrollo fijo en el bundle de producción. Quitarlo cambia el comportamiento en entornos de desarrollo.
 3. Consolidar los workflows de PR (billing, d6, d7, f3-*, web-production-build…), que ahora en parte duplican `ci.yml`. Requiere conocer los checks requeridos de la protección de `main`.
-4. `ci.yml` no se ha ejecutado en GitHub (no hubo push). Tampoco se ha comprobado allí `npm ci` + `test:web` en Linux.
-5. El arnés `scripts/catalog-check.cjs` no tiene la negativa por credenciales locales; se apoya en su allowlist y su guard. Revisar si algún caso carga `direct-transport-control`.
+4. ~~`ci.yml` sin ejecutar en GitHub~~ → **resuelto en la etapa 4** (runs verdes).
+5. ~~`catalog-check.cjs` sin negativa por credenciales locales~~ → **resuelto en la etapa 4** (rc=3).
+6. F1 y flujos de Gallery, reproducción, subidas y descargas: verificados **solo con fakes**. Falta el E2E real en navegador (LAB real3 o Telegram de pruebas), con permiso.
+7. El repositorio `BeatGaler-arq` es público: no registrar en él hosts, rutas privadas ni identificadores sensibles.
+
+## Etapa 4 — cierre de CI, seguridad y F1 (commit `cfcfb1d`)
+
+Publicado en la rama de revisión `local/limpieza-preparacion-20261121`: push sin force, sin merge, PR ni despliegue.
+
+**Seguridad PostgreSQL (fail-closed, también con `CI=true`):**
+- `run-cloud-tests.mjs --integration` exige tres condiciones antes de cualquier `CREATE DATABASE`:
+  - destino en loopback;
+  - 5432 rechazado fuera de CI;
+  - centinela `bg_test_lab.lab_identity` con una sola fila igual a `BEATGALER_CLOUD_TEST_INSTANCE_ID`.
+- `pg-port-guard.cjs` está precargado en cada proceso de prueba. Bloquea los puertos 5432/5433/5434/6432 y el de la instancia, salvo el destino exacto verificado.
+- `catalog-check.cjs` y `run-cloud-tests.mjs` se niegan a ejecutarse si el checkout tiene credenciales o estado locales. Los detectan por nombre, sin leerlos, y dejan `dotenv` inerte.
+- La prueba de comportamiento `cloud-server/tests/test-isolation-guards.test.cjs` cubre el guard, la detección de credenciales y los 3 rechazos del modo integración: sin id con `CI=true`, host remoto y 5432 fuera de CI.
+
+**CI:** `ci.yml` y `catalog-checks.yml` se disparan en push a `main` y a `local/**`. Los 21 workflows de PR no corren en push, así que no hay duplicación en la rama de revisión.
+
+| Workflow | Run | Resultado |
+|---|---|---|
+| CI V1 — Web | [44882972508](https://github.com/magosouljah/BeatGaler/actions/runs/44882972508) | PASS: typecheck, unit, component-dom, integration, guardas y build de producción (121 + 50 archivos vitest) |
+| CI V1 — Cloud | mismo run | PASS: unitarias **89/89**, centinela creado e integración PG16 efímero **15/15** |
+| catalog-checks | [44882972492](https://github.com/magosouljah/BeatGaler/actions/runs/44882972492) | PASS: unit, faults, integration y T03–T19, **120 archivos PASS, 0 FAIL/SKIP** |
+
+**Verificación local** (worktree limpio, PG18 efímero en 54329):
+- Cloud unit y catálogo unit/faults: PASS.
+- Integración: 15/15.
+- Rechazos con rc=2: sin id y con id erróneo.
+- El arnés ejecutado en el checkout con credenciales devuelve rc=3.
+
+**F1 cerrado, solo con simulación:**
+- Los contratos HTTP están cubiertos por las pruebas de la etapa 3, que CI repite en Linux.
+- En esta etapa no se encontraron defectos nuevos ni hizo falta cambiar F1.
+- Gallery, reproducción, subidas y descargas están verificadas **solo con fakes** (component-dom, T08, T13).
+- **Pendiente real:** E2E en navegador sobre LAB real3 o el Telegram de pruebas, con permiso.
+
+## Siguiente orden de limpieza (propuesto; cada módulo necesita autorización)
+
+1. **Cadena legacy INDEX en el bundle Web (recomendado como siguiente módulo).** Debería ser inalcanzable por diseño desde T25.
+   - Cadena: `AccountGate → webRememberedDirectPreconnect.prepareWebDirectForSignIn → webStartupPlaybackCoordinator → webGalerCloudTransport`, más el prewarm de `webAdapter`.
+   - Llama a rutas Cloud ya retiradas.
+   - Antes de retirarla, medir la hipótesis de que genera peticiones inútiles o fallidas al iniciar sesión.
+2. **Rama solo-Desktop.**
+   - 90 archivos de `src/` alcanzables únicamente vía `DesktopExperience` (≈3 son falsos positivos por tipos).
+   - `platform/index.ts` importa `desktopAdapter`/`tauri.ts` de forma estática también en Web.
+   - Decisión del propietario: aislar o separar, no borrar.
+3. **Pruebas huérfanas.** `tests/playback-compare`, `-e`, `-g` y `-post-fix` no tienen referencias en `package.json` ni en `scripts/`. Confirmarlo y después retirarlas o integrarlas.
+4. **Workflows de PR.** Consolidar los que duplican `ci.yml` tras revisar los checks requeridos de la protección de `main`.

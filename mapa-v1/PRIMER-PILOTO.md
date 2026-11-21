@@ -1,6 +1,6 @@
 # BeatGaler V1 — Primer piloto de limpieza (PROPUESTA, NO ejecutado)
 
-> **Actualización 2026-11-21: EJECUTADO en la rama local `local/limpieza-preparacion-20261121` (sin push ni merge).** Resultado, pruebas y decisiones en [ETAPAS-1-3](../linea-base-20261121/ETAPAS-1-3.md). El texto de abajo se conserva como plan original.
+> **Actualización 2026-11-21: EJECUTADO en la rama de revisión `local/limpieza-preparacion-20261121` (publicada, sin merge; CI verde).** Resultado, pruebas y decisiones en [ETAPAS 1–4](../linea-base-20261121/ETAPAS-1-3.md). El texto de abajo se conserva como plan original.
 
 > **Correcciones verificadas en código (2026-11-21, `main@ad8f8d0`) — amplían el alcance descrito abajo; decidir antes de autorizar:**
 > 1. No hay dos sino **cinco** funciones `request` HTTP en el catálogo Web: `catalogApi.ts:145`, `catalogCommandsApi.ts:68`, `catalogMediaClient.ts:81`, `catalogTransfer.ts:192` y `call` en `catalogLibraryProvider.tsx:124`.
