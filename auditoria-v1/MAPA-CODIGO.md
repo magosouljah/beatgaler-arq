@@ -119,3 +119,13 @@ La evidencia estática de AUD-005 está contrastada; sin test ejecutado ni C3. G
 | `cloud-server/catalog/queries.js` + `cursor.js` | ACTIVO; owner de SQL keyset y firma de tokens | `listBeats` usa `readTx`, `verifyCursor`, tuplas, ordinales; `finishPage` firma fuera de transacción; no owner de bloques | Modificar filtros/orden/cursores Cloud aquí, no en Web; C2 de tramos @ `b6b999526f77054a199c74fadb39d2171ac4eb75` |
 | `src/features/library/catalog/catalogQueryStore.ts` | ACTIVO; owner de bloques y generación UI | `loadNext/loadPrevious` valida revisión, ordinal y duplicados; una recuperación automática de stale | Modificar continuidad/evicción aquí; C2 de tramos @ `b6b999526f77054a199c74fadb39d2171ac4eb75` |
 Evidencia primaria leída a SHA y [AUD-007](runs/20261120T1730-investigador-AUD-007.md); sin pruebas ejecutadas.
+
+
+## Panorama 19:00 — audio Web @ `b52649f04a1f7166763c7d26f40ac4b3337828c8` (lectura estática)
+| Módulo / estado | Owner, entrada y dependencias | Interfaz / cambios y límites |
+|---|---|---|
+| `catalogPlaybackSession.ts:16-93,154-228` ACTIVO | Estado de target, cola, repeat, shuffle, ronda, progreso y lease; `play/next/previous/ended/setQuery/teardown`; consume `PlaybackApi` y `acquireSource` inyectados | Cambiar semántica de cola/rondas/liberación aquí. C2 tramos; carrera R-004 sin runtime |
+| `catalogMediaClient.ts:172-190,204-245,285-301` ACTIVO | Owner de grants, URL Blob/MSE, cache y lease; usa HTTP Cloud + DirectPort navegador, no dueño del Player | Cambiar gestión de streams, abort y limpieza aquí. C2 tramos, MSE/error asíncrono pendiente |
+| `catalogLibraryProvider.tsx:133-154` ACTIVO | Factory por cuenta: conecta `PlaybackApi`, `resolveFile`, `media.acquireStream`; teardown secuencial playback→media | Cambiar wiring/cleanup por cuenta aquí. C2 tramo, no garantía de cancelación de promesas tardías |
+| `useCatalogGalleryScope.ts:216-242` ACTIVO | Adapta UI Playbar/BeatCard y `useAudio` a sesión, notifica errores de next/prev | Cambiar interacción aquí; implementación interna `useAudio` pendiente. C2 tramo |
+Dónde cambiar: lease race en session y/o cancelación en media; política de reproducción en session; salida audible en `useAudio`. [AUD-008](runs/20261120T1828-investigador-AUD-008.md) contrastado; sin C3 ni prueba runtime.
