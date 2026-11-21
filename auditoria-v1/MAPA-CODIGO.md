@@ -150,3 +150,13 @@ No se transfiere automáticamente C2 histórico de LOCAL a main; revisar imports
 | `LibraryCompositionGate.tsx:32-42` | ACTIVO: selector de presentación | resolving/legacy/catalog/blocked; prop legacy genérica, caller actual suministra aviso | Otro caller podría suministrar otro árbol |
 | `server-core.js:25-50,115-138` | ACTIVO: composición HTTP Cloud | importa servicios catalog y monta `createCatalogRouter`; Express/auth/billing coexisten | Rutas INDEX antiguas pendientes AUD-011 |
 Lectura primaria @SHA, C2 solo de estos tramos; comentarios legacy contradictorios no cambian el comportamiento ejecutable.
+
+
+## Panorama Cloud/INDEX main 22:00 @ `ad8f8d0436bba5c3f663a301440ebf977200d953`
+| Sistema/archivo | Función y estado | Entradas, dependencias, owner y modificación | Límite |
+|---|---|---|---|
+| `cloud-server/server-core.js:86-88,129-135` | ACTIVO, Express compositor | Middleware observa paths upload para logging; monta router catalog con factories y autenticación; modificar montaje HTTP aquí | Logging ≠ handler registrado; otros endpoints por rastrear |
+| `cloud-server/catalog/routes.js:48-81,208` | ACTIVO, router catálogo | Owner de rutas /catalog/v1, auth por usuario, errores; `navigation/legacy` delega a `queries.resolveLegacyNavigation`; modificar contrato aquí | No equivale a INDEX Telegram; disponibilidad runtime no probada |
+| `cloud-server/catalog/legacy-fence.js:1-65` | IMPLEMENTACIÓN presente; alcanzabilidad global INCIERTA | Consultas SQL de usuario/chat, rechazo `LEGACY_CLIENT_UNSUPPORTED` 410; owner de guardia legacy, requiere rastrear inyección y handlers | La existencia de guardia no prueba que todos los caminos legacy la invoquen |
+| `cloud-server/server-core.js:617-620,683` | ACTIVO como dependencia inyectada, cuerpo NO-OP | `ensureEmptyIndexForStorage` retorna null, se pasa a `createUserStorageLifecycle` | No crea INDEX; lifecycle completo pendiente |
+| `cloud-server/index-reconciliation.js` | Archivo presente, alcanzabilidad INCIERTA | Nombre sugiere conciliación; no inferir llamadas ni uso sin imports | C0 únicamente |
