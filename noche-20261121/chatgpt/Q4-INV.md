@@ -22,3 +22,11 @@ Tenant, revision, idempotencia, locks, derechos y restore: conservar cartografí
 
 ## Limitaciones
 No se ejecutó GitHub Actions ni se inspeccionó el contenido individual de las doce migraciones. Los SHA anteriores son de los archivos leídos. No afirmar que las 0031–0042 están rotas; el hueco confirmado es de **evidencia específica**. No se modificó BeatGaler ni main.
+
+## Pasada 3 — cobertura específica 0034–0042 (2026-11-21)
+
+**Hallazgo nuevo Q4-04 — contrato textual se detiene en 0033.** En `magosouljah/BeatGaler` rama `local/noche-20261121-int`, `cloud-server/tests/postgres-schema.test.cjs:143-169` contiene aserciones individuales para 0031, 0032 y 0033 y el archivo termina en línea 169: **no hay aserciones individuales para 0034–0042 en este test**. Blob SHA `8bd767ac960d20f8bc9e2d9ce237b1469efc4516`. Esto no prueba ausencia de tests en otras suites; sí identifica una asimetría concreta del contrato de esquema.
+
+**Hallazgo nuevo Q4-05 — cableado CI comprobado con precisión.** `scripts/catalog-suites.json:360-374` registra `postgres-schema.test.cjs` y `postgres-migration-runner.test.cjs` en la rama integradora (blob `de2754d5537e1f2b049e504be46f1d493fb2262d`). `.github/workflows/catalog-checks.yml:8-28,65-73,91-107` incluye `cloud-server/migrations/**` en filtros de push y ejecuta suites contra PostgreSQL efímero (blob `b1fca51caf7a011215fe340f4f3312127e61f3fe`). El workflow de la rama integradora **sí añadió** `cloud-server/tests/postgres-migration-runner.test.cjs` al filtro de cambios, respecto a la rama de preparación (blob anterior `9d335a841bb0c322d11b36bb37aac37e9d8c88f7`). El runner sigue usando un pool simulado (blob `47fc117ac3c5e9f1a52112dba2327bd3f53f1a8d`); no confundir su PASS con DDL real. No se verificaron run IDs ni resultados de CI.
+
+**Acción Codex prioritaria:** extender el contrato explícito 0034–0042 con verificaciones de objetos y restricciones esperados y, por separado, probar esos objetos en PostgreSQL efímero tras aplicar la cadena. Construir matriz archivo de migración → aserción textual → aserción PG real → suite CI → run ID. No duplicar pruebas ya existentes: buscar primero por objeto/constraint. **Estado:** hueco de cobertura específica en `postgres-schema.test.cjs` confirmado; integridad rota NO DEMOSTRADA.
