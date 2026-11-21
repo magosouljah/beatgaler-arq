@@ -1,0 +1,30 @@
+# AUD-008 — reproducción, arriendo y continuidad (investigador, 2026-11-20 18:28 CST)
+
+**Fuente única:** `magosouljah/BeatGaler@b52649f04a1f7166763c7d26f40ac4b3337828c8`, rama `local/landing-gallery-unificada`. El HEAD avanzó un commit desde el SHA de PLAN (`c59ec82b...`), con eliminación de INDEX legacy en Cloud; este informe usa exclusivamente el SHA nuevo para sus afirmaciones de código. **Método:** lectura estática de tres módulos principales y frontera de composición; sin tests/CI, navegador, AWS, Telegram ni datos.
+
+## HECHO — mapa navegable
+- **UI/owner del motor audio:** `src/features/library/catalog/useCatalogGalleryScope.ts:73-75,216-242`. El hook usa `useAudio()`; `handlePlay` envía un target `beatId/version/fileId` a `session.play`. `session.onEvent(play)` pasa `source.url` a `useAudio.play`; `endedSeq` llama `session.ended()`; progreso actualiza `session.setProgress`. `handleNext/Prev` reportan errores mediante notice. El motor audio, no el query store, posee la reproducción física.
+- **Sesión/owner de identidad, cola y política:** `catalogPlaybackSession.ts:16-64,66-75,78-93,154-211,216-228`. Snapshot externo con `current/source/queue/repeat/shuffle/round/query/progress/status`; `useSyncExternalStore` expone el estado. `play` obtiene archivo si falta, arrienda fuente, libera lease anterior solo tras adquirir la nueva y emite evento. `next`: cola explícita primero, después Shuffle servidor (ronda y secuencia CAS) o vecino del query; `previous` reinicia al superar 0.05 de progreso. `ended` respeta cola, repeat-one y repeat-all. `setQuery` actualiza el query sin liberar fuente actual; filtros distintos liberan ronda Shuffle; revisión distinta la marca stale; sort no reinicia ronda. `teardown` incrementa generation, limpia estado, libera lease y ronda.
+- **Media/owner de URL y bytes:** el archivo real es `catalogMediaClient.ts` (no existe `catalogMediaService.ts`): `20-51,71-79,100-107,123-169,172-190,204-230,239-245,285-301`. `access` obtiene grant HTTP `POST /catalog/v1/files/:id/access` con TTL y cache; lectura de bytes usa Direct Telegram del navegador; descarga valida tamaños/hashes. `acquire` comparte descarga por cacheKey y usa refcount por consumidor; `acquireStream` usa MSE MP3 si es compatible, fallback a `acquire`, y lease que detiene alimentación al liberar. `invalidate` limpia concesiones y `teardown` revoca URLs/limpia caches en memoria.
+- **Composición/frontera (lectura auxiliar):** `catalogLibraryProvider.tsx:93-100,133-154,179-204` conecta `resolveReadyQuerySet`, `getBeat`, `media.acquireStream(fileId,"player")`, endpoints `/catalog/v1/playback/rounds...` y teardown de todos los servicios por cuenta.
+
+**Diagrama textual:** BeatCard/Playbar → scope.handlePlay/Next → playbackSession (target, queue, set, round) → provider.resolveFile/PlaybackApi → mediaClient.access(grant Cloud SQL) → Direct media navegador → lease URL (MSE o Blob) → session event(play) → useAudio.play. Filtros → scope query → session.setQuery (cambia vecinos/ronda, NO fuente vigente). Logout/cambio cuenta → provider.teardown → session.teardown → media.teardown.
+
+## Hallazgo adversarial y contraejemplo
+**R-004 — RIESGO con mecanismo estático CONFIRMADO, impacto runtime NO_VERIFICABLE.** `catalogPlaybackSession.ts:84` hace `const next = await options.acquireSource(file.fileId); assertGen(g)` antes de registrar el lease en `lease`. Si `teardown()` ocurre durante el await (`:216-221` incrementa generation y libera solo el lease previamente registrado), y `acquireSource` resuelve después, `assertGen` lanza `SESSION_TORN_DOWN`; el catch `:88-91` retorna sin llamar `next.release()`. El lease adquirido queda sin liberar por la sesión. En ruta MSE puede quedar URL/stream hasta cleanup externo; en fallback Blob refcount puede quedar incrementado. **No se ha demostrado fuga duradera**: `provider.teardown` llama después a `media.teardown()` (`catalogLibraryProvider.tsx:154`), que limpia recursos; aun así, la adquisición asíncrona puede finalizar después de esa limpieza. No afirmar leak permanente ni fallo audible sin ejecución. **Contraejemplo:** si la adquisición resuelve antes del teardown, `lease = next` y `teardown` lo libera; si falla antes de crear lease, no hay lease nuevo que liberar. Revisión sugerida: prueba controlada de promesa diferida y cierre de cuenta, sin ejecutarla aquí.
+
+**Otros límites:** `catalogPlaybackSession.ts:78-92` mantiene target en error de adquisición; `withFreshSet` (`:94-103`) solo reintenta una vez `CURSOR_STALE`; `drawFromRound` (`:117-132`) conserva idempotencyKey en fallo de transporte. No equivalen a garantía de retry de medios ni de ausencia de carreras concurrentes. `useCatalogGalleryScope.ts:217-222` registra eventos de reproducción; no se inspeccionó implementación interna de `useAudio` ni pruebas de integración.
+
+## Cobertura propuesta y pendientes
+- `catalogPlaybackSession.ts`: **C2 parcial**, contratos y estados principales leídos; C3 pendiente (interleavings y tests).
+- `catalogMediaClient.ts`: **C2 parcial** para access/acquire/acquireStream/teardown; C3 pendiente (abort, MSE, expiración, concurrencia).
+- `useCatalogGalleryScope.ts`: **C2 parcial** del puente audio; resto fuera de este microlote.
+- `catalogLibraryProvider.tsx`: **C1/C2 parcial** solo wiring; no elevar archivo entero.
+- **Pruebas escritas:** no se localizaron/leyeron archivos de test específicos en esta ejecución; **no hay cobertura de tests verificada**. Ningún C3 ni bug runtime confirmado.
+
+## Siguientes microlotes propuestos (no autoasignados)
+1. Director: contrastar R-004 con el orden real de teardown y carreras `acquireStream`/media teardown; localizar tests escritos con promesas diferidas.
+2. Inspeccionar `useAudio` y manejo de `stream` MSE, para distinguir fuente lista vs reproducción iniciada y error asíncrono.
+3. Continuar backlog vigente AUD-009 (membresía), AUD-010 (guardas), AUD-011 (debounce), AUD-012 (cursores).
+
+**Persistencia:** este documento es el único entregable del turno; el investigador no modifica registros canónicos.
