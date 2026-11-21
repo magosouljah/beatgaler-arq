@@ -140,3 +140,13 @@ Dónde cambiar: lease race en session y/o cancelación en media; política de re
 | `DESIGN/`, `.agents/skills/`, `BLUEPRINT/` | rutas incorporadas en delta de GitHub | Laboratorio/documentación; no clasificarlas como código productivo sin revisar imports/build |
 | Arneses STEP15 retirados | rutas de scripts/tests removidas en compare | Retiro de pruebas antiguas, **no prueba** de eliminación INDEX de runtime |
 No se transfiere automáticamente C2 histórico de LOCAL a main; revisar imports/contratos según delta.
+
+
+## Revalidación main 21:00 @ `ad8f8d0436bba5c3f663a301440ebf977200d953` — AUD-010
+| Componente | Propósito/estado | Interfaces y conexiones verificadas | Límite |
+|---|---|---|---|
+| `catalogComposition.ts:16-26` | ACTIVO: selección de autoridad; flag default true | false→legacy nominal; true→`api.resolveContext`; ready→catalog, demás blocked | No demuestra configuración desplegada |
+| `WebGalleryWorkspace.tsx:13-34` | ACTIVO: owner de composición visual por cuenta | `useLibraryComposition`→`LibraryCompositionGate`; legacy→`LegacyRetired`, catalog→`CatalogGalleryWorkspace` | Otros entrypoints no examinados |
+| `LibraryCompositionGate.tsx:32-42` | ACTIVO: selector de presentación | resolving/legacy/catalog/blocked; prop legacy genérica, caller actual suministra aviso | Otro caller podría suministrar otro árbol |
+| `server-core.js:25-50,115-138` | ACTIVO: composición HTTP Cloud | importa servicios catalog y monta `createCatalogRouter`; Express/auth/billing coexisten | Rutas INDEX antiguas pendientes AUD-011 |
+Lectura primaria @SHA, C2 solo de estos tramos; comentarios legacy contradictorios no cambian el comportamiento ejecutable.
