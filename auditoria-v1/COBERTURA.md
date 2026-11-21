@@ -110,3 +110,11 @@ No se calculan porcentajes: inventario aún no clasificado.
 - F01 cursor→bloques: C2 parcial estático, **no C3**. [AUD-007](runs/20261120T1730-investigador-AUD-007.md) contrastado con código original.
 - `cloud-server/runtime-operability.js:26-103` @ `c59ec82b9dbf63a5158fa2cdfee27b71a27ba7e8`: C1 parcial + C2 de tramo (config/readiness/rutas), no montaje integral ni C3. Test `runtime-operability.test.cjs` solo inventariado.
 - Sin tests ejecutados; sin porcentaje de comprensión: 1.459 blobs del SHA inicial no es denominador operativo vigente.
+
+
+## Revisión 19:00 — AUD-008 @ `b52649f04a1f7166763c7d26f40ac4b3337828c8`
+- `catalogPlaybackSession.ts:16-93,154-228`: C2 **de tramos** de estado, comandos, lease y teardown; concurrencia/teardown C3 pendiente.
+- `catalogMediaClient.ts:172-190,204-245,285-301`: C2 **de tramos** acquire/acquireStream/teardown; abort, MSE y late completion sin C3.
+- `catalogLibraryProvider.tsx:133-154`: C2 **de tramo** de wiring y teardown; resto no elevado.
+- `useCatalogGalleryScope.ts:216-242`: C2 **de tramo** de puente UI/audio; `useAudio` interno no leído.
+- F05: C2 parcial estático, **ningún C3**. AUD-008 PARCIAL; [informe](runs/20261120T1828-investigador-AUD-008.md) contrastado por Director. Delta HEAD posterior solo 4 tests Cloud + manifiesto suites; no equivale a tests ejecutados ni modifica tramos Web. Inventario 1.459 @SHA inicial, sin denominador operativo @HEAD.
