@@ -64,6 +64,6 @@ main.tsx                           server.js
 
 1. `ACTIVO` significa **alcanzable en código bajo condiciones identificadas**, no ejecución real en producción. `COMPARTIDO` tampoco significa «borrable a medias». `INCIERTO` no se borra.
 2. **Tamaños, nombres o un grafo SymDex no prueban ausencia de consumidores**: imports dinámicos, middleware instalado al registro, require hooks, scripts externos y Telegram no se resuelven por AST superficial. Verificar inversamente y conservar fuentes completas.
-3. Para hallar **cada archivo**, incluidos test, migración, scripts y alternativas, usar el [inventario C0](../panorama-main-20261120/INVENTARIO-C0.md). Para detalles y números de línea, abrir el informe P0x; este mapa no duplica esas 250+ páginas.
+3. Para hallar **cada archivo**, incluidos test, migración, scripts y alternativas, usar el [inventario C0](../panorama-main-20261120/INVENTARIO-C0.md). Para detalles y números de línea, abrir el informe P0x; este mapa no duplica los informes completos.
 
 **Ruta de lectura:** [flujos y fronteras](FLUJOS.md) → [piloto propuesto](PRIMER-PILOTO.md) → [plan completo](../panorama-main-20261120/PLAN-LIMPIEZA-V1-PROPUESTA.md).
