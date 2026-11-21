@@ -126,3 +126,7 @@ Toda cobertura C0–C2 anteriormente etiquetada LOCAL queda **HISTÓRICA, revali
 
 ## Director 21:00 — main `ad8f8d0436bba5c3f663a301440ebf977200d953`, AUD-010 PARCIAL
 `catalogComposition.ts:16-26`, `WebGalleryWorkspace.tsx:13-34`, `LibraryCompositionGate.tsx:32-42`: C2 de tramos **estáticos** por contraste independiente, sin C3. `server-core.js:25-50,115-138`: C1 parcial/C2 tramo de montaje catalog. `WebGalleryEntry.tsx` y `catalogLibraryProvider.tsx`: evidencia del informe Investigador, aún no contraste integral del Director; no elevar cobertura de módulos completos. F01 C2 parcial, C3 pendiente. Árbol íntegro y denominador main pendientes. Sin tests ejecutados.
+
+
+## Director 22:00 — AUD-011 main @ `ad8f8d0436bba5c3f663a301440ebf977200d953`
+Árbol Git recursivo **1.582 blobs, truncated=false**: C0 físico del árbol, NO C0 semántico por archivo ni porcentaje de comprensión. `server-core.js:86-88,129-135,617-620,683`: C2 solo de tramos HTTP/función no-op; `catalog/routes.js:48-81,208`: C2 de tramos auth/context/provision/legacy/fallback; `catalog/legacy-fence.js:1-65`: C1 parcial/C2 de contrato de guardia, wiring no contrastado; `index-reconciliation.js`: C0 archivo. AUD-011 PARCIAL, C3 ninguno, tests no ejecutados. Resto de C2 LOCAL histórico salvo revalidación selectiva a main. Siguiente AUD-012 endpoints upload/INDEX y fences.
