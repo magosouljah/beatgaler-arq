@@ -118,3 +118,7 @@ No se calculan porcentajes: inventario aún no clasificado.
 - `catalogLibraryProvider.tsx:133-154`: C2 **de tramo** de wiring y teardown; resto no elevado.
 - `useCatalogGalleryScope.ts:216-242`: C2 **de tramo** de puente UI/audio; `useAudio` interno no leído.
 - F05: C2 parcial estático, **ningún C3**. AUD-008 PARCIAL; [informe](runs/20261120T1828-investigador-AUD-008.md) contrastado por Director. Delta HEAD posterior solo 4 tests Cloud + manifiesto suites; no equivale a tests ejecutados ni modifica tramos Web. Inventario 1.459 @SHA inicial, sin denominador operativo @HEAD.
+
+
+## Cambio de baseline — main `ad8f8d0436bba5c3f663a301440ebf977200d953` (20:00 CST)
+Toda cobertura C0–C2 anteriormente etiquetada LOCAL queda **HISTÓRICA, revalidación pendiente según delta**; no borrar evidencia ni convertirla en C3. Lectura puntual @main de `catalogLibraryProvider.tsx`, `routes.js` y `native-transport-provisioning.js`: C1 parcial y contraste de interfaces de F02; **no C2 integral ni C3** para main. AUD-009 PARCIAL histórico; AUD-010 asignado. El denominador de 1.459 blobs NO aplica a main; inventario completo main pendiente.
