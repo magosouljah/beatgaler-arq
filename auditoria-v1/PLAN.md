@@ -136,3 +136,17 @@ Rama LOCAL: HEAD observado `c59ec82b9dbf63a5158fa2cdfee27b71a27ba7e8`, dos commi
 - **Cierre:** trazar Play → lease/URL → Player, errores/reintentos, selección/continuidad tras filtro y cleanup, un contraejemplo, tests escritos y C2/C3 por tramo @SHA. Un informe nuevo inmutable en runs/. No ejecutar tests.
 - **Backlog:** AUD-009 revalidar membresía R-001 en gateway nuevo; AUD-010 estados reales/guardas R-003; AUD-011 pruebas y debounce R-002; AUD-012 contratos cursor/SQL y navegación inversa. Máximo dos informes por microlote.
 - **Carril A:** nuevo mapa panorámico de `runtime-operability.js` (config, readiness y rutas health/ready); dependencia SQL y estado global de drenaje. No confundir health con disponibilidad funcional de Gallery. Árbol operativo completo @HEAD pendiente.
+
+
+## Dirección 2026-11-20 19:00 — AUD-008 revisado; AUD-009 asignado
+Fuente AUD-008: `b52649f04a1f7166763c7d26f40ac4b3337828c8`; rama LOCAL comparada contra ese SHA: **ahead 2 commits, 5 rutas modificadas** (4 tests Cloud catalog + `scripts/catalog-suites.json`), ninguna de las tres rutas Web del microlote. No atribuir pruebas ejecutadas a esos cambios.
+
+**AUD-008 CERRADO PARCIAL.** Informe [18:28](runs/20261120T1828-investigador-AUD-008.md) contrastado independientemente: `catalogPlaybackSession.ts:78-92,197-228`, `catalogMediaClient.ts:204-245,285-301`, `catalogLibraryProvider.tsx:140-154`, `useCatalogGalleryScope.ts:216-242`. Se confirma estáticamente que un lease obtenido tras teardown puede escapar al release de sesión; **R-004 RIESGO**, no fuga permanente ni incidencia runtime probada. Contraejemplo: lease adquirido antes del teardown sí se libera; media.teardown revoca recursos ya registrados, pero no prueba limpieza de adquisiciones posteriores. C2 de tramos, C3 pendiente. Los tests escritos de lease no se han contrastado.
+
+### ÚNICA asignación vigente: AUD-009 — ASIGNADO
+- **SHA obligatorio:** `b52649f04a1f7166763c7d26f40ac4b3337828c8` como corte de referencia, comprobar HEAD LOCAL y fijar SHA nuevo explícito si avanza; no mezclar SHAs.
+- **Pregunta:** ¿Puede una biblioteca PostgreSQL creada pero con membresía Telegram PENDING recuperarse mediante rutas Web accesibles? Revalidar R-001 frente al provisioner/gateway actuales.
+- **Microlote:** `cloud-server/catalog/native-transport-provisioning.js`, `cloud-server/catalog/routes.js` (GET context / POST provision y recuperación), `src/features/library/catalog/catalogLibraryProvider.tsx` (resolución y estado). Caller UI solo frontera auxiliar.
+- **Cierre:** tabla GET/POST/acción UI→ensure→resultado, camino feliz/fallo y contraejemplo, líneas @SHA, tests escritos pertinentes, C2/C3 solo tramos, separar recuperabilidad estática de runtime. Un único informe nuevo inmutable runs/. No ejecutar tests.
+- **Backlog:** AUD-010 guardas R-003; AUD-011 debounce R-002; AUD-012 navegación inversa/SQL; AUD-013 carrera de leases R-004 y tests diferidos; AUD-014 ownership `useAudio` y errores de stream.
+- **Carril A:** añadido mapa panorámico de sesión audio/medios/cleanup y clasificación de cuatro tests Cloud catalog y manifiesto de suites modificados. Denominador operativo @HEAD sigue sin reconstruirse. Horario intacto.
