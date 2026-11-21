@@ -69,3 +69,7 @@ BeatCard/Playbar → `useCatalogGalleryScope.handlePlay/Next` → `catalogPlayba
 
 ## Corte main `ad8f8d0436bba5c3f663a301440ebf977200d953` — 2026-11-20 20:00
 F02 (contexto/provisión) revalidación **parcial estática**: Web provider importa API/composición → Cloud `routes.js` distingue GET context de POST library/provision → `native-transport-provisioning.js` consulta SQL y usa lock/gateway inyectado para membresía. El informe AUD-009 sobre LOCAL es histórico; contraste inicial en tres archivos main, sin inspección exhaustiva de caller UI ni pruebas. F01 selección POSTGRES/INDEX **pendiente AUD-010**. Otros flujos documentados sobre LOCAL mantienen estado HISTÓRICO hasta revisión por delta; no afirmar comportamiento desplegado.
+
+
+## F01 — entrada Gallery main @ `ad8f8d0436bba5c3f663a301440ebf977200d953` (21:00, AUD-010 PARCIAL)
+`WebGalleryEntry` (según informe AUD-010) → `WebGalleryWorkspace` → `useLibraryComposition` → `isCatalogClientEnabled` → `chooseLibraryComposition` → `resolveContext` → `LibraryCompositionGate`. Default true + contexto ready → `CatalogGalleryWorkspace`; flag false → `LegacyRetired` (aviso, no INDEX); error/bloqueo → `BlockedState` (sin fallback). Cloud `server-core.js:129-138` monta `createCatalogRouter` para catálogo; no se verificó ejecución de endpoint. Contraste independiente de cuatro archivos; no se verificaron tests, otros entrypoints ni bundle desplegado. C2 parcial estático, C3 pendiente.
